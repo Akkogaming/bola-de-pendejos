@@ -2,4 +2,4 @@
 ajaja
 
 
-hay que tomar eto enserio
+hay que tomar esto enserio
