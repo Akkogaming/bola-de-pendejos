@@ -16,6 +16,30 @@ public class Admin{
             break;
 
           case "B":
-            
-        }
+                boolean deleteEmployee=false;
+            System.out.println("------------------------------------------------------------");                                                        
+            System.out.println("|              INGRESE EL NUMERO DEL EMPLEADO              |");
+            System.out.println("|                   QUE DESEE ELIMINAR                     |");
+            System.out.println("------------------------------------------------------------");
+                do{
+            int numberEmployee=read.nextInt();
+            System.out.println("------------------------------------------------------------");                                                        
+            System.out.println("|                     ¿ESTA SEGURO?                        |");
+            System.out.println("|           ASEGURECE QUE EL NUMERO SEA CORRECTO           |");
+            System.out.println("|               ESTA ACCIÓN ES IRREVERSIBLE                |");
+            System.out.println("|                 Y)CONFIRMAR N)DECLINAR                   |");
+            System.out.println("------------------------------------------------------------");
+            String confirmDecision=read.nextLine().toUpperCase(Locale.getDefault());    
+            if(confirmDecision.equals("Y")){            
+            Statement statement = connect.createStatement("DELETE FROM empleados where codigo="+numberEmployee);
+                    deleteEmployee=true;
+        }if(confirmDecision.equals("N")){
+            System.out.println("------------------------------------------------------------");                                                        
+            System.out.println("|           FAVOR DE INGRESAR UN NUMERO CORRECTO           |");
+            System.out.println("------------------------------------------------------------");
+        }else{
+            System.out.println("------------------------------------------------------------");                                                        
+            System.out.println("|           SELECCIONE UNICAMENTE Y/N SEGUN EL CASO         |");
+            System.out.println("------------------------------------------------------------");
+                }while(deleteEmployee==0);
 }
