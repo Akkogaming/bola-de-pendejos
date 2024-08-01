@@ -1,55 +1,30 @@
-public class Empleado{
+public class Empleado {
+  // Variables
+  private String nombre;
+  private String A_paterno;
+  private String A_materno;
+  private String telefono;
+  private String correo_E;
 
-  //Variables
-  private name;
-  private firstSurname;
-  private secondSurname;
-  private phone;
-  private eMail;
-
-  //Methods
-  public Empleado(String name,String firstSurname,String secondSurname,String eMail){
+  // Constructor
+  public Empleado(String nombre, String A_paterno, String A_materno, String telefono, String correo_E) {
+      this.nombre = nombre;
+      this.A_paterno = A_paterno;
+      this.A_materno = A_materno;
+      this.telefono = telefono;
+      this.correo_E = correo_E;
   }
 
-  public Empleado(){}
+  // Métodos Setters y Getters
+  public void setNombre(String nombre) { this.nombre = nombre; }
+  public void setA_paterno(String A_paterno) { this.A_paterno = A_paterno; }
+  public void setA_materno(String A_materno) { this.A_materno = A_materno; }
+  public void setTelefono(String telefono) { this.telefono = telefono; }
+  public void setCorreo_E(String correo_E) { this.correo_E = correo_E; }
 
-  public void setName(String name){
-    this.name=name;
-  }
-
-    public void setFirstSurname(String firstSurname){
-    this.firstSurname=firstSurname;
-  }
-
-    public void setSecondSurname(String secondSurname){
-    this.secondSurname=secondSurname;
-  }
-
-    public void setPhone(String phone){
-    this.phone=phone;
-  }
-
-    public void setEmail(String eMail){
-    this.eMail=eMail;
-  }
-
-  public String name(){
-    return name;
-  }
-
-  public String firstSurname(){
-    return firstSurname;
-  }
-
-  public String secondSurname(){
-    return secondSurname;
-  }
-  
-  public String getPhone(){
-    return phone;
-  }
-
-  public String getEmail(){
-    return eMail;
-  }
+  public String getNombre() { return nombre; }
+  public String getA_paterno() { return A_paterno; }
+  public String getA_materno() { return A_materno; }
+  public String getTelefono() { return telefono; }
+  public String getCorreo_E() { return correo_E; }
 }
