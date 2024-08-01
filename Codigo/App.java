@@ -5,7 +5,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         String direction = "jdbc:mysql://localhost:3306/eventos"; //luis tu le cambias el puerto aqui xd
         Connection connect = DriverManager.getConnection(direction, "root", "");
-        Statement statement = connect.createStatement(); //lo usare luego... creo.
+        Statement statement = connect.createStatement(); //lo usare luego... creo. SI,BASTANTE...
         boolean isLoggedIn = false;
         
         //System.out.println("                                                            ");
