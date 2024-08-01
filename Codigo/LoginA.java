@@ -24,8 +24,9 @@ public class LoginA {
                 System.out.println("------------------------------------------------------------");
                 System.out.println("|          BIENVENIDO ADMINISTRADOR MAURICIO               |");
                 System.out.println("------------------------------------------------------------");
-                    mommyYesmommy=true;}
-                    else{
+                    mommyYesmommy=true;
+                    Admin mauricio=new Admin();
+                }else{
                         System.out.println("------------------------------------------------------------");
                         System.out.println("|              NOMBRE O CONTRASEÑA INCORRECTOS             |");
                         System.out.println("|                VUELVA A INGRESAR SUS DATOS               |");
