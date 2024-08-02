@@ -83,7 +83,7 @@ public class App {
                             System.out.println("|               Selecciona la consulta a realizar:             |");
                             System.out.println("|                       1. Reservaciones                       |");
                             //System.out.println("|                   2. Equipamiento requerido                  |");
-                            //System.out.println("|                     3. Servicios requeridos                  |");
+                            //System.out.println("|        a             3. Servicios requeridos                  |");
                             //System.out.println("|             4. Reservaciones para el mismo salón             |");
                             //System.out.println("|                  5. Servicios del mismo tipo                 |");
                             System.out.println("|                  2. Reservaciones del cliente                |");
