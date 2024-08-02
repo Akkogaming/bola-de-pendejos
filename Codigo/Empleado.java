@@ -91,7 +91,7 @@ public class Empleado {
                     break;
             }
         }
-        leer.close(); // Cerrar el scanner al finalizar
+      
     }
 
     // Método para realizar la reservación de un salón
