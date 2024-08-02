@@ -28,6 +28,7 @@ public class App {
                 System.out.println("------------------------------------------------------------"); // 60 caracteres
                 System.out.println("|                       BLUE PALACE                        |");
                 System.out.println("------------------------------------------------------------");
+                System.out.println("|                                                          |");
                 System.out.println("|           ELIGA UNA OPCION DE LAS SIGUENTES              |");
                 System.out.println("|                                                          |");
                 System.out.println("|          1. iniciar sesion como administrador            |");
