@@ -49,7 +49,7 @@ public class App {
                             Admin.admin(connect); // Llama al método estático admin
                             break;
                         case "2":
-                            case "2":
+                            
                             Empleado.empleado(connect); //Llama al metodo estatico empleado
                             break;
                         case "3":
