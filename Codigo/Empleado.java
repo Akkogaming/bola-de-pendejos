@@ -93,7 +93,7 @@ public class Empleado {
           }
       }
 
-      leer.close();
+      
   }
   //Metodo para realizar la reservacion de un salon
   public static void ReservarSalon(){
