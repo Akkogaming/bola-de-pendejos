@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class App {
     private static Connection connect;
     static Statement statement;
-
     public static void main(String[] args) {
         String direction = "jdbc:mysql://localhost:3306/eventos"; // Cambia el puerto si es necesario
         

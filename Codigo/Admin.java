@@ -2,6 +2,7 @@ import java.sql.*;
 import java.util.Locale;
 import java.util.Scanner;
 
+
 public class Admin {
 
     public static Connection connect;
@@ -25,9 +26,9 @@ public class Admin {
             System.out.println("------------------------------------------------------------");
             System.out.println("|                 MENU ADMINISTRADOR                       |");
             System.out.println("------------------------------------------------------------");
-            System.out.println("| 1. Consultas                                             |");
-            System.out.println("| 2. Eliminar Empleados                                    |");
-            System.out.println("| 3. Añadir Salones                                        |");
+            System.out.println("|                        1. Consultas                      |");
+            System.out.println("|                   2. Eliminar Empleados                  |");
+            System.out.println("|                     3. Añadir Salones                    |");
             System.out.println("| 4. Añadir Empleados                                      |");
             System.out.println("| 5. Eliminar Salones                                      |");
             System.out.println("| 6. Añadir Servicios                                      |");
@@ -39,6 +40,25 @@ public class Admin {
             System.out.println("|                         12. Salir                        |");
             System.out.println("------------------------------------------------------------");
 
+
+
+                                                          
+
+            4. Añadir Empleados                    
+            5. Eliminar Salones                    
+            6. Añadir Servicios                    
+           7. Eliminar Servicios                   
+             8. Añadir Montajes                    
+            9. Eliminar Montajes                   
+             10. Añadir Eventos                    
+            11. Eliminar Eventos                   
+                                                   
+
+
+
+
+
+            
             String answer = leer.nextLine();
 
             switch (answer) {
@@ -116,21 +136,21 @@ public class Admin {
         System.out.println("|           9. Reservaciones con un montaje específico         |");
         System.out.println("|               10. Reservaciones en el mismo mes              |");
         System.out.println("|           11. Reservaciones asignados a un empleado          |");
-        System.out.println("|12. consultar empleados |");
-        System.out.println("|13. consultar salones  |");
-        System.out.println("|14. consultar servicios |");
-        System.out.println("|15. consultar montajes |");
-        System.out.println("|16. consultar eventos|");
+        System.out.println("|                   12. consultar empleados                    |");
+        System.out.println("|                    13. consultar salones                     |");
+        System.out.println("|                   14. consultar servicios                    |");
+        System.out.println("|                   15. consultar montajes                     |");
+        System.out.println("|                    16. consultar eventos                     |");
         System.out.println("|                           17. Salir                          |");
         System.out.println("----------------------------------------------------------------"); // 64 caracteres
 
         String consultaOption = leer.nextLine();
         switch (consultaOption) {
             case "1":
-                ConsultasC.consulta1();
+                Consultas.consulta1();
                 break;
             case "2":
-                ConsultasC.consulta2();
+                Consultas.consulta2();
                 break;
             case "3":
                 Consultas.consulta3();

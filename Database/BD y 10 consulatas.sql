@@ -377,18 +377,16 @@ WHERE month(r.fechaevento)=9
 
 /*" 11.reservaciones por un mismo empleado
 --numero de empleado
---numero de reserva
+--numero de cliente
 */
 SELECT 
     e.numero AS numero_empleado,
-    r.codigo AS numero_reserva
+    c.codigo AS numero_cliente
 FROM 
-    reservaciones r
-JOIN 
-    cliente c ON r.cliente = c.codigo
+    cliente c
 JOIN 
     empleados e ON c.empleado = e.numero
-WHERE e.numero = 40; 
+ 
 
 
 
