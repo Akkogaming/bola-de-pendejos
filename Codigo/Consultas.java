@@ -1,8 +1,11 @@
 import java.sql.*;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class Consultas {
-    
+
+ 
+
     // Método para ejecutar y mostrar una consulta SQL
     public static void ejecutarConsulta(String query) {
         Connection connection = null;
@@ -19,14 +22,14 @@ public class Consultas {
 
             // Imprimir encabezados de columna
             for (int i = 1; i <= columnCount; i++) {
-                System.out.printf("%-50s", metaData.getColumnName(i));
+                System.out.printf("%-40s", metaData.getColumnName(i));
             }
             System.out.println();
 
             // Imprimir datos de filas
             while (resultSet.next()) {
                 for (int i = 1; i <= columnCount; i++) {
-                    System.out.printf("%-50s", resultSet.getString(i));
+                    System.out.printf("%-40s", resultSet.getString(i));
                 }
                 System.out.println();
             }
@@ -486,6 +489,18 @@ public class Consultas {
         }
     }
     
+    public static void consulta11(){
+        
+        
+        System.out.println("Cancelando.........");
+
+
+        try {
+            Thread.sleep(1 * 1000);
+        } catch (InterruptedException ie) {
+            Thread.currentThread().interrupt();
+        }
+    }
     
 
     public static void main(String[] args) {
@@ -500,5 +515,6 @@ public class Consultas {
         consulta8();
         consulta9();
         consulta10();
+        consulta11();
     }
 }

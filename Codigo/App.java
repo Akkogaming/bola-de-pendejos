@@ -17,6 +17,11 @@ public class App {
             Scanner read = new Scanner(System.in); 
 
             while (isRunning) {   
+                
+
+
+                //System.out.print("\033[H\033[2J");
+    
                 // Imprimir menú
                 System.out.println("");
                 System.out.println("");
@@ -32,7 +37,7 @@ public class App {
                 System.out.println("|                        5. salir                          |"); 
                 System.out.println("|                                                          |");
                 System.out.println("------------------------------------------------------------");   
-
+                //System.out.flush();
                 // Leer la opción del usuario de manera segura
                 if (read.hasNextLine()) {
                     String answer = read.nextLine().toUpperCase(Locale.getDefault());
@@ -87,6 +92,7 @@ public class App {
                             System.out.println("|            8. Reservaciones con un equipo específico         |");
                             System.out.println("|           9. Reservaciones con un montaje específico         |");
                             System.out.println("|               10. Reservaciones en el mismo mes              |");
+                            System.out.println("|                           11. Salir                          |");
                             System.out.println("----------------------------------------------------------------"); // 64 caracteres
 
                             String consultaOption = read.nextLine();
@@ -122,7 +128,7 @@ public class App {
                                     Consultas.consulta10();
                                     break;
                                 default:
-                                    System.out.println("Opción no válida.");
+                                    Consultas.consulta11();
                             }
                             break;
                         case "4":
