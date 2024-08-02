@@ -45,9 +45,8 @@ public class App {
                     // Procesar la opción del usuario
                     switch (answer) {
                         // Llama al método Admin
-                        case "1":
-                            Admin admin = new Admin(connect);
-                            admin.Admin();
+                         case "1":
+                            Admin.admin(connect); // Llama al método estático admin
                             break;
                         case "2":
                             // Manejar el caso de iniciar sesión como empleado regular
@@ -101,7 +100,8 @@ public class App {
                                     ConsultasC.consulta1();
                                     break;
                                 case "2":
-                                    ConsultasC.consulta2();/*
+                                    ConsultasC.consulta2();
+                                    /*
                                     break;
                                 case "3":
                                     Consultas.consulta3();
