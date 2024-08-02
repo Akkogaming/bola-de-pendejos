@@ -2,6 +2,7 @@ import java.sql.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+//consultas para el empleado y el admin
 public class Consultas {
 
  

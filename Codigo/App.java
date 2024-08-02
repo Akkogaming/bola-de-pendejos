@@ -83,25 +83,25 @@ public class App {
                             System.out.println("----------------------------------------------------------------"); // 64 caracteres
                             System.out.println("|               Selecciona la consulta a realizar:             |");
                             System.out.println("|                       1. Reservaciones                       |");
-                            System.out.println("|                   2. Equipamiento requerido                  |");
-                            System.out.println("|                     3. Servicios requeridos                  |");
-                            System.out.println("|             4. Reservaciones para el mismo salón             |");
-                            System.out.println("|                  5. Servicios del mismo tipo                 |");
-                            System.out.println("|                  6. Reservaciones del cliente                |");
-                            System.out.println("|           7. Reservaciones con un servicio específico        |");
-                            System.out.println("|            8. Reservaciones con un equipo específico         |");
-                            System.out.println("|           9. Reservaciones con un montaje específico         |");
-                            System.out.println("|               10. Reservaciones en el mismo mes              |");
+                            //System.out.println("|                   2. Equipamiento requerido                  |");
+                            //System.out.println("|                     3. Servicios requeridos                  |");
+                            //System.out.println("|             4. Reservaciones para el mismo salón             |");
+                            //System.out.println("|                  5. Servicios del mismo tipo                 |");
+                            System.out.println("|                  2. Reservaciones del cliente                |");
+                            //System.out.println("|           7. Reservaciones con un servicio específico        |");
+                            //System.out.println("|            8. Reservaciones con un equipo específico         |");
+                            //System.out.println("|           9. Reservaciones con un montaje específico         |");
+                            //System.out.println("|               10. Reservaciones en el mismo mes              |");
                             System.out.println("|                           11. Salir                          |");
                             System.out.println("----------------------------------------------------------------"); // 64 caracteres
 
                             String consultaOption = read.nextLine();
                             switch (consultaOption) {
                                 case "1":
-                                    Consultas.consulta1();
+                                    ConsultasC.consulta1();
                                     break;
                                 case "2":
-                                    Consultas.consulta2();
+                                    ConsultasC.consulta2();/*
                                     break;
                                 case "3":
                                     Consultas.consulta3();
@@ -125,7 +125,7 @@ public class App {
                                     Consultas.consulta9();
                                     break;
                                 case "10":
-                                    Consultas.consulta10();
+                                    Consultas.consulta10();*/
                                     break;
                                 default:
                                     Consultas.consulta11();
