@@ -1,272 +1,515 @@
-public class Admin{
-        System.out.println("------------------------------------------------------------");
-        System.out.println("|                   ¿QUÉ DESEA REALIZAR?                   |");
-        System.out.println("------------------------------------------------------------");
-        System.out.println("|        A.CONSULTAS              B.ELIMINAR EMPLEADOS     |");
-        System.out.println("|        C.AÑADIR SALONES         D.AÑADIR EMPLEADOS       |");
-        System.out.println("|        E.ELIMINAR SALONES       F.AÑADIR SERVICIOS       |");
-        System.out.println("|        G.ELIMINAR SERVICIOS     H.AÑADIR MONTAJES        |");
-        System.out.println("|        I.ELIMINAR MONTAJES      J.AÑADIR EVENTOS         |");
-        System.out.println("|        K.ELIMINAR EVENTOS       L.SALIR                  |");
-        System.out.println("------------------------------------------------------------");
-        String answer=read.nextLine().toUpperCase(Locale.getDefault());
+import java.sql.*;
+import java.util.Locale;
+import java.util.Scanner;
 
-        switch(answer){
-          case "A"://REALIZAR CONSULTAS
-            Consultas consultProgram=new Consultas();
-            break;
 
-          case "B"://ELIMINAR EMPLEADO
-                boolean deleteEmployee=false;
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|              INGRESE EL NUMERO DEL EMPLEADO              |");
-            System.out.println("|                   QUE DESEE ELIMINAR                     |");
-            System.out.println("------------------------------------------------------------");
-                do{
-            int numberEmployee=read.nextInt();
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|                     ¿ESTA SEGURO?                        |");
-            System.out.println("|           ASEGURECE QUE EL NUMERO SEA CORRECTO           |");
-            System.out.println("|               ESTA ACCIÓN ES IRREVERSIBLE                |");
-            System.out.println("|                 Y)CONFIRMAR N)DECLINAR                   |");
-            System.out.println("------------------------------------------------------------");
-            String confirmDecision=read.nextLine().toUpperCase(Locale.getDefault());    
-            if(confirmDecision.equals("Y")){            
-            Statement deleteEmployee = connect.createStatement("DELETE FROM empleados where codigo="+numberEmployee);
-                    deleteEmployee=true;
-        }if(confirmDecision.equals("N")){
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|           FAVOR DE INGRESAR UN NUMERO CORRECTO           |");
-            System.out.println("------------------------------------------------------------");
-        }else{
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|           SELECCIONE UNICAMENTE Y/N SEGUN EL CASO         |");
-            System.out.println("------------------------------------------------------------");
-                }while(deleteEmployee==0);
-        break;
+public class Admin {
 
-        case "C"://Añadir Salon
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|       INGRESE LOS DATOS DEL SALON QUE DESEE AÑADIR       |");
-            System.out.println("|       Y EL NUMERO DEL EMPLEADO ENCARGADO DEL SALON       |");
-            System.out.println("------------------------------------------------------------");
-        do{
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|     S)SALIR AL MENU                         A)AÑADIR     |");
-            System.out.println("------------------------------------------------------------");
-                String select=read.nextLine().toUpperCase(Locale.getDefault());
-                        if(select.equals("S"){
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|               REGRESANDO AL MENU DE ADMIN                |");
-            System.out.println("------------------------------------------------------------");
-                                addingSalon++;
-                                break;
-                        }
-                        if(select.equals("A"){
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|              INGRESE EL NOMBRE DEL SALON                 |");
-            System.out.println("------------------------------------------------------------");
-                        String salonName=read.nextLine().toLowerCase(Locale.getDefault());
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|           INGRESE LA CAPACIDAD MAXIMA DE PERSONAS        |");
-            System.out.println("|              QUE PUEDE HABER DENTRO DEL SALON            |");
-            System.out.println("------------------------------------------------------------");
-                        String salonCapacity=read.nextLine().toLowerCase(Locale.getDefault());
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|           INGRESE EL CODIGO POSTAL DEL SALON             |");
-            System.out.println("------------------------------------------------------------");
-                        String salonCp=read.nextLine().toLowerCase(Locale.getDefault());
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|       INGRESE LA CALLE DONDE SE ENCUENTRA EL SALON       |");
-            System.out.println("------------------------------------------------------------");
-                        String salonWay=read.nextLine().toLowerCase(Locale.getDefault());
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|       INGRESE LA CIUDAD DONDE SE ENCUENTRA EL SALON      |");
-            System.out.println("------------------------------------------------------------");
-                        String salonCity=read.nextLine().toLowerCase(Locale.getDefault());
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|       INGRESE EL ESTADO DONDE SE ENCUENTRA EL SALON      |");
-            System.out.println("------------------------------------------------------------");
-                        String salonState=read.nextLine().toLowerCase(Locale.getDefault());
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|    INGRESE EL NUMERO DE EMPLEADO ENCARGADO DEL SALON     |");
-            System.out.println("------------------------------------------------------------");
-                        String employeeNumber=read.nextLine().toLowerCase(Locale.getDefault());
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|                        PERFECTO                          |");
-            System.out.println("|                      SALON AÑADIDO                       |");
-            System.out.println("------------------------------------------------------------");
-Statement addSalon = connect.createStatement("INSERT INTO salon(capacidad,codigoPostal,calle,ciudad,Estado) VALUES ("+salonName+","+salonCapacity+","+salonCp+","+salonWay+","+salonCity+","+salonState+","+employeeNumber")");
-            addingSalon++;
-                        }else{
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|             POR FAVOR INGRESE UN VALOR VALIDO            |");
-            System.out.println("------------------------------------------------------------");
-                        }
-        }while(addingSalon==0);
-                        break;
+    public static Connection connect;
+    public static Statement statement;
+    public static Scanner leer;
 
-                case "D"://AÑADIR EMPLEADO
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|     INGRESE LOS DATOS DEL EMPLEADO QUE DESEE AÑADIR      |");
-            System.out.println("------------------------------------------------------------");
-                do{
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|     S)SALIR AL MENU                         A)AÑADIR     |");
-            System.out.println("------------------------------------------------------------");
-                String select2=read.nextLine().toUpperCase(Locale.getDefault());
+    // Método estático para inicializar el objeto Admin
+    public static boolean admin(Connection conn) {
+        connect = conn;
+        try {
+            statement = connect.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
 
-                if(select2.equals("S"){
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|             REGRESANDO AL MENU DE ADMINISTRADOR          |");
-            System.out.println("------------------------------------------------------------");
-                        break;
-                }
-                if(select2.equals("A"){
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|              INGRESE EL NOMBRE DEL EMPLEADO              |");
-            System.out.println("------------------------------------------------------------");
-                        String employeeName=read.nextLine().toLowerCase(Locale.getDefault());
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|          INGRESE EL APELLIDO PATERNO DEL EMPLEADO        |");
-            System.out.println("------------------------------------------------------------");
-                        String employee1stSurname=read.nextLine().toLowerCase(Locale.getDefault());
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|          INGRESE EL APELLIDO MATERNO DEL EMPLEADO        |");
-            System.out.println("------------------------------------------------------------");
-                        String employee2ndSurname=read.nextLine().toLowerCase(Locale.getDefault());
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|          INGRESE EL NUMERO TELEFONICO DEL EMPLEADO       |");
-            System.out.println("------------------------------------------------------------");
-                        String employeePhone=read.nextLine().toLowerCase(Locale.getDefault());
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|          INGRESE ELCORREO ELECTRONICO DEL EMPLEADO       |");
-            System.out.println("------------------------------------------------------------");
-                        String employeeEmail=read.nextLine().toLowerCase(Locale.getDefault());
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|                        PERFECTO                          |");
-            System.out.println("|                    EMPLEADO AÑADIDO                      |");
-            System.out.println("------------------------------------------------------------");
-Statement addEmployee = connect.createStatement("INSERT INTO empleado(nombre,A_paterno,A_materno,telefono,correo_E) VALUES ("+employeeName+","+employee1stSurname+","+employee2ndSurname+","+employeePhone+","+employeeEmail));
-                        addingEmployee++;
-                }else{
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|                   CARACTER INVALIDO                      |");
-            System.out.println("|                INGRESE S/A SEGUN EL CASO                 |");
-            System.out.println("------------------------------------------------------------");
-                }
-                }while(addingEmployee==0);
-                        break;
-                case "E":
-        boolean deleteSalonDecision=false;
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|              INGRESE EL NUMERO DEL SALON                 |");
-            System.out.println("|                   QUE DESEE ELIMINAR                     |");
-            System.out.println("------------------------------------------------------------");
-                do{
-            int numberSalon=read.nextInt();
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|                     ¿ESTA SEGURO?                        |");
-            System.out.println("|           ASEGURECE QUE EL NUMERO SEA CORRECTO           |");
-            System.out.println("|               ESTA ACCIÓN ES IRREVERSIBLE                |");
-            System.out.println("|                 Y)CONFIRMAR N)DECLINAR                   |");
-            System.out.println("------------------------------------------------------------");
-            String confirmSalom=read.nextLine().toUpperCase(Locale.getDefault());    
-            if(confirmSalon.equals("Y")){            
-            Statement deleteSalon = connect.createStatement("DELETE FROM salon where codigo="+numberSalon);
-                    deleteSalonDecision=true;
-        }if(confirmSalon.equals("N")){
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|           FAVOR DE INGRESAR UN NUMERO CORRECTO           |");
-            System.out.println("------------------------------------------------------------");
-        }else{
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|           SELECCIONE UNICAMENTE Y/N SEGUN EL CASO         |");
-            System.out.println("------------------------------------------------------------");
-                }while(deleteSalonDecision==false);
-        break;
+        leer = new Scanner(System.in);
+        boolean isRunning = true;
 
-         case "F":
-                boolean addingService=false;
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|     INGRESE LOS DATOS DEL SERVICIO QUE DESEE AÑADIR      |");
+        while (isRunning) {
             System.out.println("------------------------------------------------------------");
-                do{
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|     S)SALIR AL MENU                         A)AÑADIR     |");
+            System.out.println("|                 MENU ADMINISTRADOR                       |");
             System.out.println("------------------------------------------------------------");
-                String select3=read.nextLine().toUpperCase(Locale.getDefault());
+            System.out.println("|                        1. Consultas                      |");
+            System.out.println("|                   2. Eliminar Empleados                  |");
+            System.out.println("|                     3. Añadir Salones                    |");
+            System.out.println("|                    4. Añadir Empleados                   |");
+            System.out.println("|                    5. Eliminar Salones                   |");//
+            System.out.println("|                    6. Añadir Servicios                   |");
+            System.out.println("|                   7. Eliminar Servicios                  |");// 
+            System.out.println("|                    8. Añadir Montajes                    |");
+            System.out.println("|                   9. Eliminar Montajes                   |");//
+            System.out.println("|                    10. Añadir Eventos                    |");
+            System.out.println("|                   11. Eliminar Eventos                   |");//
+            System.out.println("|                         12. Salir                        |");
+            System.out.println("------------------------------------------------------------");
+      
+            String answer = leer.nextLine();
 
-                if(select3.equals("S"){
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|             REGRESANDO AL MENU DE ADMINISTRADOR          |");
-            System.out.println("------------------------------------------------------------");
-                        break;
-                }
-                if(select3.equals("A"){
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|              INGRESE EL NOMBRE DEL SERVICIO              |");
-            System.out.println("------------------------------------------------------------");
-                        String serviceName=read.nextLine().toLowerCase(Locale.getDefault());
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|           INGRESE UNA DESCRIPCION DEL SERVICIO           |");
-            System.out.println("------------------------------------------------------------");
-                        String serviceDescription=read.nextLine().toLowerCase(Locale.getDefault());
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|               INGRESE EL PRECIO DEL SERVICIO             |");
-            System.out.println("------------------------------------------------------------");
-                        String servicePrice=read.nextLine().toLowerCase(Locale.getDefault());
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|       INGRESE EL NUMERO DEL TIPO DE SERVICIO QUE SEA     |");
-            System.out.println("------------------------------------------------------------");
-                        String serviceTypeService=read.nextInt();
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|                        PERFECTO                          |");
-            System.out.println("|                    SERVICIO AÑADIDO                      |");
-            System.out.println("------------------------------------------------------------");
-Statement addService = connect.createStatement("INSERT INTO servicio(nombre,descripcion,Precio,tipo_servicio) VALUES ("+serviceName+","+serviceDescription+","+servicePrice+","+serviceTypeService));
-                        addingService=true;
-                }else{
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|                   CARACTER INVALIDO                      |");
-            System.out.println("|                INGRESE S/A SEGUN EL CASO                 |");
-            System.out.println("------------------------------------------------------------");
-                }
-                }while(addingService==false);
-                        break;
-                        
-                case "G"://ELIMINAR SERVICIOS
-            boolean deleteServices=false;
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|              INGRESE EL NUMERO DEL SERVICIO              |");
-            System.out.println("|                   QUE DESEE ELIMINAR                     |");
-            System.out.println("------------------------------------------------------------");
-                do{
-            int numberService=read.nextInt();
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|                     ¿ESTA SEGURO?                        |");
-            System.out.println("|           ASEGURECE QUE EL NUMERO SEA CORRECTO           |");
-            System.out.println("|               ESTA ACCIÓN ES IRREVERSIBLE                |");
-            System.out.println("|                 Y)CONFIRMAR N)DECLINAR                   |");
-            System.out.println("------------------------------------------------------------");
-            String confirmDecision2=read.nextLine().toUpperCase(Locale.getDefault());    
-            if(confirmDecision2.equals("Y")){            
-            Statement deleteService = connect.createStatement("DELETE FROM servicios where codigo="+numberService);
-                    deleteServices=true;
-        }if(confirmDecision.equals("N")){
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|           FAVOR DE INGRESAR UN NUMERO CORRECTO           |");
-            System.out.println("------------------------------------------------------------");
-        }else{
-            System.out.println("------------------------------------------------------------");                                                        
-            System.out.println("|           SELECCIONE UNICAMENTE Y/N SEGUN EL CASO         |");
-            System.out.println("------------------------------------------------------------");
-                }while(deleteServices==false);
-        break;
-                        
+            switch (answer) {
+                case "1":
+                    // Consultas
+                    handleConsultas();
+                    break;
 
-                        
-                                
-                           
+                case "2":
+                    eliminarEmpleado();
+                    break;
+
+                case "3":
+                    añadirSalon();
+                    break;
+
+                case "4":
+                    insertarEmpleado();
+                    break;
+
+                case "5":
+                    eliminarSalon();
+                    break;
+
+                case "6":
+                    añadirServicio();
+                    break;
+
+                case "7":
+                    eliminarServicio();
+                    break;
+
+                case "8":
+                    añadirMontaje();
+                    break;
+
+                case "9":
+                    eliminarMontaje();
+                    break;
+
+                case "10":
+                    añadirEvento();
+                    break;
+
+                case "11":
+                    eliminarEvento();
+                    break;
+
+                case "12":
+                    System.out.println("Saliendo del menú de administrador...");
+                    return false;
+
+                default:
+                    System.out.println("Opción no válida.");
+                    break;
+            }
+        }
+
+        leer.close();
+        return true;
+    }
+
+    // Métodos de consulta
+    private static void handleConsultas() {
+        System.out.println("----------------------------------------------------------------"); // 64 caracteres
+        System.out.println("|               Selecciona la consulta a realizar:             |"); 
+        System.out.println("|                       1. Reservaciones                       |");
+        System.out.println("|                   2. Equipamiento requerido                  |");
+        System.out.println("|                     3. Servicios requeridos                  |");
+        System.out.println("|             4. Reservaciones para el mismo salón             |");
+        System.out.println("|                  5. Servicios del mismo tipo                 |");
+        System.out.println("|                  6. Reservaciones del cliente                |");
+        System.out.println("|           7. Reservaciones con un servicio específico        |");
+        System.out.println("|            8. Reservaciones con un equipo específico         |");
+        System.out.println("|           9. Reservaciones con un montaje específico         |");
+        System.out.println("|               10. Reservaciones en el mismo mes              |");
+        System.out.println("|           11. Reservaciones asignados a un empleado          |");
+        System.out.println("|                   12. consultar empleados                    |");
+        System.out.println("|                    13. consultar salones                     |");
+        System.out.println("|                   14. consultar servicios                    |");
+        System.out.println("|                   15. consultar montajes                     |");
+        System.out.println("|                    16. consultar eventos                     |");
+        System.out.println("|                           17. Salir                          |");
+        System.out.println("----------------------------------------------------------------"); // 64 caracteres
+
+        String consultaOption = leer.nextLine();
+        switch (consultaOption) {
+            case "1":
+                Consultas.consulta1();
+                break;
+            case "2":
+                Consultas.consulta2();
+                break;
+            case "3":
+                Consultas.consulta3();
+                break;
+            case "4":
+                Consultas.consulta4();
+                break;
+            case "5":
+                Consultas.consulta5();
+                break;
+            case "6":
+                Consultas.consulta6();
+                break;
+            case "7":
+                Consultas.consulta7();
+                break;
+            case "8":
+                Consultas.consulta8();
+                break;
+            case "9":
+                Consultas.consulta9();
+                break;
+            case "10":
+                Consultas.consulta10();
+                break;
+            case "11":
+                Consultas.consulta11();
+                break;
+            case "12":
+                Consultas.consulta12();
+                break;
+            case "13":
+                Consultas.consulta13();
+                break;
+            case "14":
+                Consultas.consulta14();
+                break;
+            case "15":
+                Consultas.consulta15();
+                break;
+            case "16":
+                Consultas.consulta16();
                 
+                break;
+            case "17":
+                Consultas.consulta17(); //YA SE QUE NO EXISTEN AUN NO ESTEN CHINGANDO
+                break;
+            default:
+                System.out.println("Opción no válida.");
+                break;
+        }
+    }
+
+    // Método para insertar un nuevo empleado
+    private static void insertarEmpleado() {
+        try {
+            System.out.println("Ingrese el nombre del empleado:");
+            String nombre = leer.nextLine();
+
+            System.out.println("Ingrese el número del empleado:");
+            int numero = leer.nextInt();
+            leer.nextLine(); // Consume el newline
+
+            String insertQuery = "INSERT INTO empleados (numero, nombre) VALUES (?, ?)";
+            PreparedStatement pstmt = connect.prepareStatement(insertQuery);
+            pstmt.setInt(1, numero);
+            pstmt.setString(2, nombre);
+            pstmt.executeUpdate();
+
+            System.out.println("Empleado añadido exitosamente.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Método para eliminar un empleado por código
+    private static void eliminarEmpleado() {
+        try {
+            System.out.println("Número de código a borrar (o 'C' para cancelar):");
+            String input = leer.nextLine().toUpperCase(Locale.getDefault());
+
+            if (input.equals("C")) {
+                System.out.println("Operación cancelada.");
+                return;
+            }
+
+            int numero;
+            try {
+                numero = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida. Debe ingresar un número o 'C' para cancelar.");
+                return;
+            }
+
+            String checkEmpleadoQuery = "SELECT COUNT(*) FROM cliente WHERE empleado = ?";
+            PreparedStatement checkStmt = connect.prepareStatement(checkEmpleadoQuery);
+            checkStmt.setInt(1, numero);
+            ResultSet resultSet = checkStmt.executeQuery();
+            resultSet.next();
+            int count = resultSet.getInt(1);
+
+            String checkSalonQuery = "SELECT COUNT(*) FROM salon WHERE empleado = ?";
+            PreparedStatement checkSalonStmt = connect.prepareStatement(checkSalonQuery);
+            checkSalonStmt.setInt(1, numero);
+            ResultSet salonResultSet = checkSalonStmt.executeQuery();
+            salonResultSet.next();
+            int salonCount = salonResultSet.getInt(1);
+
+            if (count > 0 || salonCount > 0) {
+                System.out.println("El empleado está asociado con uno o más registros.");
+                System.out.println("¿Desea reasignar estos registros a otro empleado? (S/N)");
+                String decision = leer.nextLine().toUpperCase(Locale.getDefault());
+
+                if (decision.equals("S")) {
+                    String listEmpleadosQuery = "SELECT numero, nombre FROM empleados";
+                    Statement stmt = connect.createStatement();
+                    ResultSet empleadosResultSet = stmt.executeQuery(listEmpleadosQuery);
+                    System.out.println("Empleados disponibles:");
+                    while (empleadosResultSet.next()) {
+                        int empNumero = empleadosResultSet.getInt("numero");
+                        String empNombre = empleadosResultSet.getString("nombre");
+                        System.out.println(empNumero + ": " + empNombre);
+                    }
+
+                    System.out.println("Ingrese el número del nuevo empleado:");
+                    int nuevoEmpleado = leer.nextInt();
+                    leer.nextLine(); // Consume el newline
+
+                    String updateClienteQuery = "UPDATE cliente SET empleado = ? WHERE empleado = ?";
+                    PreparedStatement updateClienteStmt = connect.prepareStatement(updateClienteQuery);
+                    updateClienteStmt.setInt(1, nuevoEmpleado);
+                    updateClienteStmt.setInt(2, numero);
+                    updateClienteStmt.executeUpdate();
+
+                    String updateSalonQuery = "UPDATE salon SET empleado = ? WHERE empleado = ?";
+                    PreparedStatement updateSalonStmt = connect.prepareStatement(updateSalonQuery);
+                    updateSalonStmt.setInt(1, nuevoEmpleado);
+                    updateSalonStmt.setInt(2, numero);
+                    updateSalonStmt.executeUpdate();
+
+                    System.out.println("Registros reasignados al nuevo empleado.");
+
+                    System.out.println("¿Desea eliminar al empleado original? (S/N)");
+                    String confirmDecision = leer.nextLine().toUpperCase(Locale.getDefault());
+                    if (confirmDecision.equals("S")) {
+                        String deleteEmpleadoQuery = "DELETE FROM empleados WHERE numero = ?";
+                        PreparedStatement deleteStmt = connect.prepareStatement(deleteEmpleadoQuery);
+                        deleteStmt.setInt(1, numero);
+                        deleteStmt.executeUpdate();
+                        System.out.println("Empleado eliminado exitosamente.");
+                    } else {
+                        System.out.println("Operación cancelada.");
+                    }
+                } else {
+                    System.out.println("Operación cancelada.");
+                }
+            } else {
+                System.out.println("¿Desea eliminar al empleado? (S/N)");
+                String confirmDecision = leer.nextLine().toUpperCase(Locale.getDefault());
+                if (confirmDecision.equals("S")) {
+                    String deleteEmpleadoQuery = "DELETE FROM empleados WHERE numero = ?";
+                    PreparedStatement deleteStmt = connect.prepareStatement(deleteEmpleadoQuery);
+                    deleteStmt.setInt(1, numero);
+                    deleteStmt.executeUpdate();
+                    System.out.println("Empleado eliminado exitosamente.");
+                } else {
+                    System.out.println("Operación cancelada.");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Método para añadir un salón
+    private static void añadirSalon() {
+        try {
+            System.out.println("Ingrese el nombre del salón:");
+            String nombre = leer.nextLine();
+
+            System.out.println("Ingrese el número de salón:");
+            int numero = leer.nextInt();
+            leer.nextLine(); // Consume el newline
+
+            String insertQuery = "INSERT INTO salon (numero, nombre) VALUES (?, ?)";
+            PreparedStatement pstmt = connect.prepareStatement(insertQuery);
+            pstmt.setInt(1, numero);
+            pstmt.setString(2, nombre);
+            pstmt.executeUpdate();
+
+            System.out.println("Salón añadido exitosamente.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Método para eliminar un salón por número
+    private static void eliminarSalon() {
+        try {
+            System.out.println("Número de salón a borrar (o 'C' para cancelar):");
+            String input = leer.nextLine().toUpperCase(Locale.getDefault());
+
+            if (input.equals("C")) {
+                System.out.println("Operación cancelada.");
+                return;
+            }
+
+            int numero;
+            try {
+                numero = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida. Debe ingresar un número o 'C' para cancelar.");
+                return;
+            }
+
+            String deleteQuery = "DELETE FROM salon WHERE numero = ?";
+            PreparedStatement pstmt = connect.prepareStatement(deleteQuery);
+            pstmt.setInt(1, numero);
+            pstmt.executeUpdate();
+
+            System.out.println("Salón eliminado exitosamente.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Método para añadir un servicio
+    private static void añadirServicio() {
+        try {
+            System.out.println("Ingrese el nombre del servicio:");
+            String nombre = leer.nextLine();
+
+            System.out.println("Ingrese el costo del servicio:");
+            double costo = leer.nextDouble();
+            leer.nextLine(); // Consume el newline
+
+            String insertQuery = "INSERT INTO servicios (nombre, costo) VALUES (?, ?)";
+            PreparedStatement pstmt = connect.prepareStatement(insertQuery);
+            pstmt.setString(1, nombre);
+            pstmt.setDouble(2, costo);
+            pstmt.executeUpdate();
+
+            System.out.println("Servicio añadido exitosamente.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Método para eliminar un servicio
+    private static void eliminarServicio() {
+        try {
+            System.out.println("Número de servicio a borrar (o 'C' para cancelar):");
+            String input = leer.nextLine().toUpperCase(Locale.getDefault());
+
+            if (input.equals("C")) {
+                System.out.println("Operación cancelada.");
+                return;
+            }
+
+            int numero;
+            try {
+                numero = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida. Debe ingresar un número o 'C' para cancelar.");
+                return;
+            }
+
+            String deleteQuery = "DELETE FROM servicios WHERE numero = ?";
+            PreparedStatement pstmt = connect.prepareStatement(deleteQuery);
+            pstmt.setInt(1, numero);
+            pstmt.executeUpdate();
+
+            System.out.println("Servicio eliminado exitosamente.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Método para añadir un montaje
+    private static void añadirMontaje() {
+        try {
+            System.out.println("Ingrese el nombre del montaje:");
+            String nombre = leer.nextLine();
+
+            System.out.println("Ingrese la descripción del montaje:");
+            String descripcion = leer.nextLine();
+
+            String insertQuery = "INSERT INTO montajes (nombre, descripcion) VALUES (?, ?)";
+            PreparedStatement pstmt = connect.prepareStatement(insertQuery);
+            pstmt.setString(1, nombre);
+            pstmt.setString(2, descripcion);
+            pstmt.executeUpdate();
+
+            System.out.println("Montaje añadido exitosamente.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Método para eliminar un montaje
+    private static void eliminarMontaje() {
+        try {
+            System.out.println("Número de montaje a borrar (o 'C' para cancelar):");
+            String input = leer.nextLine().toUpperCase(Locale.getDefault());
+
+            if (input.equals("C")) {
+                System.out.println("Operación cancelada.");
+                return;
+            }
+
+            int numero;
+            try {
+                numero = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida. Debe ingresar un número o 'C' para cancelar.");
+                return;
+            }
+
+            String deleteQuery = "DELETE FROM montajes WHERE numero = ?";
+            PreparedStatement pstmt = connect.prepareStatement(deleteQuery);
+            pstmt.setInt(1, numero);
+            pstmt.executeUpdate();
+
+            System.out.println("Montaje eliminado exitosamente.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Método para añadir un evento
+    private static void añadirEvento() {
+        try {
+            System.out.println("Ingrese el nombre del evento:");
+            String nombre = leer.nextLine();
+
+            System.out.println("Ingrese la fecha del evento (YYYY-MM-DD):");
+            String fecha = leer.nextLine();
+
+            String insertQuery = "INSERT INTO eventos (nombre, fecha) VALUES (?, ?)";
+            PreparedStatement pstmt = connect.prepareStatement(insertQuery);
+            pstmt.setString(1, nombre);
+            pstmt.setDate(2, Date.valueOf(fecha));
+            pstmt.executeUpdate();
+
+            System.out.println("Evento añadido exitosamente.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Método para eliminar un evento
+    private static void eliminarEvento() {
+        try {
+            System.out.println("Número de evento a borrar (o 'C' para cancelar):");
+            String input = leer.nextLine().toUpperCase(Locale.getDefault());
+
+            if (input.equals("C")) {
+                System.out.println("Operación cancelada.");
+                return;
+            }
+
+            int numero;
+            try {
+                numero = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida. Debe ingresar un número o 'C' para cancelar.");
+                return;
+            }
+
+            String deleteQuery = "DELETE FROM eventos WHERE numero = ?";
+            PreparedStatement pstmt = connect.prepareStatement(deleteQuery);
+            pstmt.setInt(1, numero);
+            pstmt.executeUpdate();
+
+            System.out.println("Evento eliminado exitosamente.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
