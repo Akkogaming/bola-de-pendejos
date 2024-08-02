@@ -372,3 +372,20 @@ INNER JOIN salon as s on R.salon = S.codigo
 INNER JOIN evento as e on R.evento = e.numeroEvento
 INNER JOIN tipo_evento as tp on e.numeroEvento = tp.codigo
 WHERE month(r.fechaevento)=9
+
+
+
+/*" 11.reservaciones por un mismo empleado
+--numero de empleado
+--numero de reserva
+*/
+SELECT 
+    e.numero AS numero_empleado,
+    r.codigo AS numero_reserva
+FROM 
+    reservaciones r
+JOIN 
+    cliente c ON r.cliente = c.codigo
+JOIN 
+    empleados e ON c.empleado = e.numero
+WHERE e.numero = 40; 

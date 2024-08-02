@@ -73,7 +73,7 @@ public class Consultas {
         String query = "SELECT " +
                 "Date_format(R.fechaevento, \"%d-%m-%y\") as 'Fecha de la reservacion', " +
                 "r.HoraI AS Hora_Inicio, " +
-                "CONCAT(c.nombre,' ', c.apaterno,' ', IFNULL(CONCAT(c.amaterno,' '),' ')) as cliente, " +
+                "CONCAT(c.nombre,' ', c.apaterno,' ', IFNULL(CONCAT(c.amaterno,' '),' '))  cliente, " +
                 "te.descripcion AS Tipo_Evento, " +
                 "s.nombreSalon AS Nombre_Salon, " +
                 "CONCAT(s.calle, ', ', s.ciudad, ', ', s.Estado, ' ', s.codigopostal) AS Direccion_Salon, " +
@@ -491,6 +491,41 @@ public class Consultas {
     }
     
     public static void consulta11(){
+
+
+        
+        int num;
+        Scanner read = new Scanner(System.in);
+        System.out.println("Ingrese el codigo del empleado");
+        num = read.nextInt();
+        
+        // Define the SQL query with proper spacing
+        String query = "SELECT " +
+                        "e.numero AS numero_empleado, " +
+                        "r.codigo AS numero_reserva " +
+                        "FROM " +
+                        "reservaciones r " +
+                        "JOIN cliente c ON r.cliente = c.codigo " +
+                        "JOIN empleados e ON c.empleado = e.numero " +
+                        "WHERE e.numero = " + num;
+        
+        // Use try-with-resources to ensure resources are closed properly
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/eventos", "root", "");
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+            
+            // Process the result set
+            while (rs.next()) {
+                int empleadoNumero = rs.getInt("numero_empleado");
+                int reservaNumero = rs.getInt("numero_reserva");
+                System.out.println("Número de empleado: " + empleadoNumero + ", Número de reserva: " + reservaNumero);
+            }
+            
+        } catch (Exception e) {
+            System.out.println("Se produjo un error inesperado: " + e.getMessage());
+        }
+    }
+    public static void consulta12(){
         
         
         System.out.println("Cancelando.........");
@@ -517,5 +552,6 @@ public class Consultas {
         consulta9();
         consulta10();
         consulta11();
+        consulta12();
     }
 }
