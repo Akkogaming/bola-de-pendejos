@@ -49,34 +49,8 @@ public class App {
                             Admin.admin(connect); // Llama al método estático admin
                             break;
                         case "2":
-                            // Manejar el caso de iniciar sesión como empleado regular
-                            
-
-                            System.out.println("Ingrese el nombre del empleado:");
-                            String nombre = read.nextLine();
-
-                            System.out.println("Ingrese el apellido paterno del empleado:");
-                            String A_paterno = read.nextLine();
-
-                            System.out.println("Ingrese el apellido materno del empleado:");
-                            String A_materno = read.nextLine();
-
-                            System.out.println("Ingrese el teléfono del empleado:");
-                            String telefono = read.nextLine();
-
-                            System.out.println("Ingrese el correo electrónico del empleado:");
-                            String correo_E = read.nextLine();
-
-                            // Crear una nueva instancia de Empleado
-                            Empleado empleado = new Empleado(nombre, A_paterno, A_materno, telefono, correo_E);
-
-                            // Mostrar los detalles del empleado creado
-                            System.out.println("Empleado creado:");
-                            System.out.println("Nombre: " + empleado.getNombre());
-                            System.out.println("Apellido Paterno: " + empleado.getA_paterno());
-                            System.out.println("Apellido Materno: " + empleado.getA_materno());
-                            System.out.println("Teléfono: " + empleado.getTelefono());
-                            System.out.println("Correo Electrónico: " + empleado.getCorreo_E());
+                            case "2":
+                            Empleado.empleado(connect); //Llama al metodo estatico empleado
                             break;
                         case "3":
                             System.out.println("----------------------------------------------------------------"); // 64 caracteres
