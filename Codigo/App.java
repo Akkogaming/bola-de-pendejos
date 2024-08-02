@@ -52,7 +52,8 @@ public class App {
                             handleClientConsultation(read);
                             break;
                         case "4":
-                            Otros.Otros();
+                            Otros.otros();
+                            
                             break;  
                         case "5":
                             System.out.println("Saliendo del programa...");

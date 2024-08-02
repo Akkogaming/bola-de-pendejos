@@ -30,13 +30,13 @@ public class Admin {
             System.out.println("|                   2. Eliminar Empleados                  |");
             System.out.println("|                     3. Añadir Salones                    |");
             System.out.println("|                    4. Añadir Empleados                   |");
-            System.out.println("|                    5. Eliminar Salones                   |");
+            System.out.println("|                    5. Eliminar Salones                   |");//
             System.out.println("|                    6. Añadir Servicios                   |");
-            System.out.println("|                   7. Eliminar Servicios                  |");
+            System.out.println("|                   7. Eliminar Servicios                  |");// 
             System.out.println("|                    8. Añadir Montajes                    |");
-            System.out.println("|                   9. Eliminar Montajes                   |");
+            System.out.println("|                   9. Eliminar Montajes                   |");//
             System.out.println("|                    10. Añadir Eventos                    |");
-            System.out.println("|                   11. Eliminar Eventos                   |");
+            System.out.println("|                   11. Eliminar Eventos                   |");//
             System.out.println("|                         12. Salir                        |");
             System.out.println("------------------------------------------------------------");
       

@@ -193,8 +193,8 @@ public class Empleado {
             System.out.println("------------------------------------------------------------");
             System.out.println("|                     ¿ESTÁ SEGURO?                         |");
             System.out.println("|           ASEGÚRESE DE QUE EL NÚMERO SEA CORRECTO         |");
-            System.out.println("|               ESTA ACCIÓN ES IRREVERSIBLE                |");
-            System.out.println("|                 Y)CONFIRMAR N)DECLINAR                   |");
+            System.out.println("|               ESTA ACCIÓN ES IRREVERSIBLE                 |");
+            System.out.println("|                 Y)CONFIRMAR N)DECLINAR                    |");
             System.out.println("------------------------------------------------------------");
 
             String confirmDecision = leer.nextLine().toUpperCase(Locale.getDefault());

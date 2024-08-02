@@ -1,9 +1,12 @@
-
+import java.util.Scanner;
 
 
 public class Otros {
-    public static void Otros() {
-        System.out.println("copyright o algo asi no se jaja");
+    public static void otros() {
+        try{
+            Scanner keyboard=new Scanner(System.in);
+            String enter;
+            System.out.println("copyright o algo asi no se jaja");
         
 
 
@@ -38,12 +41,14 @@ System.out.println("░███████████████████
 System.out.println("░███████████████████████████████████████████████████████░");
 System.out.println("░███████████████████████████████████████████████████████░");
 System.out.println("░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░");
+System.out.println("Este programa esta lleno de errores");
 
 System.out.println("Press Enter to continue");
-try{System.in.read();}
-catch(Exception e){}
-       
-        
+enter=keyboard.nextLine();
+        }
+catch(Exception e){
+
+}
     }
     
 }
