@@ -15,13 +15,12 @@ public class Empleado {
           statement = connect.createStatement();
       } catch (SQLException e) {
           e.printStackTrace();
-          return;
       }
 
       leer = new Scanner(System.in);
-      boolean isRunning = true;
+      boolean isRunning2 = true;
 
-      while (isRunning) {
+      while (isRunning2) {
           System.out.println("------------------------------------------------------------");
           System.out.println("|                    MENU EMPLEADO                         |");
           System.out.println("------------------------------------------------------------");
@@ -35,7 +34,6 @@ public class Empleado {
 
           switch (answer) {
               case "1":
-                  
                           System.out.println("----------------------------------------------------------------"); // 64 caracteres
                           System.out.println("|               Selecciona la consulta a realizar:             |");
                           System.out.println("|                       1. Reservaciones                       |");
@@ -43,12 +41,7 @@ public class Empleado {
                           System.out.println("|                     3. Servicios requeridos                  |");
                           System.out.println("|             4. Reservaciones para el mismo salón             |");
                           System.out.println("|                  5. Servicios del mismo tipo                 |");
-                          //System.out.println("|                  6. Reservaciones del cliente                |");
-                          //System.out.println("|           7. Reservaciones con un servicio específico        |");
-                          //System.out.println("|            8. Reservaciones con un equipo específico         |");
-                          //System.out.println("|           9. Reservaciones con un montaje específico         |");
-                          //System.out.println("|               10. Reservaciones en el mismo mes              |");
-                          System.out.println("|                           6. Salir                          |");
+                          System.out.println("|                           6. Salir                           |");
                           System.out.println("----------------------------------------------------------------"); // 64 caracteres
 
                           String consultaOption = leer.nextLine();
@@ -71,8 +64,9 @@ public class Empleado {
                               case "6":
                                 ConsultasE.consulta11();
                                 break;
+
                                 default:
-                              System.out.println("...");
+                                System.out.println("Opción no válida.");
                           }
                           break;
 
@@ -85,20 +79,22 @@ public class Empleado {
                   break;
               case "4":
               ConsultasE.consulta11();
-              System.out.println("Saliendo del menú de administrador.");
+              System.out.println("Saliendo del menú de empleado.");
+              isRunning2=false;
               break;
               default:
                   System.out.println("Opción no válida.");
+                  isRunning2=false;
                 break;
           }
       }
 
-      leer.close();
+      
   }
-  //Metodo para realizar la reservacion de un salon (Si no termino soy puto)
+  //Metodo para realizar la reservacion de un salon
   public static void ReservarSalon(){
     try{
-      boolean crearReservacion=true;
+      boolean crearReservacion;
       int codigoSalon;
       int codigocliente;
       int cant_inv;
@@ -157,7 +153,7 @@ public class Empleado {
         evento=leer.nextInt();
 
         System.out.println("----------------------------------------------------------------");
-        System.out.println("     |Ingrese el codigo del montaje que se realizara           |");
+        System.out.println("|     Ingrese el codigo del montaje que se realizara           |");
         System.out.println("----------------------------------------------------------------");
         montaje=leer.nextInt();
 
@@ -173,7 +169,7 @@ public class Empleado {
         System.out.println("|              Reservacion creada con exito                    |");
         System.out.println("----------------------------------------------------------------");
         crearReservacion=false;
-      }while(crearReservacion=false);
+      }while(crearReservacion);
     }catch(Exception e){
       e.printStackTrace();
     }
@@ -205,4 +201,3 @@ public class Empleado {
     }
 }
 }
-

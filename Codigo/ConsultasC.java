@@ -1,6 +1,5 @@
 import java.sql.*;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 //consultas para el cliente
 public class ConsultasC {
@@ -67,6 +66,7 @@ public class ConsultasC {
                 System.out.println("Entrada inválida. Por favor, ingrese un número.");
                 read.next(); // Limpiar el buffer del scanner
             }
+            read.close();
         }
 
         // Preparar la consulta SQL
@@ -137,6 +137,7 @@ public class ConsultasC {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
+        read.close();
     }
 
     public static void consulta3(){
