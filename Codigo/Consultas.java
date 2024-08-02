@@ -490,10 +490,7 @@ public class Consultas {
         }
     }
     
-    public static void consulta11(){
-
-
-        
+    public static void consulta11(){     
         int num;
         Scanner read = new Scanner(System.in);
         System.out.println("Ingrese el codigo del empleado");
@@ -525,7 +522,39 @@ public class Consultas {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
     }
-    public static void consulta12(){
+
+    public static void consulta12() {
+        int num;
+        Scanner read = new Scanner(System.in);
+        System.out.println("Ingrese el codigo del empleado");
+        num = read.nextInt();
+
+        String query = "SELECT"+
+        "numero AS EmpleadoNumero, nombre AS EmpleadoNombre,"+
+        "FROM empleados,"+
+        "where num =" + num;   
+    }
+
+    public static void consulta13() {
+        
+    }
+
+    public static void consulta14() {
+        
+    }
+
+    public static void consulta15() {
+        
+    }
+
+    public static void consulta16() {
+        
+    }
+    public static void consulta17() {
+        
+    }
+
+    public static void consulta18(){
         
         
         System.out.println("Cancelando.........");

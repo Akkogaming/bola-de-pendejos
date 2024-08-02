@@ -389,3 +389,61 @@ JOIN
 JOIN 
     empleados e ON c.empleado = e.numero
 WHERE e.numero = 40; 
+
+
+
+
+
+--1. Consulta para Empleados
+--empleados, mostrando su número y nombre.
+-- Consulta para obtener todos los empleados
+
+
+SELECT numero AS EmpleadoNumero, nombre AS EmpleadoNombre
+FROM empleados
+where numero = 1;
+
+/*2. Consulta para Salones*/
+--salones, mostrando su número y nombre.
+-- Consulta para obtener todos los salones
+
+SELECT codigo AS "Numero del salon",
+`nombreSalon` AS "Nombre del salon",
+capacidad as "capacidad del salon",
+codigopostal as "Codigo postal",
+calle as calle,
+ciudad as ciudad,
+estado as estado
+FROM salon
+where codigo = 1
+
+--"3. Consulta para Servicios
+--Esta consulta devuelve todos los servicios, mostrando su número, nombre y costo.
+
+
+
+-- Consulta para obtener todos los servicios
+SELECT codigo AS ServicioNumero, nombre AS ServicioNombre, Precio AS ServicioCosto
+FROM servicios
+where codigo = 1;
+
+/*
+4. Consulta para Montajes
+Esta consulta devuelve todos los montajes, mostrando su número, nombre y descripción.
+-- Consulta para obtener todos los montajes
+*/
+
+SELECT codigo AS MontajeNumero, descripcion AS MontajeDescripcion
+FROM montaje
+where codigo = 1;
+
+/*
+5. Consulta para Eventos
+*/
+
+SELECT numeroevento AS EventoNumero,
+salon AS "numero de salon",
+montaje AS montaje,
+tipo_evento as "tipo de evento"
+FROM evento
+where numeroevento = 1;
