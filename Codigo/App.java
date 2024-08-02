@@ -51,33 +51,7 @@ public class App {
                             break;
                         case "2":
                             // Manejar el caso de iniciar sesión como empleado regular
-                            
-
-                            System.out.println("Ingrese el nombre del empleado:");
-                            String nombre = read.nextLine();
-
-                            System.out.println("Ingrese el apellido paterno del empleado:");
-                            String A_paterno = read.nextLine();
-
-                            System.out.println("Ingrese el apellido materno del empleado:");
-                            String A_materno = read.nextLine();
-
-                            System.out.println("Ingrese el teléfono del empleado:");
-                            String telefono = read.nextLine();
-
-                            System.out.println("Ingrese el correo electrónico del empleado:");
-                            String correo_E = read.nextLine();
-
-                            // Crear una nueva instancia de Empleado
-                            Empleado empleado = new Empleado(nombre, A_paterno, A_materno, telefono, correo_E);
-
-                            // Mostrar los detalles del empleado creado
-                            System.out.println("Empleado creado:");
-                            System.out.println("Nombre: " + empleado.getNombre());
-                            System.out.println("Apellido Paterno: " + empleado.getA_paterno());
-                            System.out.println("Apellido Materno: " + empleado.getA_materno());
-                            System.out.println("Teléfono: " + empleado.getTelefono());
-                            System.out.println("Correo Electrónico: " + empleado.getCorreo_E());
+                            Empleado.empleado(connect);
                             break;
                         case "3":
                             System.out.println("----------------------------------------------------------------"); // 64 caracteres
@@ -92,7 +66,7 @@ public class App {
                             //System.out.println("|            8. Reservaciones con un equipo específico         |");
                             //System.out.println("|           9. Reservaciones con un montaje específico         |");
                             //System.out.println("|               10. Reservaciones en el mismo mes              |");
-                            System.out.println("|                           11. Salir                          |");
+                            System.out.println("|                           3. Salir                          |");
                             System.out.println("----------------------------------------------------------------"); // 64 caracteres
 
                             String consultaOption = read.nextLine();
@@ -102,34 +76,10 @@ public class App {
                                     break;
                                 case "2":
                                     ConsultasC.consulta2();
-                                    /*
-                                    break;
-                                case "3":
-                                    Consultas.consulta3();
-                                    break;
-                                case "4":
-                                    Consultas.consulta4();
-                                    break;
-                                case "5":
-                                    Consultas.consulta5();
-                                    break;
-                                case "6":
-                                    Consultas.consulta6();
-                                    break;
-                                case "7":
-                                    Consultas.consulta7();
-                                    break;
-                                case "8":
-                                    Consultas.consulta8();
-                                    break;
-                                case "9":
-                                    Consultas.consulta9();
-                                    break;
-                                case "10":
-                                    Consultas.consulta10();*/
+                                    
                                     break;
                                 default:
-                                    Consultas.consulta11();
+                                    ConsultasC.consulta3();
                             }
                             break;
                         case "4":
