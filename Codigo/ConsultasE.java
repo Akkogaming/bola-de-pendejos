@@ -260,22 +260,16 @@ public class ConsultasE {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
     }
-    public static void consulta11(){
-        
-        
+    public static boolean consulta11() {
         System.out.println("Cancelando.........");
-
-
         try {
             Thread.sleep(1 * 1000);
         } catch (InterruptedException ie) {
             Thread.currentThread().interrupt();
         }
-
-
-        
+        return true; // Indica que se debe regresar al menú anterior
     }
-
+    
 
     public static void main(String[] args) {
         // Ejemplo de llamada a las consultas

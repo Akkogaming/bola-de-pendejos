@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class App {
     private static Connection connect;
     static Statement statement;
+
     public static void main(String[] args) {
         String direction = "jdbc:mysql://localhost:3306/eventos"; // Cambia el puerto si es necesario
         
@@ -16,11 +17,6 @@ public class App {
             Scanner read = new Scanner(System.in); 
 
             while (isRunning) {   
-                
-
-
-                //System.out.print("\033[H\033[2J");
-    
                 // Imprimir menú
                 System.out.println("");
                 System.out.println("");
@@ -37,49 +33,19 @@ public class App {
                 System.out.println("|                        5. salir                          |"); 
                 System.out.println("|                                                          |");
                 System.out.println("------------------------------------------------------------");   
-                //System.out.flush();
-                // Leer la opción del usuario de manera segura
-                if (read.hasNextLine()) {
+
+                if (read.hasNextLine()) { //este es el problema
                     String answer = read.nextLine().toUpperCase(Locale.getDefault());
 
-                    // Procesar la opción del usuario
                     switch (answer) {
-                        // Llama al método Admin
-                         case "1":
+                        case "1":
                             Admin.admin(connect); // Llama al método estático admin
                             break;
                         case "2":
-                            // Manejar el caso de iniciar sesión como empleado regular
-                            Empleado.empleado(connect);
+                            Empleado.empleado(connect); // Maneja el caso de empleado
                             break;
                         case "3":
-                            System.out.println("----------------------------------------------------------------"); // 64 caracteres
-                            System.out.println("|               Selecciona la consulta a realizar:             |");
-                            System.out.println("|                       1. Reservaciones                       |");
-                            //System.out.println("|                   2. Equipamiento requerido                  |");
-                            //System.out.println("|        a             3. Servicios requeridos                  |");
-                            //System.out.println("|             4. Reservaciones para el mismo salón             |");
-                            //System.out.println("|                  5. Servicios del mismo tipo                 |");
-                            System.out.println("|                  2. Reservaciones del cliente                |");
-                            //System.out.println("|           7. Reservaciones con un servicio específico        |");
-                            //System.out.println("|            8. Reservaciones con un equipo específico         |");
-                            //System.out.println("|           9. Reservaciones con un montaje específico         |");
-                            //System.out.println("|               10. Reservaciones en el mismo mes              |");
-                            System.out.println("|                           3. Salir                          |");
-                            System.out.println("----------------------------------------------------------------"); // 64 caracteres
-
-                            String consultaOption = read.nextLine();
-                            switch (consultaOption) {
-                                case "1":
-                                    ConsultasC.consulta1();
-                                    break;
-                                case "2":
-                                    ConsultasC.consulta2();
-                                    
-                                    break;
-                                default:
-                                    ConsultasC.consulta3();
-                            }
+                            // Manejar consulta cliente
                             break;
                         case "4":
                             Otros.Otros();

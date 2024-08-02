@@ -72,7 +72,7 @@ public class Empleado {
                                 ConsultasE.consulta11();
                                 break;
                                 default:
-                              System.out.println("LAPUTAMADRE");
+                              System.out.println("...");
                           }
                           break;
 
@@ -84,7 +84,7 @@ public class Empleado {
                 eliminarReservacion();
                   break;
               case "4":
-              ConsultasE.consulta11();;
+              ConsultasE.consulta11();
               System.out.println("Saliendo del menú de administrador.");
               break;
               default:
