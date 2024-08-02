@@ -119,9 +119,9 @@ public class Admin {
         System.out.println("|12. consultar empleados |");
         System.out.println("|13. consultar salones  |");
         System.out.println("|14. consultar servicios |");
-        System.out.println("|16. consultar montajes |");
-        System.out.println("|17. consultar eventos|");
-        System.out.println("|                           18. Salir                          |");
+        System.out.println("|15. consultar montajes |");
+        System.out.println("|16. consultar eventos|");
+        System.out.println("|                           17. Salir                          |");
         System.out.println("----------------------------------------------------------------"); // 64 caracteres
 
         String consultaOption = leer.nextLine();
@@ -173,12 +173,10 @@ public class Admin {
                 break;
             case "16":
                 Consultas.consulta16();
+                
                 break;
             case "17":
-                Consultas.consulta17();
-                break;
-            case "18":
-                Consultas.consulta18(); //YA SE QUE NO EXISTEN AUN NO ESTEN CHINGANDO
+                Consultas.consulta17(); //YA SE QUE NO EXISTEN AUN NO ESTEN CHINGANDO
                 break;
             default:
                 System.out.println("Opción no válida.");

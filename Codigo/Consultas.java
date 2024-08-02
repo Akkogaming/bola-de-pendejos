@@ -23,14 +23,14 @@ public class Consultas {
 
             // Imprimir encabezados de columna
             for (int i = 1; i <= columnCount; i++) {
-                System.out.printf("%-40s", metaData.getColumnName(i));
+                System.out.printf("%-20s", metaData.getColumnName(i));
             }
             System.out.println();
 
             // Imprimir datos de filas
             while (resultSet.next()) {
                 for (int i = 1; i <= columnCount; i++) {
-                    System.out.printf("%-40s", resultSet.getString(i));
+                    System.out.printf("%-20s", resultSet.getString(i));
                 }
                 System.out.println();
             }
@@ -523,38 +523,42 @@ public class Consultas {
         }
     }
 
+   
     public static void consulta12() {
-        int num;
-        Scanner read = new Scanner(System.in);
-        System.out.println("Ingrese el codigo del empleado");
-        num = read.nextInt();
-
-        String query = "SELECT"+
-        "numero AS EmpleadoNumero, nombre AS EmpleadoNombre,"+
-        "FROM empleados,"+
-        "where num =" + num;   
+        String query = "SELECT * FROM empleados";
+        ejecutarConsulta(query);
     }
 
     public static void consulta13() {
-        
+        String query = "SELECT * FROM equipamiento";
+        ejecutarConsulta(query);
     }
 
     public static void consulta14() {
-        
+        String query = "SELECT * FROM servicios"; // Define la consulta SQL
+    
+        // Ejecutar la consulta usando el método ejecutarConsulta
+        try {
+            // Aquí simplemente llamamos a `ejecutarConsulta` que ya maneja la conexión y la ejecución
+            ejecutarConsulta(query);
+        } catch (Exception e) {
+            System.out.println("Se produjo un error inesperado: " + e.getMessage());
+        }
     }
+    
 
     public static void consulta15() {
-        
+       
+        String query = "SELECT * FROM montaje ";
+        ejecutarConsulta(query);
     }
-
+    
     public static void consulta16() {
-        
-    }
-    public static void consulta17() {
-        
+        String query = "SELECT * FROM evento ";
+        ejecutarConsulta(query);
     }
 
-    public static void consulta18(){
+    public static void consulta17(){
         
         
         System.out.println("Cancelando.........");
@@ -582,5 +586,10 @@ public class Consultas {
         consulta10();
         consulta11();
         consulta12();
+        consulta13();
+        consulta14();
+        consulta15();
+        consulta16();
+        consulta17();
     }
 }
