@@ -1,6 +1,5 @@
 import java.sql.*;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 //consultas para el empleado y el admin
 public class ConsultasE {
@@ -91,6 +90,7 @@ public class ConsultasE {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
+        read.close();
     }
 
     public static void consulta2E() {
@@ -134,6 +134,7 @@ public class ConsultasE {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
+        read.close();
     }
 
     public static void consulta3E() {
@@ -179,6 +180,7 @@ public class ConsultasE {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
+        read.close();
     }
 
     public static void consulta4E() {
@@ -221,6 +223,7 @@ public class ConsultasE {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
+        read.close();
     }
 
     public static void consulta5E() {
@@ -259,17 +262,23 @@ public class ConsultasE {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
+        read.close();
     }
-    public static boolean consulta11() {
+    public static void consulta11(){
+        
+        
         System.out.println("Cancelando.........");
+
+
         try {
             Thread.sleep(1 * 1000);
         } catch (InterruptedException ie) {
             Thread.currentThread().interrupt();
         }
-        return true; // Indica que se debe regresar al menú anterior
+
+
     }
-    
+
 
     public static void main(String[] args) {
         // Ejemplo de llamada a las consultas

@@ -15,13 +15,12 @@ public class Empleado {
           statement = connect.createStatement();
       } catch (SQLException e) {
           e.printStackTrace();
-          return;
       }
 
       leer = new Scanner(System.in);
-      boolean isRunning = true;
+      boolean isRunning2 = true;
 
-      while (isRunning) {
+      while (isRunning2) {
           System.out.println("------------------------------------------------------------");
           System.out.println("|                    MENU EMPLEADO                         |");
           System.out.println("------------------------------------------------------------");
@@ -35,7 +34,6 @@ public class Empleado {
 
           switch (answer) {
               case "1":
-                  
                           System.out.println("----------------------------------------------------------------"); // 64 caracteres
                           System.out.println("|               Selecciona la consulta a realizar:             |");
                           System.out.println("|                       1. Reservaciones                       |");
@@ -72,7 +70,7 @@ public class Empleado {
                                 ConsultasE.consulta11();
                                 break;
                                 default:
-                              System.out.println("...");
+                                System.out.println("Opción no válida.");
                           }
                           break;
 
@@ -85,20 +83,22 @@ public class Empleado {
                   break;
               case "4":
               ConsultasE.consulta11();
-              System.out.println("Saliendo del menú de administrador.");
+              System.out.println("Saliendo del menú de empleado.");
+              isRunning2=false;
               break;
               default:
                   System.out.println("Opción no válida.");
+                  isRunning2=false;
                 break;
           }
       }
 
       leer.close();
   }
-  //Metodo para realizar la reservacion de un salon (Si no termino soy puto)
+  //Metodo para realizar la reservacion de un salon
   public static void ReservarSalon(){
     try{
-      boolean crearReservacion=true;
+      boolean crearReservacion;
       int codigoSalon;
       int codigocliente;
       int cant_inv;
@@ -173,7 +173,7 @@ public class Empleado {
         System.out.println("|              Reservacion creada con exito                    |");
         System.out.println("----------------------------------------------------------------");
         crearReservacion=false;
-      }while(crearReservacion=false);
+      }while(crearReservacion);
     }catch(Exception e){
       e.printStackTrace();
     }
