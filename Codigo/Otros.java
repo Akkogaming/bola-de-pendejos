@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 
 public class Otros {
-    public static void Otros() {
+    public static void otros() {
         try{
             Scanner keyboard=new Scanner(System.in);
             String enter;

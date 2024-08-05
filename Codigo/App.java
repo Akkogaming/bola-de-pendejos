@@ -20,21 +20,21 @@ public class App {
             Scanner read = new Scanner(System.in); 
             while (isRunning) {
                 // Imprimir menú
-                System.out.println("");
-                System.out.println("");
-                System.out.println("------------------------------------------------------------"); // 60 caracteres
-                System.out.println("|                       BLUE PALACE                        |");
-                System.out.println("------------------------------------------------------------");
-                System.out.println("|                                                          |");
-                System.out.println("|           ELIGA UNA OPCION DE LAS SIGUENTES              |");
-                System.out.println("|                                                          |");
-                System.out.println("|          1. iniciar sesion como administrador            |");
-                System.out.println("|         2. iniciar sesion como empleado regular          |");
-                System.out.println("|        3. consultar una reservacion como cliente         |");
-                System.out.println("|                        4. otros                          |");
-                System.out.println("|                        5. salir                          |"); 
-                System.out.println("|                                                          |");
-                System.out.println("------------------------------------------------------------");   
+                System.out.println("‎");
+                System.out.println("‎");
+                System.out.println("╔══════════════════════════════════════════════════════════╗"); // 60 caracteres
+                System.out.println("║                       BLUE PALACE                        ║");
+                System.out.println("╠══════════════════════════════════════════════════════════╣");
+                System.out.println("║                                                          ║");
+                System.out.println("║           ELIGA UNA OPCION DE LAS SIGUENTES              ║");
+                System.out.println("║                                                          ║");
+                System.out.println("║          1. iniciar sesion como administrador            ║");
+                System.out.println("║         2. iniciar sesion como empleado regular          ║");
+                System.out.println("║        3. consultar una reservacion como cliente         ║");
+                System.out.println("║                        4. otros                          ║");
+                System.out.println("║                        5. salir                          ║"); 
+                System.out.println("║                                                          ║");
+                System.out.println("╚══════════════════════════════════════════════════════════╝");   
 
                 // Leer la opción del usuario
                 if (read.hasNextLine()) {
@@ -52,7 +52,7 @@ public class App {
                             handleClientConsultation(read);
                             break;
                         case "4":
-                            Otros.Otros();
+                            Otros.otros();
                             break;  
                         case "5":
                             System.out.println("Saliendo del programa...");
