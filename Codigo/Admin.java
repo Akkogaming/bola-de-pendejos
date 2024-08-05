@@ -388,30 +388,94 @@ public class Admin {
         try {
             System.out.println("Número de salón a borrar (o 'C' para cancelar):");
             String input = leer.nextLine().toUpperCase(Locale.getDefault());
-
+    
             if (input.equals("C")) {
                 System.out.println("Operación cancelada.");
                 return;
             }
-
-            int codigo;
+    
+            int numero;
             try {
-                codigo = Integer.parseInt(input);
+                numero = Integer.parseInt(input);
             } catch (NumberFormatException e) {
                 System.out.println("Entrada inválida. Debe ingresar un número o 'C' para cancelar.");
                 return;
             }
-
-            String deleteQuery = "DELETE FROM salon WHERE codigo = ?";
-            PreparedStatement pstmt = connect.prepareStatement(deleteQuery);
-            pstmt.setInt(1, codigo);
-            pstmt.executeUpdate();
-
-            System.out.println("Salón eliminado exitosamente.");
+    
+            // Verificar si hay reservas asociadas al salón
+            String checkReservasQuery = "SELECT COUNT(*) FROM reservaciones WHERE salon = ?";
+            PreparedStatement checkReservasStmt = connect.prepareStatement(checkReservasQuery);
+            checkReservasStmt.setInt(1, numero);
+            ResultSet reservasResultSet = checkReservasStmt.executeQuery();
+            reservasResultSet.next();
+            int reservaCount = reservasResultSet.getInt(1);
+    
+            if (reservaCount > 0) {
+                System.out.println("El salón está asociado con una o más reservas.");
+                System.out.println("¿Desea reasignar estas reservas a otro salón? (S/N)");
+                String decision = leer.nextLine().toUpperCase(Locale.getDefault());
+    
+                if (decision.equals("S")) {
+                    // Listar salones disponibles para reasignar reservas
+                    String listSalonesQuery = "SELECT codigo, nombreSalon FROM salon";
+                    Statement stmt = connect.createStatement();
+                    ResultSet salonesResultSet = stmt.executeQuery(listSalonesQuery);
+                    System.out.println("Salones disponibles:");
+                    while (salonesResultSet.next()) {
+                        int salonCodigo = salonesResultSet.getInt("codigo");
+                        String salonNombre = salonesResultSet.getString("nombreSalon");
+                        System.out.println(salonCodigo + ": " + salonNombre);
+                    }
+    
+                    System.out.println("Ingrese el número del nuevo salón:");
+                    int nuevoSalon = leer.nextInt();
+                    leer.nextLine(); // Consumir el newline
+    
+                    // Reasignar reservas al nuevo salón
+                    String updateReservasQuery = "UPDATE reservaciones SET salon = ? WHERE salon = ?";
+                    PreparedStatement updateReservasStmt = connect.prepareStatement(updateReservasQuery);
+                    updateReservasStmt.setInt(1, nuevoSalon);
+                    updateReservasStmt.setInt(2, numero);
+                    updateReservasStmt.executeUpdate();
+    
+                    System.out.println("Reservas reasignadas al nuevo salón.");
+    
+                    System.out.println("¿Desea eliminar el salón original? (S/N)");
+                    String confirmDecision = leer.nextLine().toUpperCase(Locale.getDefault());
+                    if (confirmDecision.equals("S")) {
+                        String deleteSalonQuery = "DELETE FROM salon WHERE codigo = ?";
+                        PreparedStatement deleteStmt = connect.prepareStatement(deleteSalonQuery);
+                        deleteStmt.setInt(1, numero);
+                        deleteStmt.executeUpdate();
+                        System.out.println("Salón eliminado exitosamente.");
+                    } else {
+                        System.out.println("Operación cancelada.");
+                    }
+                } else {
+                    System.out.println("Operación cancelada.");
+                }
+            } else {
+                System.out.println("¿Desea eliminar el salón? (S/N)");
+                String confirmDecision = leer.nextLine().toUpperCase(Locale.getDefault());
+                if (confirmDecision.equals("S")) {
+                    String deleteSalonQuery = "DELETE FROM salon WHERE codigo = ?";
+                    PreparedStatement deleteStmt = connect.prepareStatement(deleteSalonQuery);
+                    deleteStmt.setInt(1, numero);
+                    deleteStmt.executeUpdate();
+                    System.out.println("Salón eliminado exitosamente.");
+                } else {
+                    System.out.println("Operación cancelada.");
+                }
+            }
+    
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+    
+    
+    
+    //////////////////////////////////////////////
 
     // Método para añadir un servicio
     private static void añadirServicio() {
