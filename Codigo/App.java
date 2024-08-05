@@ -20,8 +20,8 @@ public class App {
             Scanner read = new Scanner(System.in); 
             while (isRunning) {
                 // Imprimir menú
-                System.out.println("‎‎");
-                System.out.println("‎");
+                System.out.println("⠀");
+                System.out.println("⠀");
                 System.out.println("╔══════════════════════════════════════════════════════════╗"); // 60 caracteres
                 System.out.println("║                       BLUE PALACE                        ║");
                 System.out.println("╠══════════════════════════════════════════════════════════╣");

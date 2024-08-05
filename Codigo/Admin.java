@@ -22,22 +22,22 @@ public class Admin {
         boolean isRunning = true;
 
         while (isRunning) {
-            System.out.println("------------------------------------------------------------");
-            System.out.println("|                 MENU ADMINISTRADOR                       |");
-            System.out.println("------------------------------------------------------------");
-            System.out.println("| 1. Consultas                                             |");
-            System.out.println("| 2. Eliminar Empleados                                    |");
-            System.out.println("| 3. Añadir Salones                                        |");
-            System.out.println("| 4. Añadir Empleados                                      |");
-            System.out.println("| 5. Eliminar Salones                                      |");
-            System.out.println("| 6. Añadir Servicios                                      |");
-            System.out.println("| 7. Eliminar Servicios                                    |");
-            System.out.println("| 8. Añadir Montajes                                       |");
-            System.out.println("| 9. Eliminar Montajes                                     |");
-            System.out.println("| 10. Añadir Eventos                                       |");
-            System.out.println("| 11. Eliminar Eventos                                     |");
-            System.out.println("|                         12. Salir                        |");
-            System.out.println("------------------------------------------------------------");
+            System.out.println("╔══════════════════════════════════════════════════════════════╗");
+            System.out.println("║                       MENU ADMINISTRADOR                     ║");
+            System.out.println("╠══════════════════════════════════════════════════════════════╣");
+            System.out.println("║ 1. Consultas                                                 ║");
+            System.out.println("║ 2. Añadir Empleados                                          ║");
+            System.out.println("║ 3. Eliminar Empleados                                        ║");
+            System.out.println("║ 4. Añadir Salones                                            ║");
+            System.out.println("║ 5. Eliminar Salones                                          ║");
+            System.out.println("║ 6. Añadir Servicios                                          ║");
+            System.out.println("║ 7. Eliminar Servicios                                        ║");
+            System.out.println("║ 8. Añadir Montajes                                           ║");
+            System.out.println("║ 9. Eliminar Montajes                                         ║");
+            System.out.println("║ 10. Añadir Eventos                                           ║");
+            System.out.println("║ 11. Eliminar Eventos                                         ║");
+            System.out.println("║                         12. Salir                            ║");
+            System.out.println("╚══════════════════════════════════════════════════════════════╝");
 
             String answer = leer.nextLine();
 
@@ -48,15 +48,15 @@ public class Admin {
                     break;
 
                 case "2":
-                    eliminarEmpleado();
+                    insertarEmpleado();
                     break;
 
                 case "3":
-                    añadirSalon();
+                    eliminarEmpleado();
                     break;
 
                 case "4":
-                    insertarEmpleado();
+                    añadirSalon();
                     break;
 
                 case "5":
@@ -102,27 +102,28 @@ public class Admin {
     }
 
     // Métodos de consulta
+    // todo: reorganizar esto
     private static void handleConsultas() {
-        System.out.println("----------------------------------------------------------------"); // 64 caracteres
-        System.out.println("|               Selecciona la consulta a realizar:             |"); 
-        System.out.println("|                       1. Reservaciones                       |");
-        System.out.println("|                   2. Equipamiento requerido                  |");
-        System.out.println("|                     3. Servicios requeridos                  |");
-        System.out.println("|             4. Reservaciones para el mismo salón             |");
-        System.out.println("|                  5. Servicios del mismo tipo                 |");
-        System.out.println("|                  6. Reservaciones del cliente                |");
-        System.out.println("|           7. Reservaciones con un servicio específico        |");
-        System.out.println("|            8. Reservaciones con un equipo específico         |");
-        System.out.println("|           9. Reservaciones con un montaje específico         |");
-        System.out.println("|               10. Reservaciones en el mismo mes              |");
-        System.out.println("|           11. Reservaciones asignados a un empleado          |");
-        System.out.println("|12. consultar empleados |");
-        System.out.println("|13. consultar salones  |");
-        System.out.println("|14. consultar servicios |");
-        System.out.println("|15. consultar montajes |");
-        System.out.println("|16. consultar eventos|");
-        System.out.println("|                           17. Salir                          |");
-        System.out.println("----------------------------------------------------------------"); // 64 caracteres
+        System.out.println("╔══════════════════════════════════════════════════════════════╗"); // 64 caracteres
+        System.out.println("║               Selecciona la consulta a realizar:             ║"); 
+        System.out.println("║                       1. Reservaciones                       ║");
+        System.out.println("║                   2. Equipamiento requerido                  ║");
+        System.out.println("║                     3. Servicios requeridos                  ║");
+        System.out.println("║             4. Reservaciones para el mismo salón             ║");
+        System.out.println("║                  5. Servicios del mismo tipo                 ║");
+        System.out.println("║                  6. Reservaciones del cliente                ║");
+        System.out.println("║           7. Reservaciones con un servicio específico        ║");
+        System.out.println("║            8. Reservaciones con un equipo específico         ║");
+        System.out.println("║           9. Reservaciones con un montaje específico         ║");
+        System.out.println("║               10. Reservaciones en el mismo mes              ║");
+        System.out.println("║           11. Reservaciones asignados a un empleado          ║");
+        System.out.println("║                   12. consultar empleados                    ║");
+        System.out.println("║                     13. consultar salones                    ║");
+        System.out.println("║                   14. consultar servicios                    ║");
+        System.out.println("║                    15. consultar montajes                    ║");
+        System.out.println("║                    16. consultar eventos                     ║");
+        System.out.println("║                           17. Salir                          ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════╝"); // 64 caracteres
 
         String consultaOption = leer.nextLine();
         switch (consultaOption) {
@@ -184,20 +185,38 @@ public class Admin {
         }
     }
 
-    // Método para insertar un nuevo empleado
+
+
+    //  Método para insertar un nuevo empleado
     private static void insertarEmpleado() {
         try {
+            
+            Integer numero = null;
+
+
             System.out.println("Ingrese el nombre del empleado:");
             String nombre = leer.nextLine();
+            
+            System.out.println("Ingrese el primer apellido del empleado:");
+            String a_paterno = leer.nextLine();
+            
+            System.out.println("Ingrese el segundo apellido del empleado:");
+            String a_materno = leer.nextLine();
 
-            System.out.println("Ingrese el número del empleado:");
-            int numero = leer.nextInt();
-            leer.nextLine(); // Consume el newline
+            System.out.println("Ingrese el telefono del empleado:");
+            String telefono = leer.nextLine();
 
-            String insertQuery = "INSERT INTO empleados (numero, nombre) VALUES (?, ?)";
+            System.out.println("Ingrese el correo del empleado:");
+            String correo_e = leer.nextLine();
+
+            String insertQuery = "INSERT INTO empleados (numero, nombre, a_paterno, a_materno, telefono, correo_e) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = connect.prepareStatement(insertQuery);
-            pstmt.setInt(1, numero);
+            pstmt.setObject(1, numero, java.sql.Types.INTEGER);
             pstmt.setString(2, nombre);
+            pstmt.setString(3, a_paterno);
+            pstmt.setString(4, a_materno);
+            pstmt.setString(5, telefono);
+            pstmt.setString(6, correo_e);
             pstmt.executeUpdate();
 
             System.out.println("Empleado añadido exitosamente.");
@@ -205,6 +224,7 @@ public class Admin {
             e.printStackTrace();
         }
     }
+
 
     // Método para eliminar un empleado por código
     private static void eliminarEmpleado() {
@@ -305,21 +325,56 @@ public class Admin {
             e.printStackTrace();
         }
     }
+    
+    //eliminar empleado funciona
+
 
     // Método para añadir un salón
     private static void añadirSalon() {
         try {
+
+            Integer codigo = null;
+
+            System.out.println("Ingrese la capacidad del salón:");
+            int capacidad = leer.nextInt();
+            leer.nextLine();
+
             System.out.println("Ingrese el nombre del salón:");
-            String nombre = leer.nextLine();
+            String nombresalon = leer.nextLine();
 
-            System.out.println("Ingrese el número de salón:");
-            int numero = leer.nextInt();
-            leer.nextLine(); // Consume el newline
+            System.out.println("Ingrese el codigo postal del salón:");
+            int codigopostal = leer.nextInt();
+            leer.nextLine();
 
-            String insertQuery = "INSERT INTO salon (numero, nombre) VALUES (?, ?)";
+            System.out.println("Ingrese el nombre de la calle del salón:");
+            String calle = leer.nextLine();
+
+            System.out.println("Ingrese el nombre de la ciudad del salón:");
+            String ciudad = leer.nextLine();
+
+            System.out.println("Ingrese el nombre del estado del salón:");
+            String estado = leer.nextLine();
+
+            //// empleado foregein key
+
+            System.out.println("Ingrese el número de empleado asociado al salón:");
+            int empleado = leer.nextInt(); // Suponiendo que el número de empleado es un entero
+            leer.nextLine();
+
+            String insertQuery = "INSERT INTO salon (codigo, capacidad, nombresalon, codigopostal, calle, ciudad, estado, empleado) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = connect.prepareStatement(insertQuery);
-            pstmt.setInt(1, numero);
-            pstmt.setString(2, nombre);
+            pstmt.setObject(1, codigo, java.sql.Types.INTEGER);
+            pstmt.setInt(2, capacidad);
+            pstmt.setString(3,nombresalon);
+            pstmt.setInt(4, codigopostal);
+            pstmt.setString(5,calle);
+            pstmt.setString(6,ciudad);
+            pstmt.setString(7,estado);
+            pstmt.setInt(8, empleado);
+            
+            
+            //// empleado foregein key
+
             pstmt.executeUpdate();
 
             System.out.println("Salón añadido exitosamente.");
