@@ -325,9 +325,7 @@ public class Admin {
             e.printStackTrace();
         }
     }
-    
-    //eliminar empleado funciona
-
+    //! eliminar empleado funciona
 
     // Método para añadir un salón
     private static void añadirSalon() {
@@ -473,8 +471,7 @@ public class Admin {
         }
     }
     
-    
-    
+
     //////////////////////////////////////////////
 
     // Método para añadir un servicio
