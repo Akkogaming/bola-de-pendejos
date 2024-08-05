@@ -85,8 +85,8 @@ public class App {
         System.out.println("----------------------------------------------------------------"); // 64 caracteres
         System.out.println("|               Selecciona la consulta a realizar:             |");
         System.out.println("|                       1. Reservaciones                       |");
-        System.out.println("|                  2. Reservaciones del cliente                |");
-        System.out.println("|                           3. Salir                           |");
+        //System.out.println("|                  2. Reservaciones del cliente                |");
+        System.out.println("|                           2. Salir                           |");
         System.out.println("----------------------------------------------------------------"); // 64 caracteres
 
         if (read.hasNextLine()) {
@@ -96,7 +96,7 @@ public class App {
                     ConsultasC.consulta1();
                     break;
                 case "2":
-                    ConsultasC.consulta2();
+                    //ConsultasC.consulta2();
                     break;
                 case "3":
                     // No hacer nada, simplemente salimos xd
