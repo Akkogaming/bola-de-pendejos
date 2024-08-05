@@ -1,6 +1,5 @@
 import java.sql.*;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 //consultas para el empleado y el admin
 public class Consultas {
@@ -51,8 +50,10 @@ public class Consultas {
     public static void consulta1() {
         Scanner read = new Scanner(System.in);
         int clienteCodigo = -1;
+        String teclado;
+        boolean active=true;
 
-        while (clienteCodigo <= 0) {
+        do{
             System.out.println("Ingrese el código del cliente");
 
             try {
@@ -67,7 +68,7 @@ public class Consultas {
                 System.out.println("Entrada inválida. Por favor, ingrese un número.");
                 read.next(); // Limpiar el buffer del scanner
             }
-        }
+        
 
         // Preparar la consulta SQL
         String query = "SELECT " +
@@ -94,13 +95,16 @@ public class Consultas {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
+    }while(clienteCodigo <= 0 || active);
     }
 
     public static void consulta2() {
         Scanner read = new Scanner(System.in);
         int equipamientoCodigo = -1;
+        String teclado;
+        boolean active=true;
 
-        while (equipamientoCodigo <= 0) {
+        do{
             System.out.println("Ingrese el código del equipamiento :");
 
             try {
@@ -115,7 +119,7 @@ public class Consultas {
                 System.out.println("Entrada inválida. Por favor, ingrese un número");
                 read.next(); // Limpiar el buffer del scanner
             }
-        }
+        
 
         // Preparar la consulta SQL
         String query = "SELECT " +
@@ -137,12 +141,13 @@ public class Consultas {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
+    }while(equipamientoCodigo <= 0 || active);
     }
 
     public static void consulta3() {
         Scanner read = new Scanner(System.in);
         int tipoServicioCodigo = -1;
-
+        
         while (tipoServicioCodigo <= 0) {
             System.out.println("Ingrese el código del tipo de servicio:");
 
@@ -499,16 +504,12 @@ public class Consultas {
         // Define the SQL query with proper spacing
         String query = "SELECT " +
                         "e.numero AS numero_empleado, " +
-                        "c.codigo AS numero_cliente " +
+                        "r.codigo AS numero_reserva " +
                         "FROM " +
-                        "cliente as c " +
-                        "JOIN " +
-                        "empleados e ON c.empleado = e.numero "+
+                        "reservaciones r " +
+                        "JOIN cliente c ON r.cliente = c.codigo " +
+                        "JOIN empleados e ON c.empleado = e.numero " +
                         "WHERE e.numero = " + num;
-
-                      
-                        
- 
         
         // Use try-with-resources to ensure resources are closed properly
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/eventos", "root", "");
@@ -518,8 +519,8 @@ public class Consultas {
             // Process the result set
             while (rs.next()) {
                 int empleadoNumero = rs.getInt("numero_empleado");
-                int clienteCodigo = rs.getInt("numero_cliente");
-                System.out.println("Número de empleado: " + empleadoNumero + ", Número de de cliente: " + clienteCodigo);
+                int reservaNumero = rs.getInt("numero_reserva");
+                System.out.println("Número de empleado: " + empleadoNumero + ", Número de reserva: " + reservaNumero);
             }
             
         } catch (Exception e) {

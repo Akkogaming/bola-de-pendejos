@@ -1,6 +1,5 @@
 import java.sql.*;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 //consultas para el empleado y el admin
 public class ConsultasE {
@@ -48,8 +47,10 @@ public class ConsultasE {
     public static void consulta1E() {
         Scanner read = new Scanner(System.in);
         int clienteCodigo = -1;
-
-        while (clienteCodigo <= 0) {
+        String teclado;
+        boolean active=true;
+        do{
+            active=false;
             System.out.println("Ingrese el código del cliente");
 
             try {
@@ -64,7 +65,6 @@ public class ConsultasE {
                 System.out.println("Entrada inválida. Por favor, ingrese un número.");
                 read.next(); // Limpiar el buffer del scanner
             }
-        }
 
         // Preparar la consulta SQL
         String query = "SELECT " +
@@ -91,13 +91,15 @@ public class ConsultasE {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
+    }while(clienteCodigo <= 0 || active);
     }
 
     public static void consulta2E() {
         Scanner read = new Scanner(System.in);
         int equipamientoCodigo = -1;
-
-        while (equipamientoCodigo <= 0) {
+        String teclado;
+        boolean active=false;
+        do{
             System.out.println("Ingrese el código del equipamiento :");
 
             try {
@@ -112,7 +114,6 @@ public class ConsultasE {
                 System.out.println("Entrada inválida. Por favor, ingrese un número");
                 read.next(); // Limpiar el buffer del scanner
             }
-        }
 
         // Preparar la consulta SQL
         String query = "SELECT " +
@@ -134,13 +135,15 @@ public class ConsultasE {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
+    }while(equipamientoCodigo <= 0 || active);
     }
 
     public static void consulta3E() {
         Scanner read = new Scanner(System.in);
         int tipoServicioCodigo = -1;
-
-        while (tipoServicioCodigo <= 0) {
+        String teclado;
+        boolean active=true;
+        do{
             System.out.println("Ingrese el código del tipo de servicio:");
 
             try {
@@ -155,7 +158,7 @@ public class ConsultasE {
                 System.out.println("Entrada inválida. Por favor, ingrese un número");
                 read.next(); // Limpiar el buffer del scanner
             }
-        }
+        
 
         // Preparar la consulta SQL
         String query = "SELECT " +
@@ -179,13 +182,16 @@ public class ConsultasE {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
+    }while(tipoServicioCodigo <= 0 || active);
     }
 
     public static void consulta4E() {
         Scanner read = new Scanner(System.in);
         int salonCodigo = -1;
+        String teclado;
+        boolean active=false;
 
-        while (salonCodigo <= 0) {
+        do{
             System.out.println("Ingrese el código del salón:");
 
             try {
@@ -200,7 +206,7 @@ public class ConsultasE {
                 System.out.println("Entrada inválida. Por favor, ingrese un número.");
                 read.next(); // Limpiar el buffer del scanner
             }
-        }
+        
 
         // Preparar la consulta SQL
         String query = "SELECT " +
@@ -221,13 +227,16 @@ public class ConsultasE {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
+    }while (salonCodigo <= 0 || active); 
     }
 
     public static void consulta5E() {
         Scanner read = new Scanner(System.in);
         int tipoServicioCodigo = -1;
+        String teclado;
+        boolean active=false;
 
-        while (tipoServicioCodigo <= 0) {
+        do{
             System.out.println("Ingrese el código del tipo de servicio:");
 
             try {
@@ -242,7 +251,7 @@ public class ConsultasE {
                 System.out.println("Entrada inválida. Por favor, ingrese un número.");
                 read.next(); // Limpiar el buffer del scanner
             }
-        }
+        
 
         // Preparar la consulta SQL
         String query = "SELECT " +
@@ -259,17 +268,21 @@ public class ConsultasE {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
+    }while(tipoServicioCodigo <= 0 || active);
     }
-    public static boolean consulta11() {
+    public static void consulta11(){
+        
+        
         System.out.println("Cancelando.........");
+
+
         try {
             Thread.sleep(1 * 1000);
         } catch (InterruptedException ie) {
             Thread.currentThread().interrupt();
         }
-        return true; // Indica que se debe regresar al menú anterior
     }
-    
+
 
     public static void main(String[] args) {
         // Ejemplo de llamada a las consultas

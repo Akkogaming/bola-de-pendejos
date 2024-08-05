@@ -3,9 +3,6 @@ import java.util.*;
 
 //consultas para el cliente
 public class ConsultasC {
-
- 
-
     // Método para ejecutar y mostrar una consulta SQL
     public static void ejecutarConsulta(String query) {
         Connection connection = null;
@@ -50,9 +47,15 @@ public class ConsultasC {
     public static void consulta1() {
         Scanner read = new Scanner(System.in);
         int clienteCodigo = -1;
-
-        while (clienteCodigo <= 0) {
+        
+        char teclado;
+        boolean active=true;
+        //estas funcionaban hace un momento
+        
+        do{
+            active=false;
             System.out.println("Ingrese el código del cliente");
+            read.nextLine();
 
             try {
                 clienteCodigo = read.nextInt();
@@ -66,8 +69,7 @@ public class ConsultasC {
                 System.out.println("Entrada inválida. Por favor, ingrese un número.");
                 read.next(); // Limpiar el buffer del scanner
             }
-            read.close();
-        }
+        
 
         // Preparar la consulta SQL
         String query = "SELECT " +
@@ -94,13 +96,16 @@ public class ConsultasC {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
+    }while(clienteCodigo <= 0 || active);
     }
 
     public static void consulta2() {
         Scanner read = new Scanner(System.in);
         int clienteCodigo = -1;
+        char teclado;
+        boolean active=true;
 
-        while (clienteCodigo <= 0) {
+        do{
             System.out.println("Ingrese el código del cliente:");
 
             try {
@@ -115,7 +120,7 @@ public class ConsultasC {
                 System.out.println("Entrada inválida. Por favor, ingrese un número.");
                 read.next(); // Limpiar el buffer del scanner
             }
-        }
+        
 
         // Preparar la consulta SQL
         String query = "SELECT " +
@@ -137,7 +142,7 @@ public class ConsultasC {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
-        read.close();
+    }while(clienteCodigo <= 0 || active);
     }
 
     public static void consulta3(){
