@@ -93,7 +93,6 @@ public class Consultas {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
-        read.close();
     }
 
     public static void consulta2() {
@@ -137,7 +136,6 @@ public class Consultas {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
-        read.close();
     }
 
     public static void consulta3() {
@@ -183,7 +181,6 @@ public class Consultas {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
-        read.close();
     }
 
     public static void consulta4() {
@@ -226,7 +223,6 @@ public class Consultas {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
-        read.close();
     }
 
     public static void consulta5() {
@@ -265,7 +261,6 @@ public class Consultas {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
-        read.close();
     }
 
     public static void consulta6() {
@@ -309,7 +304,6 @@ public class Consultas {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
-        read.close();
     }
 
     public static void consulta7() {
@@ -360,7 +354,6 @@ public class Consultas {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
-        read.close();
     }
 
     public static void consulta8() {
@@ -409,7 +402,6 @@ public class Consultas {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
-        read.close();
     }
 
     public static void consulta9() {
@@ -454,7 +446,6 @@ public class Consultas {
         } catch (Exception e) {
             System.out.println("ay wey, se produjo un error inesperado: " + e.getMessage());
         }
-        read.close();
     }
 
     public static void consulta10() {
@@ -496,7 +487,6 @@ public class Consultas {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
-        read.close();
     }
     
     public static void consulta11(){     
@@ -530,7 +520,6 @@ public class Consultas {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
-        read.close();
     }
 
    

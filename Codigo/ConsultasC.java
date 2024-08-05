@@ -3,9 +3,6 @@ import java.util.*;
 
 //consultas para el cliente
 public class ConsultasC {
-
- 
-
     // Método para ejecutar y mostrar una consulta SQL
     public static void ejecutarConsulta(String query) {
         Connection connection = null;
@@ -66,7 +63,6 @@ public class ConsultasC {
                 System.out.println("Entrada inválida. Por favor, ingrese un número.");
                 read.next(); // Limpiar el buffer del scanner
             }
-            read.close();
         }
 
         // Preparar la consulta SQL
@@ -137,7 +133,6 @@ public class ConsultasC {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
-        read.close();
     }
 
     public static void consulta3(){

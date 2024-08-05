@@ -92,8 +92,6 @@ public class Empleado {
                 break;
           }
       }
-
-      
   }
   //Metodo para realizar la reservacion de un salon
   public static void ReservarSalon(){
@@ -135,7 +133,7 @@ public class Empleado {
 
         System.out.println("----------------------------------------------------------------");
         System.out.println("|      Cual es la fecha en la que se requerira el salon?       |");
-        System.out.println("|      Por favor escriba en el siguiente orden: DD/MM/AA       |");
+        System.out.println("|      Por favor escriba en el siguiente orden: AA/MM/DD       |");
         System.out.println("|              Favor de solo introducir numeros                |");
         System.out.println("----------------------------------------------------------------");
         String Fecha=leer.nextLine();

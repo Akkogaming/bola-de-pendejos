@@ -90,7 +90,6 @@ public class ConsultasE {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
-        read.close();
     }
 
     public static void consulta2E() {
@@ -134,7 +133,6 @@ public class ConsultasE {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
-        read.close();
     }
 
     public static void consulta3E() {
@@ -180,7 +178,6 @@ public class ConsultasE {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
-        read.close();
     }
 
     public static void consulta4E() {
@@ -223,7 +220,6 @@ public class ConsultasE {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
-        read.close();
     }
 
     public static void consulta5E() {
@@ -262,7 +258,6 @@ public class ConsultasE {
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
-        read.close();
     }
     public static void consulta11(){
         
