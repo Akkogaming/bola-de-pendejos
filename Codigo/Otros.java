@@ -11,7 +11,7 @@ public class Otros {
 
 
 System.out.println("Rentjoy");
-System.out.println("Este programa esta lleno de errores");
+System.out.println("Este programa esta lleno de errores jaja");
 
 System.out.println("Press Enter to continue");
 enter=keyboard.nextLine();
