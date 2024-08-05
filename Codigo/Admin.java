@@ -394,17 +394,17 @@ public class Admin {
                 return;
             }
 
-            int numero;
+            int codigo;
             try {
-                numero = Integer.parseInt(input);
+                codigo = Integer.parseInt(input);
             } catch (NumberFormatException e) {
                 System.out.println("Entrada inválida. Debe ingresar un número o 'C' para cancelar.");
                 return;
             }
 
-            String deleteQuery = "DELETE FROM salon WHERE numero = ?";
+            String deleteQuery = "DELETE FROM salon WHERE codigo = ?";
             PreparedStatement pstmt = connect.prepareStatement(deleteQuery);
-            pstmt.setInt(1, numero);
+            pstmt.setInt(1, codigo);
             pstmt.executeUpdate();
 
             System.out.println("Salón eliminado exitosamente.");
