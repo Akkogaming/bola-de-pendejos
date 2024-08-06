@@ -198,5 +198,9 @@ public class Empleado {
     }catch(Exception e){
     }
 }
+  public static void eliminarEmpleado() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'eliminarEmpleado'");
+  }
 }
 
