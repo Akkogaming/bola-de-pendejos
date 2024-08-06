@@ -82,12 +82,11 @@ public class App {
     }
 
     private static void handleClientConsultation(Scanner read) {
-        System.out.println("----------------------------------------------------------------"); // 64 caracteres
-        System.out.println("|               Selecciona la consulta a realizar:             |");
-        System.out.println("|                       1. Reservaciones                       |");
-        //System.out.println("|                  2. Reservaciones del cliente                |");
-        System.out.println("|                           2. Salir                           |");
-        System.out.println("----------------------------------------------------------------"); // 64 caracteres
+        System.out.println("╔══════════════════════════════════════════════════════════════╗"); // 60 caracteres // 64 caracteres
+        System.out.println("║               Selecciona la consulta a realizar:             ║");
+        System.out.println("║                       1. Reservaciones                       ║");
+        System.out.println("║                           2. Salir                           ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════╝"); 
 
         if (read.hasNextLine()) {
             String consultaOption = read.nextLine().trim();

@@ -1,4 +1,6 @@
+
 import java.sql.*;
+import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -32,13 +34,12 @@ public class Admin {
             System.out.println("║ 3. Eliminar Empleados                                        ║");
             System.out.println("║ 4. Añadir Salones                                            ║");
             System.out.println("║ 5. Eliminar Salones                                          ║");
-
             System.out.println("║ 6. Añadir Servicios           *                              ║");
             System.out.println("║ 7. Eliminar Servicios         *                              ║");
             System.out.println("║ 8. Añadir Montajes            *                              ║");
             System.out.println("║ 9. Eliminar Montajes          *                              ║");
             System.out.println("║ 10. Añadir Eventos            *                              ║");
-            System.out.println("║ 11. Eliminar Eventos          *                              ║");
+            System.out.println("║                   11. Eliminar Eventos                       ║");
             System.out.println("║                         12. Salir                            ║");
             System.out.println("╚══════════════════════════════════════════════════════════════╝");
 
@@ -121,9 +122,9 @@ public class Admin {
         System.out.println("║           11. Reservaciones asignados a un empleado          ║");
         System.out.println("║                   12. consultar empleados                    ║");
         System.out.println("║                     13. consultar salones                    ║");
-        System.out.println("║                   14. consultar servicios                    ║");
+        System.out.println("║                    14. consultar servicios                   ║");
         System.out.println("║                    15. consultar montajes                    ║");
-        System.out.println("║                    16. consultar eventos                     ║");
+        System.out.println("║                     16. consultar eventos                    ║");
         System.out.println("║                           17. Salir                          ║");
         System.out.println("╚══════════════════════════════════════════════════════════════╝"); // 64 caracteres
 
@@ -188,129 +189,113 @@ public class Admin {
     }
 
 
+//  Método para insertar un nuevo empleado
+private static void insertarEmpleado() {
+    try {
+        
+        Integer numero = null;
 
-    //  Método para insertar un nuevo empleado
-    private static void insertarEmpleado() {
-        try {
-            
-            Integer numero = null;
 
+        System.out.println("Ingrese el nombre del empleado:");
+        String nombre = leer.nextLine();
+        
+        System.out.println("Ingrese el primer apellido del empleado:");
+        String a_paterno = leer.nextLine();
+        
+        System.out.println("Ingrese el segundo apellido del empleado:");
+        String a_materno = leer.nextLine();
 
-            System.out.println("Ingrese el nombre del empleado:");
-            String nombre = leer.nextLine();
-            
-            System.out.println("Ingrese el primer apellido del empleado:");
-            String a_paterno = leer.nextLine();
-            
-            System.out.println("Ingrese el segundo apellido del empleado:");
-            String a_materno = leer.nextLine();
+        System.out.println("Ingrese el telefono del empleado:");
+        String telefono = leer.nextLine();
 
-            System.out.println("Ingrese el telefono del empleado:");
-            String telefono = leer.nextLine();
+        System.out.println("Ingrese el correo del empleado:");
+        String correo_e = leer.nextLine();
 
-            System.out.println("Ingrese el correo del empleado:");
-            String correo_e = leer.nextLine();
+        String insertQuery = "INSERT INTO empleados (numero, nombre, a_paterno, a_materno, telefono, correo_e) VALUES (?, ?, ?, ?, ?, ?)";
+        PreparedStatement pstmt = connect.prepareStatement(insertQuery);
+        pstmt.setObject(1, numero, java.sql.Types.INTEGER);
+        pstmt.setString(2, nombre);
+        pstmt.setString(3, a_paterno);
+        pstmt.setString(4, a_materno);
+        pstmt.setString(5, telefono);
+        pstmt.setString(6, correo_e);
+        pstmt.executeUpdate();
 
-            String insertQuery = "INSERT INTO empleados (numero, nombre, a_paterno, a_materno, telefono, correo_e) VALUES (?, ?, ?, ?, ?, ?)";
-            PreparedStatement pstmt = connect.prepareStatement(insertQuery);
-            pstmt.setObject(1, numero, java.sql.Types.INTEGER);
-            pstmt.setString(2, nombre);
-            pstmt.setString(3, a_paterno);
-            pstmt.setString(4, a_materno);
-            pstmt.setString(5, telefono);
-            pstmt.setString(6, correo_e);
-            pstmt.executeUpdate();
-
-            System.out.println("Empleado añadido exitosamente.");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        System.out.println("Empleado añadido exitosamente.");
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+}
 
 
-    // Método para eliminar un empleado por código
-    private static void eliminarEmpleado() {
+// Método para eliminar un empleado por código
+private static void eliminarEmpleado() {
+    try {
+        System.out.println("Número de código a borrar (o 'C' para cancelar):");
+        String input = leer.nextLine().toUpperCase(Locale.getDefault());
+
+        if (input.equals("C")) {
+            System.out.println("Operación cancelada.");
+            return;
+        }
+
+        int numero;
         try {
-            System.out.println("Número de código a borrar (o 'C' para cancelar):");
-            String input = leer.nextLine().toUpperCase(Locale.getDefault());
+            numero = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            System.out.println("Entrada inválida. Debe ingresar un número o 'C' para cancelar.");
+            return;
+        }
 
-            if (input.equals("C")) {
-                System.out.println("Operación cancelada.");
-                return;
-            }
+        String checkEmpleadoQuery = "SELECT COUNT(*) FROM cliente WHERE empleado = ?";
+        PreparedStatement checkStmt = connect.prepareStatement(checkEmpleadoQuery);
+        checkStmt.setInt(1, numero);
+        ResultSet resultSet = checkStmt.executeQuery();
+        resultSet.next();
+        int count = resultSet.getInt(1);
 
-            int numero;
-            try {
-                numero = Integer.parseInt(input);
-            } catch (NumberFormatException e) {
-                System.out.println("Entrada inválida. Debe ingresar un número o 'C' para cancelar.");
-                return;
-            }
+        String checkSalonQuery = "SELECT COUNT(*) FROM salon WHERE empleado = ?";
+        PreparedStatement checkSalonStmt = connect.prepareStatement(checkSalonQuery);
+        checkSalonStmt.setInt(1, numero);
+        ResultSet salonResultSet = checkSalonStmt.executeQuery();
+        salonResultSet.next();
+        int salonCount = salonResultSet.getInt(1);
 
-            String checkEmpleadoQuery = "SELECT COUNT(*) FROM cliente WHERE empleado = ?";
-            PreparedStatement checkStmt = connect.prepareStatement(checkEmpleadoQuery);
-            checkStmt.setInt(1, numero);
-            ResultSet resultSet = checkStmt.executeQuery();
-            resultSet.next();
-            int count = resultSet.getInt(1);
+        if (count > 0 || salonCount > 0) {
+            System.out.println("El empleado está asociado con uno o más registros.");
+            System.out.println("¿Desea reasignar estos registros a otro empleado? (S/N)");
+            String decision = leer.nextLine().toUpperCase(Locale.getDefault());
 
-            String checkSalonQuery = "SELECT COUNT(*) FROM salon WHERE empleado = ?";
-            PreparedStatement checkSalonStmt = connect.prepareStatement(checkSalonQuery);
-            checkSalonStmt.setInt(1, numero);
-            ResultSet salonResultSet = checkSalonStmt.executeQuery();
-            salonResultSet.next();
-            int salonCount = salonResultSet.getInt(1);
-
-            if (count > 0 || salonCount > 0) {
-                System.out.println("El empleado está asociado con uno o más registros.");
-                System.out.println("¿Desea reasignar estos registros a otro empleado? (S/N)");
-                String decision = leer.nextLine().toUpperCase(Locale.getDefault());
-
-                if (decision.equals("S")) {
-                    String listEmpleadosQuery = "SELECT numero, nombre FROM empleados";
-                    Statement stmt = connect.createStatement();
-                    ResultSet empleadosResultSet = stmt.executeQuery(listEmpleadosQuery);
-                    System.out.println("Empleados disponibles:");
-                    while (empleadosResultSet.next()) {
-                        int empNumero = empleadosResultSet.getInt("numero");
-                        String empNombre = empleadosResultSet.getString("nombre");
-                        System.out.println(empNumero + ": " + empNombre);
-                    }
-
-                    System.out.println("Ingrese el número del nuevo empleado:");
-                    int nuevoEmpleado = leer.nextInt();
-                    leer.nextLine(); // Consume el newline
-
-                    String updateClienteQuery = "UPDATE cliente SET empleado = ? WHERE empleado = ?";
-                    PreparedStatement updateClienteStmt = connect.prepareStatement(updateClienteQuery);
-                    updateClienteStmt.setInt(1, nuevoEmpleado);
-                    updateClienteStmt.setInt(2, numero);
-                    updateClienteStmt.executeUpdate();
-
-                    String updateSalonQuery = "UPDATE salon SET empleado = ? WHERE empleado = ?";
-                    PreparedStatement updateSalonStmt = connect.prepareStatement(updateSalonQuery);
-                    updateSalonStmt.setInt(1, nuevoEmpleado);
-                    updateSalonStmt.setInt(2, numero);
-                    updateSalonStmt.executeUpdate();
-
-                    System.out.println("Registros reasignados al nuevo empleado.");
-
-                    System.out.println("¿Desea eliminar al empleado original? (S/N)");
-                    String confirmDecision = leer.nextLine().toUpperCase(Locale.getDefault());
-                    if (confirmDecision.equals("S")) {
-                        String deleteEmpleadoQuery = "DELETE FROM empleados WHERE numero = ?";
-                        PreparedStatement deleteStmt = connect.prepareStatement(deleteEmpleadoQuery);
-                        deleteStmt.setInt(1, numero);
-                        deleteStmt.executeUpdate();
-                        System.out.println("Empleado eliminado exitosamente.");
-                    } else {
-                        System.out.println("Operación cancelada.");
-                    }
-                } else {
-                    System.out.println("Operación cancelada.");
+            if (decision.equals("S")) {
+                String listEmpleadosQuery = "SELECT numero, nombre FROM empleados";
+                Statement stmt = connect.createStatement();
+                ResultSet empleadosResultSet = stmt.executeQuery(listEmpleadosQuery);
+                System.out.println("Empleados disponibles:");
+                while (empleadosResultSet.next()) {
+                    int empNumero = empleadosResultSet.getInt("numero");
+                    String empNombre = empleadosResultSet.getString("nombre");
+                    System.out.println(empNumero + ": " + empNombre);
                 }
-            } else {
-                System.out.println("¿Desea eliminar al empleado? (S/N)");
+
+                System.out.println("Ingrese el número del nuevo empleado:");
+                int nuevoEmpleado = leer.nextInt();
+                leer.nextLine(); // Consume el newline
+
+                String updateClienteQuery = "UPDATE cliente SET empleado = ? WHERE empleado = ?";
+                PreparedStatement updateClienteStmt = connect.prepareStatement(updateClienteQuery);
+                updateClienteStmt.setInt(1, nuevoEmpleado);
+                updateClienteStmt.setInt(2, numero);
+                updateClienteStmt.executeUpdate();
+
+                String updateSalonQuery = "UPDATE salon SET empleado = ? WHERE empleado = ?";
+                PreparedStatement updateSalonStmt = connect.prepareStatement(updateSalonQuery);
+                updateSalonStmt.setInt(1, nuevoEmpleado);
+                updateSalonStmt.setInt(2, numero);
+                updateSalonStmt.executeUpdate();
+
+                System.out.println("Registros reasignados al nuevo empleado.");
+
+                System.out.println("¿Desea eliminar al empleado original? (S/N)");
                 String confirmDecision = leer.nextLine().toUpperCase(Locale.getDefault());
                 if (confirmDecision.equals("S")) {
                     String deleteEmpleadoQuery = "DELETE FROM empleados WHERE numero = ?";
@@ -321,12 +306,27 @@ public class Admin {
                 } else {
                     System.out.println("Operación cancelada.");
                 }
+            } else {
+                System.out.println("Operación cancelada.");
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } else {
+            System.out.println("¿Desea eliminar al empleado? (S/N)");
+            String confirmDecision = leer.nextLine().toUpperCase(Locale.getDefault());
+            if (confirmDecision.equals("S")) {
+                String deleteEmpleadoQuery = "DELETE FROM empleados WHERE numero = ?";
+                PreparedStatement deleteStmt = connect.prepareStatement(deleteEmpleadoQuery);
+                deleteStmt.setInt(1, numero);
+                deleteStmt.executeUpdate();
+                System.out.println("Empleado eliminado exitosamente.");
+            } else {
+                System.out.println("Operación cancelada.");
+            }
         }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+}
     //! eliminar empleado funciona
 
     // Método para añadir un salón
@@ -473,42 +473,84 @@ public class Admin {
         }
     }
     
-
     //////////////////////////////////////////////
 
     // Método para añadir un servicio
     private static void añadirServicio() {
         try {
+            // Definir variables
+            Integer codigo;
+            String nombre, descripcion;
+            float precio = 0;
+            Integer tipo_servicio;
+    
+            // Obtener el nuevo código para el servicio
+            String maxCodeQuery = "SELECT MAX(codigo) AS max_codigo FROM servicios";
+            Statement stmt = connect.createStatement();
+            ResultSet rs = stmt.executeQuery(maxCodeQuery);
+    
+            if (rs.next()) {
+                int maxCodigo = rs.getInt("max_codigo");
+                codigo = maxCodigo + 1; // Incrementar el valor máximo encontrado
+            } else {
+                codigo = 1; // Si no hay registros, iniciar con el valor 1
+            }
+    
+            // Obtener nombre del servicio
             System.out.println("Ingrese el nombre del servicio:");
-            String nombre = leer.nextLine();
-
-            System.out.println("Ingrese el costo del servicio:");
-            double costo = leer.nextDouble();
-            leer.nextLine(); // Consume el newline
-
-            String insertQuery = "INSERT INTO servicios (nombre, costo) VALUES (?, ?)";
+            nombre = leer.nextLine();
+    
+            // Obtener descripción del servicio
+            System.out.println("Ingrese la descripción del servicio:");
+            descripcion = leer.nextLine();
+    
+            // Obtener y validar el costo del servicio
+            boolean precioValido = false;
+            while (!precioValido) {
+                System.out.println("Ingrese el costo del servicio:");
+                try {
+                    precio = leer.nextFloat();
+                    precioValido = true; // La entrada es válida
+                } catch (InputMismatchException e) {
+                    System.out.println("Entrada inválida. Por favor, ingrese un número válido.");
+                    leer.next(); // Limpiar el buffer del scanner
+                }
+            }
+            leer.nextLine(); // Consumir el newline
+    
+            // Obtener tipo de servicio
+            System.out.println("Ingrese el código del tipo de servicio (asegúrese de que exista en la base de datos):");
+            tipo_servicio = leer.nextInt();
+            leer.nextLine(); // Consumir el newline
+    
+            // Consulta SQL para insertar el servicio
+            String insertQuery = "INSERT INTO servicios (codigo, nombre, descripcion, Precio, tipo_servicio) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement pstmt = connect.prepareStatement(insertQuery);
-            pstmt.setString(1, nombre);
-            pstmt.setDouble(2, costo);
+            pstmt.setInt(1, codigo);
+            pstmt.setString(2, nombre);
+            pstmt.setString(3, descripcion);
+            pstmt.setFloat(4, precio);
+            pstmt.setInt(5, tipo_servicio);
+    
+            // Ejecutar la consulta
             pstmt.executeUpdate();
-
             System.out.println("Servicio añadido exitosamente.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
+    
     // Método para eliminar un servicio
     private static void eliminarServicio() {
         try {
             System.out.println("Número de servicio a borrar (o 'C' para cancelar):");
             String input = leer.nextLine().toUpperCase(Locale.getDefault());
-
+    
             if (input.equals("C")) {
                 System.out.println("Operación cancelada.");
                 return;
             }
-
+    
             int numero;
             try {
                 numero = Integer.parseInt(input);
@@ -516,17 +558,18 @@ public class Admin {
                 System.out.println("Entrada inválida. Debe ingresar un número o 'C' para cancelar.");
                 return;
             }
-
-            String deleteQuery = "DELETE FROM servicios WHERE numero = ?";
+    
+            String deleteQuery = "DELETE FROM servicios WHERE codigo = ?";
             PreparedStatement pstmt = connect.prepareStatement(deleteQuery);
             pstmt.setInt(1, numero);
             pstmt.executeUpdate();
-
+    
             System.out.println("Servicio eliminado exitosamente.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+    
 
     // Método para añadir un montaje
     private static void añadirMontaje() {
@@ -582,35 +625,50 @@ public class Admin {
     // Método para añadir un evento
     private static void añadirEvento() {
         try {
-            System.out.println("Ingrese el nombre del evento:");
-            String nombre = leer.nextLine();
-
+            System.out.println("Ingrese la descripción del evento:");
+            String descripcion = leer.nextLine();
+    
             System.out.println("Ingrese la fecha del evento (YYYY-MM-DD):");
             String fecha = leer.nextLine();
-
-            String insertQuery = "INSERT INTO eventos (nombre, fecha) VALUES (?, ?)";
+    
+            System.out.println("Ingrese el código del salón:");
+            int salonCodigo = leer.nextInt();
+            leer.nextLine(); // Consume the newline
+    
+            System.out.println("Ingrese el código del montaje:");
+            int montajeCodigo = leer.nextInt();
+            leer.nextLine(); // Consume the newline
+    
+            System.out.println("Ingrese el código del tipo de evento:");
+            int tipoEventoCodigo = leer.nextInt();
+            leer.nextLine(); // Consume the newline
+    
+            String insertQuery = "INSERT INTO evento (descripcion, salon, montaje, tipo_evento) VALUES (?, ?, ?, ?)";
             PreparedStatement pstmt = connect.prepareStatement(insertQuery);
-            pstmt.setString(1, nombre);
-            pstmt.setDate(2, Date.valueOf(fecha));
+            pstmt.setString(1, descripcion);
+            pstmt.setInt(2, salonCodigo);
+            pstmt.setInt(3, montajeCodigo);
+            pstmt.setInt(4, tipoEventoCodigo);
+    
             pstmt.executeUpdate();
-
             System.out.println("Evento añadido exitosamente.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+    
 
     // Método para eliminar un evento
     private static void eliminarEvento() {
         try {
             System.out.println("Número de evento a borrar (o 'C' para cancelar):");
             String input = leer.nextLine().toUpperCase(Locale.getDefault());
-
+    
             if (input.equals("C")) {
                 System.out.println("Operación cancelada.");
                 return;
             }
-
+    
             int numero;
             try {
                 numero = Integer.parseInt(input);
@@ -618,15 +676,16 @@ public class Admin {
                 System.out.println("Entrada inválida. Debe ingresar un número o 'C' para cancelar.");
                 return;
             }
-
-            String deleteQuery = "DELETE FROM eventos WHERE numero = ?";
+    
+            String deleteQuery = "DELETE FROM evento WHERE numeroEvento = ?";
             PreparedStatement pstmt = connect.prepareStatement(deleteQuery);
             pstmt.setInt(1, numero);
             pstmt.executeUpdate();
-
+    
             System.out.println("Evento eliminado exitosamente.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+    
 }
