@@ -2,29 +2,29 @@
 import java.sql.*;
 import java.util.*;
 
-//consultas para el empleado y el admin
+
 public class ConsultasE {
-    // Método para ejecutar y mostrar una consulta SQL
+    
     public static void ejecutarConsulta(String query) {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/eventos", "root", ""); //puerto
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/eventos", "root", ""); 
             statement = connection.createStatement();
             resultSet = statement.executeQuery(query);
 
             ResultSetMetaData metaData = resultSet.getMetaData();
             int columnCount = metaData.getColumnCount();
 
-            // Imprimir encabezados de columna
+            
             for (int i = 1; i <= columnCount; i++) {
                 System.out.printf("%-40s", metaData.getColumnName(i));
             }
             System.out.println();
 
-            // Imprimir datos de filas
+            
             while (resultSet.next()) {
                 for (int i = 1; i <= columnCount; i++) {
                     System.out.printf("%-40s", resultSet.getString(i));
@@ -34,7 +34,7 @@ public class ConsultasE {
         } catch (SQLException e) {
             System.out.println("Ocurrió un error al ejecutar la consulta: " + e.getMessage());
         } finally {
-            // Cerrar recursos en el bloque finally para asegurarse de que se cierren siempre
+            
             try {
                 if (resultSet != null) resultSet.close();
                 if (statement != null) statement.close();
@@ -55,18 +55,18 @@ public class ConsultasE {
             try {
                 clienteCodigo = read.nextInt();
 
-                // Validar el código ingresado
+                
                 if (clienteCodigo <= 0) {
                     System.out.println("Código inválido. Por favor, ingrese un número");
                 }
             } catch (InputMismatchException e) {
-                // Manejar el caso cuando el usuario ingresa un valor no numérico
+                
                 System.out.println("Entrada inválida. Por favor, ingrese un número.");
-                read.next(); // Limpiar el buffer del scanner
+                read.next(); 
             }
         }
 
-        // Preparar la consulta SQL
+        
         String query = "SELECT " +
                 "Date_format(R.fechaevento, \"%d-%m-%y\") as 'Fecha de la reservacion', " +
                 "r.HoraI AS Hora_Inicio, " +
@@ -85,7 +85,7 @@ public class ConsultasE {
                 "JOIN montaje m ON e.montaje = m.codigo " +
                 "WHERE r.cliente = " + clienteCodigo;
         
-        // Ejecutar la consulta y manejar posibles errores
+        
         try {
             ejecutarConsulta(query);
         } catch (Exception e) {
@@ -103,18 +103,18 @@ public class ConsultasE {
             try {
                 equipamientoCodigo = read.nextInt();
 
-                // Validar el código ingresado
+                
                 if (equipamientoCodigo <= 0) {
                     System.out.println("Código inválido. Por favor, ingrese un número.");
                 }
             } catch (InputMismatchException e) {
-                // Manejar el caso cuando el usuario ingresa un valor no numérico
+                
                 System.out.println("Entrada inválida. Por favor, ingrese un número");
-                read.next(); // Limpiar el buffer del scanner
+                read.next(); 
             }
         }
 
-        // Preparar la consulta SQL
+        
         String query = "SELECT " +
                 "Date_format(R.fechaevento, \"%d-%m-%y\") as 'Fecha de la reservacion', " +
                 "CONCAT(c.nombre,' ', c.apaterno,' ', IFNULL(CONCAT(c.amaterno,' '),' ')) as cliente, " +
@@ -128,7 +128,7 @@ public class ConsultasE {
                 "JOIN equipamiento eq ON er.equipamiento = eq.codigo " +
                 "WHERE eq.codigo = " + equipamientoCodigo;
         
-        // Ejecutar la consulta y manejar posibles errores
+        
         try {
             ejecutarConsulta(query);
         } catch (Exception e) {
@@ -146,18 +146,18 @@ public class ConsultasE {
             try {
                 tipoServicioCodigo = read.nextInt();
 
-                // Validar el código ingresado
+                
                 if (tipoServicioCodigo <= 0) {
                     System.out.println("Código inválido. Por favor, ingrese un número");
                 }
             } catch (InputMismatchException e) {
-                // Manejar el caso cuando el usuario ingresa un valor no numérico
+                
                 System.out.println("Entrada inválida. Por favor, ingrese un número");
-                read.next(); // Limpiar el buffer del scanner
+                read.next(); 
             }
         }
 
-        // Preparar la consulta SQL
+        
         String query = "SELECT " +
                 "Date_format(R.fechaevento, \"%d-%m-%y\") as 'Fecha de la reservacion', " +
                 "CONCAT(c.nombre,' ', c.apaterno,' ', IFNULL(CONCAT(c.amaterno,' '),' ')) as cliente, " +
@@ -173,7 +173,7 @@ public class ConsultasE {
                 "JOIN salon s ON r.salon = s.codigo " +
                 "WHERE ts.codigo = " + tipoServicioCodigo;
         
-        // Ejecutar la consulta y manejar posibles errores
+        
         try {
             ejecutarConsulta(query);
         } catch (Exception e) {
@@ -191,18 +191,18 @@ public class ConsultasE {
             try {
                 salonCodigo = read.nextInt();
 
-                // Validar el código ingresado
+                
                 if (salonCodigo <= 0) {
                     System.out.println("Código inválido. Por favor, ingrese un número.");
                 }
             } catch (InputMismatchException e) {
-                // Manejar el caso cuando el usuario ingresa un valor no numérico
+                
                 System.out.println("Entrada inválida. Por favor, ingrese un número.");
-                read.next(); // Limpiar el buffer del scanner
+                read.next(); 
             }
         }
 
-        // Preparar la consulta SQL
+        
         String query = "SELECT " +
                 "s.nombreSalon AS Nombre_Salon, " +
                 "Date_format(R.fechaevento, \"%d-%m-%y\") as 'Fecha de la reservacion', " +
@@ -215,7 +215,7 @@ public class ConsultasE {
                 "JOIN tipo_evento te ON e.tipo_evento = te.codigo " +
                 "WHERE s.codigo = " + salonCodigo;
         
-        // Ejecutar la consulta y manejar posibles errores
+        
         try {
             ejecutarConsulta(query);
         } catch (Exception e) {
@@ -233,18 +233,18 @@ public class ConsultasE {
             try {
                 tipoServicioCodigo = read.nextInt();
 
-                // Validar el código ingresado
+                
                 if (tipoServicioCodigo <= 0) {
                     System.out.println("Código inválido. Por favor, ingrese un número.");
                 }
             } catch (InputMismatchException e) {
-                // Manejar el caso cuando el usuario ingresa un valor no numérico
+                
                 System.out.println("Entrada inválida. Por favor, ingrese un número.");
-                read.next(); // Limpiar el buffer del scanner
+                read.next(); 
             }
         }
 
-        // Preparar la consulta SQL
+        
         String query = "SELECT " +
                 "ts.descripcion AS Descripcion_Tipo_Servicio, " +
                 "sv.descripcion AS Descripcion_Servicio, " +
@@ -253,7 +253,7 @@ public class ConsultasE {
                 "JOIN tipo_servicio ts ON sv.tipo_servicio = ts.codigo " +
                 "WHERE ts.codigo = " + tipoServicioCodigo;
         
-        // Ejecutar la consulta y manejar posibles errores
+        
         try {
             ejecutarConsulta(query);
         } catch (Exception e) {
@@ -277,7 +277,7 @@ public class ConsultasE {
 
 
     public static void main(String[] args) {
-        // Ejemplo de llamada a las consultas
+        
         consulta1E();
         consulta2E();
         consulta3E();

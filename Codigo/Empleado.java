@@ -9,7 +9,7 @@ public class Empleado {
   private static Statement statement;
   private static Scanner leer;
 
-  // Método estático para inicializar el objeto Empleado
+  
   public static void empleado(Connection conn) {
       connect = conn;
       try {
@@ -22,20 +22,20 @@ public class Empleado {
       boolean isRunning2 = true;
 
       while (isRunning2) {
-          System.out.println("╔══════════════════════════════════════════════════════════╗");
-          System.out.println("║                    MENU EMPLEADO                         ║");
-          System.out.println("╠══════════════════════════════════════════════════════════╣");
-          System.out.println("║ 1. Consultas                                             ║");
-          System.out.println("║ 2. Realizar la reservacion de un salon                   ║");
-          System.out.println("║ 3. Eliminar la reservacion de un salon                   ║");
-          System.out.println("║ 4. Salir                                                 ║");
-          System.out.println("╚══════════════════════════════════════════════════════════╝");
+          System.out.println("╔═════════════════════════════════════════════════╗");
+          System.out.println("║                 MENU EMPLEADO                   ║");
+          System.out.println("╠═════════════════════════════════════════════════╣");
+          System.out.println("║                 1. Consultas                    ║");
+          System.out.println("║     2. Realizar la reservacion de un salon      ║");
+          System.out.println("║     3. Eliminar la reservacion de un salon      ║");
+          System.out.println("║                   4. Salir                      ║");
+          System.out.println("╚═════════════════════════════════════════════════╝");
 
           String answer = leer.nextLine().toUpperCase(Locale.getDefault());
 
           switch (answer) {
               case "1":
-                          System.out.println("╔══════════════════════════════════════════════════════════════╗"); // 64 caracteres
+                          System.out.println("╔══════════════════════════════════════════════════════════════╗"); 
                           System.out.println("║               Selecciona la consulta a realizar:             ║");
                           System.out.println("║                       1. Reservaciones                       ║");
                           System.out.println("║                   2. Equipamiento requerido                  ║");
@@ -43,7 +43,7 @@ public class Empleado {
                           System.out.println("║             4. Reservaciones para el mismo salón             ║");
                           System.out.println("║                  5. Servicios del mismo tipo                 ║");
                           System.out.println("║                           6. Salir                           ║");
-                          System.out.println("╚══════════════════════════════════════════════════════════════╝"); // 64 caracteres
+                          System.out.println("╚══════════════════════════════════════════════════════════════╝"); 
 
                           String consultaOption = leer.nextLine();
                           switch (consultaOption) {
@@ -89,7 +89,7 @@ public class Empleado {
           }
       }
   }
-  //Metodo para realizar la reservacion de un salon
+  
   public static void ReservarSalon(){
     try{
       boolean crearReservacion;
@@ -103,69 +103,69 @@ public class Empleado {
       float monto=4455;
       float montoT=5541;
       do{
-        System.out.println("----------------------------------------------------------------"); // 64 caracteres
-        System.out.println("|             Creando una nueva reservacion                    |");
-        System.out.println("|            Quien fue el que le pidio el salon?               |");
-        System.out.println("|          Favor de ingresar el codigo del cliente             |");
-        System.out.println("----------------------------------------------------------------");
+        System.out.println("╔══════════════════════════════════════════════════════════════╗");
+        System.out.println("║             Creando una nueva reservacion                    ║");
+        System.out.println("║            Quien fue el que le pidio el salon?               ║");
+        System.out.println("║          Favor de ingresar el codigo del cliente             ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════╝");
         codigocliente=leer.nextInt();
 
-        System.out.println("----------------------------------------------------------------");
-        System.out.println("|                 Que salon se va a requerir?                  |");
-        System.out.println("|             Favor de introducir el codigo del Salon          |");
-        System.out.println("----------------------------------------------------------------");
+        System.out.println("╔══════════════════════════════════════════════════════════════╗");
+        System.out.println("║                 Que salon se va a requerir?                  ║");
+        System.out.println("║             Favor de introducir el codigo del Salon          ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════╝");
         codigoSalon=leer.nextInt();
-        leer.nextLine(); //sino hace parkour el Scan
+        leer.nextLine(); 
 
-        System.out.println("----------------------------------------------------------------");
-        System.out.println("|            A que hora necesita el cliente ese salon?         |");
-        System.out.println("----------------------------------------------------------------");
+        System.out.println("╔══════════════════════════════════════════════════════════════╗");
+        System.out.println("║            A que hora necesita el cliente ese salon?         ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════╝");
         String horaInicio=leer.nextLine();
 
-        System.out.println("----------------------------------------------------------------");
-        System.out.println("|             A que hora se desocupara el salon?               |");
-        System.out.println("----------------------------------------------------------------");
+        System.out.println("╔══════════════════════════════════════════════════════════════╗");
+        System.out.println("║             A que hora se desocupara el salon?               ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════╝");
         String horaFinal=leer.nextLine();
 
-        System.out.println("----------------------------------------------------------------");
-        System.out.println("|      Cual es la fecha en la que se requerira el salon?       |");
-        System.out.println("|      Por favor escriba en el siguiente orden: AA/MM/DD       |");
-        System.out.println("|              Favor de solo introducir numeros                |");
-        System.out.println("----------------------------------------------------------------");
+        System.out.println("╔══════════════════════════════════════════════════════════════╗");
+        System.out.println("║      Cual es la fecha en la que se requerira el salon?       ║");
+        System.out.println("║      Por favor escriba en el siguiente orden: AA/MM/DD       ║");
+        System.out.println("║              Favor de solo introducir numeros                ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════╝");
         String Fecha=leer.nextLine();
 
-        System.out.println("----------------------------------------------------------------");
-        System.out.println("|          Cuantos invitados asistiran al evento?               |");
-        System.out.println("----------------------------------------------------------------");
+        System.out.println("╔══════════════════════════════════════════════════════════════╗");
+        System.out.println("║          Cuantos invitados asistiran al evento?              ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════╝");
         cant_inv=leer.nextInt();
 
-        System.out.println("----------------------------------------------------------------");
-        System.out.println("|        Que tipo de servicio ha pedido el cliente?            |");
-        System.out.println("|        Favor de introducir el codigo del servicio            |");
-        System.out.println("----------------------------------------------------------------");
+        System.out.println("╔══════════════════════════════════════════════════════════════╗");
+        System.out.println("║        Que tipo de servicio ha pedido el cliente?            ║");
+        System.out.println("║        Favor de introducir el codigo del servicio            ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════╝");
         servicio=leer.nextInt();
 
-        System.out.println("----------------------------------------------------------------");
-        System.out.println("|      Ingrese el codigo del evento que se solicitara          |");
-        System.out.println("----------------------------------------------------------------");
+        System.out.println("╔══════════════════════════════════════════════════════════════╗");
+        System.out.println("║      Ingrese el codigo del evento que se solicitara          ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════╝");
         evento=leer.nextInt();
 
-        System.out.println("----------------------------------------------------------------");
-        System.out.println("     |Ingrese el codigo del montaje que se realizara           |");
-        System.out.println("----------------------------------------------------------------");
+        System.out.println("╔══════════════════════════════════════════════════════════════╗");
+        System.out.println("║     Ingrese el codigo del montaje que se realizara           ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════╝");
         montaje=leer.nextInt();
 
-        System.out.println("-----------------------------------------------------------------");
-        System.out.println("|Por ultimo, ingrese el codigo del equipamiento que se requerira|");
-        System.out.println("-----------------------------------------------------------------");
+        System.out.println("╔════════════════════════════════════════════════════════════════╗");
+        System.out.println("║Por ultimo, ingrese el codigo del equipamiento que se requerira ║");
+        System.out.println("╚════════════════════════════════════════════════════════════════╝");
         equipamiento=leer.nextInt();
-        //No supe como añadirle un monto y monto total reales, esto se cambiara mas adelante
+        
         String comando = "INSERT INTO reservaciones(fechaevento, Cant_Inv, HoraI, HoraF, monto, montoT, cliente, salon, evento) VALUES('"+
         Fecha+"','"+cant_inv+"','"+horaInicio+"','"+horaFinal+"','"+monto+"','"+montoT+"','"+codigocliente+"','"+codigoSalon+"','"+evento+"')";
         statement.executeUpdate(comando);
-        System.out.println("----------------------------------------------------------------");
-        System.out.println("|              Reservacion creada con exito                    |");
-        System.out.println("----------------------------------------------------------------");
+        System.out.println("╔══════════════════════════════════════════════════════════════╗");
+        System.out.println("║              Reservacion creada con exito                    ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════╝");
         crearReservacion=false;
       }while(crearReservacion);
     }catch(Exception e){
@@ -178,12 +178,12 @@ public class Empleado {
         int numero = leer.nextInt();
         leer.nextLine();
 
-        System.out.println("------------------------------------------------------------");
-        System.out.println("|                     ¿ESTA SEGURO?                        |");
-        System.out.println("|           ASEGURECE QUE EL NUMERO SEA CORRECTO           |");
-        System.out.println("|               ESTA ACCIÓN ES IRREVERSIBLE                |");
-        System.out.println("|                 Y)CONFIRMAR N)DECLINAR                   |");
-        System.out.println("------------------------------------------------------------");
+        System.out.println("╔══════════════════════════════════════════════════════════╗");
+        System.out.println("║                     ¿ESTA SEGURO?                        ║");
+        System.out.println("║           ASEGURECE QUE EL NUMERO SEA CORRECTO           ║");
+        System.out.println("║               ESTA ACCIÓN ES IRREVERSIBLE                ║");
+        System.out.println("║                 Y)CONFIRMAR N)DECLINAR                   ║");
+        System.out.println("╚══════════════════════════════════════════════════════════╝");
 
         String confirmDecision = leer.nextLine().toUpperCase(Locale.getDefault());
         if (confirmDecision.equals("Y")) {

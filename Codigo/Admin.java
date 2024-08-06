@@ -10,7 +10,7 @@ public class Admin {
     public static Statement statement;
     public static Scanner leer;
 
-    // Método estático para inicializar el objeto Admin
+    
     public static boolean admin(Connection conn) {
         connect = conn;
         try {
@@ -23,31 +23,31 @@ public class Admin {
         leer = new Scanner(System.in);
         boolean isRunning = true;
 
-            // todo: reorganizar esto
+            
 
         while (isRunning) {
             System.out.println("╔══════════════════════════════════════════════════════════════╗");
             System.out.println("║                       MENU ADMINISTRADOR                     ║");
             System.out.println("╠══════════════════════════════════════════════════════════════╣");
-            System.out.println("║ 1. Consultas                                                 ║");
-            System.out.println("║ 2. Añadir Empleados                                          ║");
-            System.out.println("║ 3. Eliminar Empleados                                        ║");
-            System.out.println("║ 4. Añadir Salones                                            ║");
-            System.out.println("║ 5. Eliminar Salones                                          ║");
-            System.out.println("║ 6. Añadir Servicios           *                              ║");
-            System.out.println("║ 7. Eliminar Servicios         *                              ║");
-            System.out.println("║ 8. Añadir Montajes            *                              ║");
-            System.out.println("║ 9. Eliminar Montajes          *                              ║");
-            System.out.println("║ 10. Añadir Eventos            *                              ║");
-            System.out.println("║                   11. Eliminar Eventos                       ║");
-            System.out.println("║                         12. Salir                            ║");
+            System.out.println("║                          1. Consultas                        ║");
+            System.out.println("║                        2. Añadir Empleados                   ║");
+            System.out.println("║                      3. Eliminar Empleados                   ║");
+            System.out.println("║                        4. Añadir Salones                     ║");
+            System.out.println("║                      5. Eliminar Salones                     ║");
+            System.out.println("║                        6. Añadir Servicios                   ║");
+            System.out.println("║                      7. Eliminar Servicios                   ║");
+            System.out.println("║                        8. Añadir Montajes                    ║");
+            System.out.println("║                      9. Eliminar Montajes                    ║");
+            System.out.println("║                       10. Añadir Eventos                     ║");
+            System.out.println("║                      11. Eliminar Eventos                    ║");
+            System.out.println("║                            12. Salir                         ║");
             System.out.println("╚══════════════════════════════════════════════════════════════╝");
 
             String answer = leer.nextLine();
 
             switch (answer) {
                 case "1":
-                    // Consultas
+                    
                     handleConsultas();
                     break;
 
@@ -105,9 +105,9 @@ public class Admin {
         return true;
     }
 
-    // Métodos de consulta
+    
     private static void handleConsultas() {
-        System.out.println("╔══════════════════════════════════════════════════════════════╗"); // 64 caracteres
+        System.out.println("╔══════════════════════════════════════════════════════════════╗"); 
         System.out.println("║               Selecciona la consulta a realizar:             ║"); 
         System.out.println("║                       1. Reservaciones                       ║");
         System.out.println("║                   2. Equipamiento requerido                  ║");
@@ -126,7 +126,7 @@ public class Admin {
         System.out.println("║                    15. consultar montajes                    ║");
         System.out.println("║                     16. consultar eventos                    ║");
         System.out.println("║                           17. Salir                          ║");
-        System.out.println("╚══════════════════════════════════════════════════════════════╝"); // 64 caracteres
+        System.out.println("╚══════════════════════════════════════════════════════════════╝"); 
 
         String consultaOption = leer.nextLine();
         switch (consultaOption) {
@@ -180,7 +180,7 @@ public class Admin {
                 
                 break;
             case "17":
-                Consultas.consulta17(); //YA SE QUE NO EXISTEN AUN NO ESTEN CHINGANDO
+                Consultas.consulta17(); 
                 break;
             default:
                 System.out.println("Opción no válida.");
@@ -189,7 +189,7 @@ public class Admin {
     }
 
 
-//  Método para insertar un nuevo empleado
+
 private static void insertarEmpleado() {
     try {
         
@@ -228,7 +228,7 @@ private static void insertarEmpleado() {
 }
 
 
-// Método para eliminar un empleado por código
+
 private static void eliminarEmpleado() {
     try {
         System.out.println("Número de código a borrar (o 'C' para cancelar):");
@@ -279,7 +279,7 @@ private static void eliminarEmpleado() {
 
                 System.out.println("Ingrese el número del nuevo empleado:");
                 int nuevoEmpleado = leer.nextInt();
-                leer.nextLine(); // Consume el newline
+                leer.nextLine(); 
 
                 String updateClienteQuery = "UPDATE cliente SET empleado = ? WHERE empleado = ?";
                 PreparedStatement updateClienteStmt = connect.prepareStatement(updateClienteQuery);
@@ -327,9 +327,9 @@ private static void eliminarEmpleado() {
         e.printStackTrace();
     }
 }
-    //! eliminar empleado funciona
+    
 
-    // Método para añadir un salón
+    
     private static void añadirSalon() {
         try {
 
@@ -355,10 +355,10 @@ private static void eliminarEmpleado() {
             System.out.println("Ingrese el nombre del estado del salón:");
             String estado = leer.nextLine();
 
-            //// empleado foregein key
+            
 
             System.out.println("Ingrese el número de empleado asociado al salón:");
-            int empleado = leer.nextInt(); // Suponiendo que el número de empleado es un entero
+            int empleado = leer.nextInt(); 
             leer.nextLine();
 
             String insertQuery = "INSERT INTO salon (codigo, capacidad, nombresalon, codigopostal, calle, ciudad, estado, empleado) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -373,7 +373,7 @@ private static void eliminarEmpleado() {
             pstmt.setInt(8, empleado);
             
             
-            //// empleado foregein key
+            
 
             pstmt.executeUpdate();
 
@@ -383,7 +383,7 @@ private static void eliminarEmpleado() {
         }
     }
 
-    // Método para eliminar un salón por número
+    
     private static void eliminarSalon() {
         try {
             System.out.println("Número de salón a borrar (o 'C' para cancelar):");
@@ -402,7 +402,7 @@ private static void eliminarEmpleado() {
                 return;
             }
     
-            // Verificar si hay reservas asociadas al salón
+            
             String checkReservasQuery = "SELECT COUNT(*) FROM reservaciones WHERE salon = ?";
             PreparedStatement checkReservasStmt = connect.prepareStatement(checkReservasQuery);
             checkReservasStmt.setInt(1, numero);
@@ -416,7 +416,7 @@ private static void eliminarEmpleado() {
                 String decision = leer.nextLine().toUpperCase(Locale.getDefault());
     
                 if (decision.equals("S")) {
-                    // Listar salones disponibles para reasignar reservas
+                    
                     String listSalonesQuery = "SELECT codigo, nombreSalon FROM salon";
                     Statement stmt = connect.createStatement();
                     ResultSet salonesResultSet = stmt.executeQuery(listSalonesQuery);
@@ -429,9 +429,9 @@ private static void eliminarEmpleado() {
     
                     System.out.println("Ingrese el número del nuevo salón:");
                     int nuevoSalon = leer.nextInt();
-                    leer.nextLine(); // Consumir el newline
+                    leer.nextLine(); 
     
-                    // Reasignar reservas al nuevo salón
+                    
                     String updateReservasQuery = "UPDATE reservaciones SET salon = ? WHERE salon = ?";
                     PreparedStatement updateReservasStmt = connect.prepareStatement(updateReservasQuery);
                     updateReservasStmt.setInt(1, nuevoSalon);
@@ -473,77 +473,92 @@ private static void eliminarEmpleado() {
         }
     }
     
-    //////////////////////////////////////////////
+    
 
-    // Método para añadir un servicio
+    
     private static void añadirServicio() {
         try {
-            // Definir variables
+            
             Integer codigo;
             String nombre, descripcion;
             float precio = 0;
             Integer tipo_servicio;
-    
-            // Obtener el nuevo código para el servicio
+            
+            
             String maxCodeQuery = "SELECT MAX(codigo) AS max_codigo FROM servicios";
             Statement stmt = connect.createStatement();
             ResultSet rs = stmt.executeQuery(maxCodeQuery);
-    
+        
             if (rs.next()) {
                 int maxCodigo = rs.getInt("max_codigo");
-                codigo = maxCodigo + 1; // Incrementar el valor máximo encontrado
+                codigo = maxCodigo + 1; 
             } else {
-                codigo = 1; // Si no hay registros, iniciar con el valor 1
+                codigo = 1; 
             }
-    
-            // Obtener nombre del servicio
+        
+            
             System.out.println("Ingrese el nombre del servicio:");
             nombre = leer.nextLine();
-    
-            // Obtener descripción del servicio
+        
+            
             System.out.println("Ingrese la descripción del servicio:");
             descripcion = leer.nextLine();
-    
-            // Obtener y validar el costo del servicio
+        
+            
             boolean precioValido = false;
             while (!precioValido) {
                 System.out.println("Ingrese el costo del servicio:");
                 try {
                     precio = leer.nextFloat();
-                    precioValido = true; // La entrada es válida
+                    precioValido = true; 
                 } catch (InputMismatchException e) {
                     System.out.println("Entrada inválida. Por favor, ingrese un número válido.");
-                    leer.next(); // Limpiar el buffer del scanner
+                    leer.next(); 
                 }
             }
-            leer.nextLine(); // Consumir el newline
-    
-            // Obtener tipo de servicio
-            System.out.println("Ingrese el código del tipo de servicio (asegúrese de que exista en la base de datos):");
+            leer.nextLine(); 
+        
+            
+            System.out.println("Ingrese el código del tipo de servicio (1 al 50):");
             tipo_servicio = leer.nextInt();
-            leer.nextLine(); // Consumir el newline
-    
-            // Consulta SQL para insertar el servicio
+            leer.nextLine(); 
+        
+            
+            String checkTypeServiceQuery = "SELECT codigo FROM tipo_servicio WHERE codigo = ?";
+            PreparedStatement checkStmt = connect.prepareStatement(checkTypeServiceQuery);
+            checkStmt.setInt(1, tipo_servicio);
+            ResultSet checkRs = checkStmt.executeQuery();
+        
+            if (!checkRs.next()) {
+                throw new SQLException("El tipo de servicio especificado no existe en la base de datos.");
+            }
+        
+            
             String insertQuery = "INSERT INTO servicios (codigo, nombre, descripcion, Precio, tipo_servicio) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement pstmt = connect.prepareStatement(insertQuery);
             pstmt.setInt(1, codigo);
             pstmt.setString(2, nombre);
             pstmt.setString(3, descripcion);
             pstmt.setFloat(4, precio);
-            pstmt.setInt(5, tipo_servicio);
+            pstmt.setInt(5, tipo_servicio); 
     
-            // Ejecutar la consulta
+            
             pstmt.executeUpdate();
             System.out.println("Servicio añadido exitosamente.");
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            
+            if (leer != null) {
+                
+            }
         }
     }
     
-    // Método para eliminar un servicio
+    
     private static void eliminarServicio() {
         try {
-            System.out.println("Número de servicio a borrar (o 'C' para cancelar):");
+            System.out.println("Número de código a borrar (o 'C' para cancelar):");
             String input = leer.nextLine().toUpperCase(Locale.getDefault());
     
             if (input.equals("C")) {
@@ -559,30 +574,73 @@ private static void eliminarEmpleado() {
                 return;
             }
     
-            String deleteQuery = "DELETE FROM servicios WHERE codigo = ?";
-            PreparedStatement pstmt = connect.prepareStatement(deleteQuery);
-            pstmt.setInt(1, numero);
-            pstmt.executeUpdate();
+            
+            String checkServiciosClienteQuery = "SELECT COUNT(*) FROM servicios_cliente WHERE servicios = ?";
+            PreparedStatement checkStmt = connect.prepareStatement(checkServiciosClienteQuery);
+            checkStmt.setInt(1, numero);
+            ResultSet resultSet = checkStmt.executeQuery();
+            resultSet.next();
+            int count = resultSet.getInt(1);
     
-            System.out.println("Servicio eliminado exitosamente.");
+            if (count > 0) {
+                System.out.println("El servicio está asociado con uno o más clientes.");
+                System.out.println("¿Desea desvincular estos servicios de los clientes? (S/N)");
+                String decision = leer.nextLine().toUpperCase(Locale.getDefault());
+    
+                if (decision.equals("S")) {
+                    
+                    String deleteFromSCQuery = "DELETE FROM servicios_cliente WHERE servicios = ?";
+                    PreparedStatement deleteSCStmt = connect.prepareStatement(deleteFromSCQuery);
+                    deleteSCStmt.setInt(1, numero);
+                    deleteSCStmt.executeUpdate();
+    
+                    System.out.println("Asociaciones de servicios con clientes eliminadas.");
+    
+                    System.out.println("¿Desea eliminar el servicio original? (S/N)");
+                    String confirmDecision = leer.nextLine().toUpperCase(Locale.getDefault());
+                    if (confirmDecision.equals("S")) {
+                        String deleteServicioQuery = "DELETE FROM servicios WHERE codigo = ?";
+                        PreparedStatement deleteStmt = connect.prepareStatement(deleteServicioQuery);
+                        deleteStmt.setInt(1, numero);
+                        deleteStmt.executeUpdate();
+                        System.out.println("Servicio eliminado exitosamente.");
+                    } else {
+                        System.out.println("Operación cancelada.");
+                    }
+                } else {
+                    System.out.println("Operación cancelada.");
+                }
+            } else {
+                System.out.println("¿Desea eliminar el servicio? (S/N)");
+                String confirmDecision = leer.nextLine().toUpperCase(Locale.getDefault());
+                if (confirmDecision.equals("S")) {
+                    String deleteServicioQuery = "DELETE FROM servicios WHERE codigo = ?";
+                    PreparedStatement deleteStmt = connect.prepareStatement(deleteServicioQuery);
+                    deleteStmt.setInt(1, numero);
+                    deleteStmt.executeUpdate();
+                    System.out.println("Servicio eliminado exitosamente.");
+                } else {
+                    System.out.println("Operación cancelada.");
+                }
+            }
+    
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     
 
-    // Método para añadir un montaje
+    
     private static void añadirMontaje() {
         try {
-            System.out.println("Ingrese el nombre del montaje:");
-            String nombre = leer.nextLine();
+            Integer codigo=null;
 
             System.out.println("Ingrese la descripción del montaje:");
             String descripcion = leer.nextLine();
 
-            String insertQuery = "INSERT INTO montajes (nombre, descripcion) VALUES (?, ?)";
+            String insertQuery = "INSERT INTO montaje (codigo, descripcion) VALUES (?, ?)";
             PreparedStatement pstmt = connect.prepareStatement(insertQuery);
-            pstmt.setString(1, nombre);
+            pstmt.setObject(1, codigo, java.sql.Types.INTEGER);
             pstmt.setString(2, descripcion);
             pstmt.executeUpdate();
 
@@ -592,56 +650,76 @@ private static void eliminarEmpleado() {
         }
     }
 
-    // Método para eliminar un montaje
+    
     private static void eliminarMontaje() {
         try {
             System.out.println("Número de montaje a borrar (o 'C' para cancelar):");
             String input = leer.nextLine().toUpperCase(Locale.getDefault());
-
+    
             if (input.equals("C")) {
                 System.out.println("Operación cancelada.");
                 return;
             }
-
-            int numero;
+    
+            int codigo;
             try {
-                numero = Integer.parseInt(input);
+                codigo = Integer.parseInt(input);
             } catch (NumberFormatException e) {
                 System.out.println("Entrada inválida. Debe ingresar un número o 'C' para cancelar.");
                 return;
             }
-
-            String deleteQuery = "DELETE FROM montajes WHERE numero = ?";
-            PreparedStatement pstmt = connect.prepareStatement(deleteQuery);
-            pstmt.setInt(1, numero);
+    
+            String checkEventoQuery = "SELECT COUNT(*) FROM evento WHERE montaje = ?";
+            PreparedStatement checkStmt = connect.prepareStatement(checkEventoQuery);
+            checkStmt.setInt(1, codigo);
+            ResultSet resultSet = checkStmt.executeQuery();
+            resultSet.next();
+            int count = resultSet.getInt(1);
+    
+            if (count > 0) {
+                System.out.println("El montaje está asociado con uno o más eventos.");
+                System.out.println("Ingrese el número del nuevo montaje:");
+                int nuevoMontaje = leer.nextInt();
+                leer.nextLine(); 
+    
+                String updateEventoQuery = "UPDATE evento SET montaje = ? WHERE montaje = ?";
+                PreparedStatement updateEventoStmt = connect.prepareStatement(updateEventoQuery);
+                updateEventoStmt.setInt(1, nuevoMontaje);
+                updateEventoStmt.setInt(2, codigo);
+                updateEventoStmt.executeUpdate();
+    
+                System.out.println("Eventos reasignados al nuevo montaje.");
+            }
+    
+            String deleteMontajeQuery = "DELETE FROM montaje WHERE codigo = ?";
+            PreparedStatement pstmt = connect.prepareStatement(deleteMontajeQuery);
+            pstmt.setInt(1, codigo);
             pstmt.executeUpdate();
-
+    
             System.out.println("Montaje eliminado exitosamente.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    // Método para añadir un evento
+    
     private static void añadirEvento() {
         try {
             System.out.println("Ingrese la descripción del evento:");
             String descripcion = leer.nextLine();
     
-            System.out.println("Ingrese la fecha del evento (YYYY-MM-DD):");
-            String fecha = leer.nextLine();
     
             System.out.println("Ingrese el código del salón:");
             int salonCodigo = leer.nextInt();
-            leer.nextLine(); // Consume the newline
+            leer.nextLine(); 
     
             System.out.println("Ingrese el código del montaje:");
             int montajeCodigo = leer.nextInt();
-            leer.nextLine(); // Consume the newline
+            leer.nextLine(); 
     
             System.out.println("Ingrese el código del tipo de evento:");
             int tipoEventoCodigo = leer.nextInt();
-            leer.nextLine(); // Consume the newline
+            leer.nextLine(); 
     
             String insertQuery = "INSERT INTO evento (descripcion, salon, montaje, tipo_evento) VALUES (?, ?, ?, ?)";
             PreparedStatement pstmt = connect.prepareStatement(insertQuery);
@@ -658,7 +736,7 @@ private static void eliminarEmpleado() {
     }
     
 
-    // Método para eliminar un evento
+    
     private static void eliminarEvento() {
         try {
             System.out.println("Número de evento a borrar (o 'C' para cancelar):");

@@ -10,19 +10,19 @@ public class App {
     static Statement statement;
 
     public static void main(String[] args) {
-        String direction = "jdbc:mysql://localhost:3306/eventos"; // Cambia el puerto si es necesario
+        String direction = "jdbc:mysql://localhost:3306/eventos"; 
         
         try {
             connect = DriverManager.getConnection(direction, "root", "");
-            statement = connect.createStatement(); // Inicializa el statement
+            statement = connect.createStatement(); 
 
             boolean isRunning = true;
             Scanner read = new Scanner(System.in); 
             while (isRunning) {
-                // Imprimir menú
+                
                 System.out.println("⠀");
                 System.out.println("⠀");
-                System.out.println("╔══════════════════════════════════════════════════════════╗"); // 60 caracteres
+                System.out.println("╔══════════════════════════════════════════════════════════╗"); 
                 System.out.println("║                       BLUE PALACE                        ║");
                 System.out.println("╠══════════════════════════════════════════════════════════╣");
                 System.out.println("║                                                          ║");
@@ -36,14 +36,14 @@ public class App {
                 System.out.println("║                                                          ║");
                 System.out.println("╚══════════════════════════════════════════════════════════╝");   
 
-                // Leer la opción del usuario
+                
                 if (read.hasNextLine()) {
                     String answer = read.nextLine().trim().toUpperCase(Locale.getDefault());
 
-                    // Procesar la opción del usuario
+                    
                     switch (answer) {
                         case "1":
-                            Admin.admin(connect); // Llama al método estático admin
+                            Admin.admin(connect); 
                             break;
                         case "2":
                             Empleado.empleado(connect);
@@ -56,7 +56,7 @@ public class App {
                             break;  
                         case "5":
                             System.out.println("Saliendo del programa...");
-                            isRunning = false; // Termina el bucle y sale del programa
+                            isRunning = false; 
                             break;        
                         default:
                             System.out.println("Elija una de las opciones correctas por favor");
@@ -67,13 +67,13 @@ public class App {
                     isRunning = false;
                 }
             }
-            read.close(); // Cerrar el scanner al final
+            read.close(); 
         } catch (Exception e) {
-            e.printStackTrace(); // Imprimir el stack trace para depurar excepciones
+            e.printStackTrace(); 
         } finally {
             if (connect != null) {
                 try {
-                    connect.close(); // Cerrar la conexión
+                    connect.close(); 
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -82,7 +82,7 @@ public class App {
     }
 
     private static void handleClientConsultation(Scanner read) {
-        System.out.println("╔══════════════════════════════════════════════════════════════╗"); // 60 caracteres // 64 caracteres
+        System.out.println("╔══════════════════════════════════════════════════════════════╗"); 
         System.out.println("║               Selecciona la consulta a realizar:             ║");
         System.out.println("║                       1. Reservaciones                       ║");
         System.out.println("║                           2. Salir                           ║");
@@ -95,10 +95,10 @@ public class App {
                     ConsultasC.consulta1();
                     break;
                 case "2":
-                    //ConsultasC.consulta2();
+                    
                     break;
                 case "3":
-                    // No hacer nada, simplemente salimos xd
+                    
                     break;
                 default:
                     System.out.println("Opción no válida.");
