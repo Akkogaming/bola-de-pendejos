@@ -28,11 +28,11 @@ public class App {
                 System.out.println("║                                                          ║");
                 System.out.println("║           ELIGA UNA OPCION DE LAS SIGUENTES              ║");
                 System.out.println("║                                                          ║");
-                System.out.println("║          1. iniciar sesion como administrador            ║");
-                System.out.println("║         2. iniciar sesion como empleado regular          ║");
+                System.out.println("║        1. iniciar sesion como administrador              ║");
+                System.out.println("║        2. iniciar sesion como empleado regular           ║");
                 System.out.println("║        3. consultar una reservacion como cliente         ║");
-                System.out.println("║                        4. otros                          ║");
-                System.out.println("║                        5. salir                          ║"); 
+                System.out.println("║        4. otros                                          ║");
+                System.out.println("║        5. salir                                          ║"); 
                 System.out.println("║                                                          ║");
                 System.out.println("╚══════════════════════════════════════════════════════════╝");   
 
@@ -85,7 +85,7 @@ public class App {
         System.out.println("╔══════════════════════════════════════════════════════════════╗"); 
         System.out.println("║               Selecciona la consulta a realizar:             ║");
         System.out.println("║                       1. Reservaciones                       ║");
-        System.out.println("║                           2. Salir                           ║");
+        System.out.println("║                       2. Salir                               ║");
         System.out.println("╚══════════════════════════════════════════════════════════════╝"); 
 
         if (read.hasNextLine()) {

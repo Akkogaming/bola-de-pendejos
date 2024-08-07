@@ -25,10 +25,10 @@ public class Empleado {
           System.out.println("╔═════════════════════════════════════════════════╗");
           System.out.println("║                 MENU EMPLEADO                   ║");
           System.out.println("╠═════════════════════════════════════════════════╣");
-          System.out.println("║                 1. Consultas                    ║");
+          System.out.println("║     1. Consultas                                ║");
           System.out.println("║     2. Realizar la reservacion de un salon      ║");
           System.out.println("║     3. Eliminar la reservacion de un salon      ║");
-          System.out.println("║                   4. Salir                      ║");
+          System.out.println("║     4. Salir                                    ║");
           System.out.println("╚═════════════════════════════════════════════════╝");
 
           String answer = leer.nextLine().toUpperCase(Locale.getDefault());
@@ -37,12 +37,12 @@ public class Empleado {
               case "1":
                           System.out.println("╔══════════════════════════════════════════════════════════════╗"); 
                           System.out.println("║               Selecciona la consulta a realizar:             ║");
-                          System.out.println("║                       1. Reservaciones                       ║");
+                          System.out.println("║                   1. Reservaciones                           ║");
                           System.out.println("║                   2. Equipamiento requerido                  ║");
-                          System.out.println("║                     3. Servicios requeridos                  ║");
-                          System.out.println("║             4. Reservaciones para el mismo salón             ║");
-                          System.out.println("║                  5. Servicios del mismo tipo                 ║");
-                          System.out.println("║                           6. Salir                           ║");
+                          System.out.println("║                   3. Servicios requeridos                    ║");
+                          System.out.println("║                   4. Reservaciones para el mismo salón       ║");
+                          System.out.println("║                   5. Servicios del mismo tipo                ║");
+                          System.out.println("║                   6. Salir                                   ║");
                           System.out.println("╚══════════════════════════════════════════════════════════════╝"); 
 
                           String consultaOption = leer.nextLine();
