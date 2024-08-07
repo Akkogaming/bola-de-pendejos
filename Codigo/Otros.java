@@ -63,8 +63,8 @@ catch(Exception e){
         "    AA   AAA    AA   AAAA AA       A   A        AAA              A      A       A         A  A\n"+     
         "    AA   AA     AA  AA  AA AA     AA AAA  AAA  AAAA              A      A       A         A  A\n"+     
         "    AAAAAA     AA  AAA   AA AA   AA AAA  AA AAAAAA               A      A       A         A  A\n"+     
-        "      AAAAAAAAAA AAA      AAAAAAAAAAA    AA  AAA                 A      A       A         A  A\n"+     
-        "                                                                 A        AAAAA   AAAAAAA";          
+        "      AAAAAAAAAA AAA      AAAAAAAAAAA      AAAAA                 A      A       A         A  A\n"+     
+        "                                                                 AAAAAAAAAAAAAAAAAAAAAAAAAAAAA";          
 
 
         System.out.println(design);

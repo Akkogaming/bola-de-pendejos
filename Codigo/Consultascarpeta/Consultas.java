@@ -107,27 +107,6 @@ import java.util.*;
     //! basado en consultas admin
 
     public static void consulta1() {
-       /* Scanner read = new Scanner(System.in);
-        int clienteCodigo = -1;
-
-        while (clienteCodigo <= 0) {
-            System.out.println("Ingrese el código del cliente");
-
-            try {
-                clienteCodigo = read.nextInt();
-
-                
-                if (clienteCodigo <= 0) {
-                    System.out.println("Código inválido. Por favor, ingrese un número");
-                }
-            } catch (InputMismatchException e) {
-                
-                System.out.println("Entrada inválida. Por favor, ingrese un número.");
-                read.next(); 
-            }
-        }
-        */
-
         
         String query = "SELECT " +
                 "Date_format(R.fechaevento, \"%d-%m-%y\") as 'Fecha reservacion', " +
