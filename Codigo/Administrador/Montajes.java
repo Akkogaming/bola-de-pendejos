@@ -34,6 +34,8 @@ public class Montajes {
     public static void añadirMontaje() {
         conectar();
         try {
+            
+            Scanner leer = new Scanner(System.in);
             Integer codigo=null;
 
             System.out.println("Ingrese la descripción del montaje:");
@@ -55,6 +57,8 @@ public class Montajes {
     public static void eliminarMontaje() {
         conectar();
         try {
+            
+            Scanner leer = new Scanner(System.in);
             System.out.println("Número de montaje a borrar (o 'C' para cancelar):");
             String input = leer.nextLine().toUpperCase(Locale.getDefault());
     

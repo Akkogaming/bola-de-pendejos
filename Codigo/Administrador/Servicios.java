@@ -35,6 +35,8 @@ public class Servicios {
     conectar();
         try {
             
+            Scanner leer = new Scanner(System.in);
+            
             Integer codigo;
             String nombre, descripcion;
             float precio = 0;
@@ -115,6 +117,8 @@ public class Servicios {
     public static void eliminarServicio() {
         conectar();
         try {
+            
+            Scanner leer = new Scanner(System.in);
             System.out.println("Número de código a borrar (o 'C' para cancelar):");
             String input = leer.nextLine().toUpperCase(Locale.getDefault());
     

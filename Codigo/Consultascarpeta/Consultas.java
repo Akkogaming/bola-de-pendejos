@@ -20,7 +20,7 @@ import java.util.*;
     
                 ResultSetMetaData metaData = resultSet.getMetaData();
                 int columnCount = metaData.getColumnCount();
-                int columnWidth = 26;  // Ajusta el ancho de la columna aquí
+                int columnWidth = 25;  // Ajusta el ancho de la columna aquí
     
                 // Generar la fila del encabezado con caracteres de dibujo de caja
                 StringBuilder headerRowBuilder = new StringBuilder("╔");
@@ -107,7 +107,7 @@ import java.util.*;
     //! basado en consultas admin
 
     public static void consulta1() {
-        
+    //!consutlas de clientes
         String query = "SELECT " +
                 "Date_format(R.fechaevento, \"%d-%m-%y\") as 'Fecha reservacion', " +
                 "r.HoraI AS Hora_Inicio, " +
@@ -135,6 +135,7 @@ import java.util.*;
     }
 
     public static void consulta2() {
+        //! equpipamento requerido
         Scanner read = new Scanner(System.in);
         int equipamientoCodigo = -1;
 
@@ -178,6 +179,7 @@ import java.util.*;
     }
 
     public static void consulta3() {
+        //!servicios requeridos
         Scanner read = new Scanner(System.in);
         int tipoServicioCodigo = -1;
 
@@ -223,6 +225,7 @@ import java.util.*;
     }
 
     public static void consulta4() {
+        //!mismo salon
         Scanner read = new Scanner(System.in);
         int salonCodigo = -1;
 
@@ -265,6 +268,8 @@ import java.util.*;
     }
 
     public static void consulta5() {
+
+        //!mismo servicio
         Scanner read = new Scanner(System.in);
         int tipoServicioCodigo = -1;
 
@@ -303,6 +308,7 @@ import java.util.*;
     }
 
     public static void consulta6() {
+        //!reservaciones cliente especifico
         Scanner read = new Scanner(System.in);
         int clienteCodigo = -1;
 
@@ -346,7 +352,10 @@ import java.util.*;
     }
 
     public static void consulta7() {
+        //!servicio espeficico
         Scanner read = new Scanner(System.in);
+
+
         int servicioCodigo = -1;
 
         while (servicioCodigo <= 0) {
@@ -396,6 +405,7 @@ import java.util.*;
     }
 
     public static void consulta8() {
+        //!equipamiento especifico
         Scanner read = new Scanner(System.in);
         int equipamientoCodigo = -1;
 
@@ -444,6 +454,7 @@ import java.util.*;
     }
 
     public static void consulta9() {
+        //!montaje especifico
         Scanner read = new Scanner(System.in);
         int montajeCodigo = -1;
 
@@ -488,6 +499,7 @@ import java.util.*;
     }
 
     public static void consulta10() {
+        //!mismo mes
         Scanner read = new Scanner(System.in); 
         
         
@@ -529,6 +541,7 @@ import java.util.*;
     }
     
     public static void consulta11(){     
+        //!reservaciones a unn empleadoempleados
         int num;
         Scanner read = new Scanner(System.in);
         System.out.println("Ingrese el codigo del empleado");
@@ -561,30 +574,22 @@ import java.util.*;
         }
     }
 
-   
     public static void consulta12() {
+        //!consultar empleados
         String query = "SELECT * FROM empleados";
         ejecutarConsulta(query);
     }
 
     public static void consulta13() {
-        String query = "SELECT * FROM equipamiento";
+        String query = "SELECT * FROM salon";
         ejecutarConsulta(query);
     }
 
     public static void consulta14() {
-        String query = "SELECT * FROM servicios"; 
-    
-        
-        try {
-            
-            ejecutarConsulta(query);
-        } catch (Exception e) {
-            System.out.println("Se produjo un error inesperado: " + e.getMessage());
-        }
+        String query = "SELECT * FROM servicios";         
+        ejecutarConsulta(query);       
     }
     
-
     public static void consulta15() {
        
         String query = "SELECT * FROM montaje ";

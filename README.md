@@ -1,9 +1,4 @@
 # bola-de-pendejos
-ajaja
-
-
-hay que tomar esto enserio
-
 
 ## todo
 -separar las consultas en multiples archivos, por ejemplo
@@ -14,3 +9,18 @@ hay que tomar esto enserio
 -arreglar la conexion a la base de datos
 
 -reacomodar los menus
+
+-eliminar tipo_servicio de la tabla servicios
+
+-menus mas pequeños
+(quiere ver la siguente pagina?) o algo asi
+
+-faltas de ortografias
+
+-las tablas de las consultas deben tener nombres
+
+/si no se elimina la columna tipo_servicio:
+en la tabla servicio en vez de tomar el codgio tomar la descripcion del servicio
+
+
+

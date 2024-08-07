@@ -8,6 +8,7 @@ public class Salones {
     public static Statement statement;
     public static Scanner leer;
 
+    
     public static void conectar() {
         try {
             connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/eventos", "root", "");
@@ -20,6 +21,7 @@ public class Salones {
 
     // Método para cerrar la conexión
     public static void cerrarConexion() {
+        
         try {
             if (connect != null && !connect.isClosed()) {
                 connect.close();
@@ -33,6 +35,8 @@ public class Salones {
     public static void añadirSalon() {
         try {
             conectar();
+            
+            Scanner leer = new Scanner(System.in);
 
             Integer codigo = null;
 
@@ -88,6 +92,8 @@ public class Salones {
     public static void eliminarSalon() {
         conectar();
         try {
+            
+            Scanner leer = new Scanner(System.in);
             System.out.println("Número de salón a borrar (o 'C' para cancelar):");
             String input = leer.nextLine().toUpperCase(Locale.getDefault());
     

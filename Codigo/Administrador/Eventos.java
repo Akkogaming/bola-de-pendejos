@@ -34,6 +34,8 @@ public class Eventos {
     public static void añadirEvento() {
         conectar();
         try {
+            
+            Scanner leer = new Scanner(System.in);
             System.out.println("Ingrese la descripción del evento:");
             String descripcion = leer.nextLine();
     
@@ -69,6 +71,8 @@ public class Eventos {
     public static void eliminarEvento() {
         conectar();
         try {
+            
+            Scanner leer = new Scanner(System.in);
             System.out.println("Número de evento a borrar (o 'C' para cancelar):");
             String input = leer.nextLine().toUpperCase(Locale.getDefault());
     
