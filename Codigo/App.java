@@ -71,7 +71,7 @@ public class App {
                     isRunning = false;
                 }
             }
-            read.close(); 
+            
         } catch (Exception e) {
             e.printStackTrace(); 
         } finally {

@@ -10,3 +10,7 @@ hay que tomar esto enserio
 -que consultas1 contenga la consulta 1 y 2
 -y asi hasta que se acaben, y son 17 consultas asi que
 -7 archivos de 2 consultas y uno de una
+
+-arreglar la conexion a la base de datos
+
+-reacomodar los menus

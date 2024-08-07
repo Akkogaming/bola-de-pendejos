@@ -104,7 +104,7 @@ public class Admin {
             }
         }
 
-        leer.close();
+        
         return true;
     }
 
