@@ -1,9 +1,10 @@
+package Consultascarpeta;
 
 import java.sql.*;
 import java.util.*;
 
 
-public class ConsultasC {
+public class ConsultasE {
     
     public static void ejecutarConsulta(String query) {
         Connection connection = null;
@@ -88,16 +89,17 @@ public class ConsultasC {
 
     private static String truncateCellValue(String cellValue, int maxLength) {
         if (cellValue == null) {
-            return String.format("%-" + maxLength + "s", "").replace(' ', '.');
+            return String.format("%-" + maxLength + "s", "").replace(' ', ' ');
         } else if (cellValue.length() > maxLength) {
             String truncatedValue = cellValue.substring(0, maxLength - 3) + "...";
-            return String.format("%-" + maxLength + "s", truncatedValue).replace(' ', '.');
+            return String.format("%-" + maxLength + "s", truncatedValue).replace(' ', ' ');
         } else {
-            return String.format("%-" + maxLength + "s", cellValue).replace(' ', '.');
+            return String.format("%-" + maxLength + "s", cellValue).replace(' ', ' ');
         }
     }
 
-    public static void consulta1() {
+
+    public static void consulta1E() {
         Scanner read = new Scanner(System.in);
         int clienteCodigo = -1;
 
@@ -145,18 +147,106 @@ public class ConsultasC {
         }
     }
 
-    public static void consulta2() {
+    public static void consulta2E() {
         Scanner read = new Scanner(System.in);
-        int clienteCodigo = -1;
+        int equipamientoCodigo = -1;
 
-        while (clienteCodigo <= 0) {
-            System.out.println("Ingrese el código del cliente:");
+        while (equipamientoCodigo <= 0) {
+            System.out.println("Ingrese el código del equipamiento :");
 
             try {
-                clienteCodigo = read.nextInt();
+                equipamientoCodigo = read.nextInt();
 
                 
-                if (clienteCodigo <= 0) {
+                if (equipamientoCodigo <= 0) {
+                    System.out.println("Código inválido. Por favor, ingrese un número.");
+                }
+            } catch (InputMismatchException e) {
+                
+                System.out.println("Entrada inválida. Por favor, ingrese un número");
+                read.next(); 
+            }
+        }
+
+        
+        String query = "SELECT " +
+                "Date_format(R.fechaevento, \"%d-%m-%y\") as 'Fecha de la reservacion', " +
+                "CONCAT(c.nombre,' ', c.apaterno,' ', IFNULL(CONCAT(c.amaterno,' '),' ')) as cliente, " +
+                "s.nombreSalon AS Nombre_Salon, " +
+                "eq.nombre AS Descripcion, " +
+                "eq.precio AS Costo_Equipo " +
+                "FROM equipo_reservado er " +
+                "JOIN reservaciones r ON er.reservacion = r.codigo " +
+                "JOIN cliente c ON r.cliente = c.codigo " +
+                "JOIN salon s ON r.salon = s.codigo " +
+                "JOIN equipamiento eq ON er.equipamiento = eq.codigo " +
+                "WHERE eq.codigo = " + equipamientoCodigo;
+        
+        
+        try {
+            ejecutarConsulta(query);
+        } catch (Exception e) {
+            System.out.println("Se produjo un error inesperado: " + e.getMessage());
+        }
+    }
+
+    public static void consulta3E() {
+        Scanner read = new Scanner(System.in);
+        int tipoServicioCodigo = -1;
+
+        while (tipoServicioCodigo <= 0) {
+            System.out.println("Ingrese el código del tipo de servicio:");
+
+            try {
+                tipoServicioCodigo = read.nextInt();
+
+                
+                if (tipoServicioCodigo <= 0) {
+                    System.out.println("Código inválido. Por favor, ingrese un número");
+                }
+            } catch (InputMismatchException e) {
+                
+                System.out.println("Entrada inválida. Por favor, ingrese un número");
+                read.next(); 
+            }
+        }
+
+        
+        String query = "SELECT " +
+                "Date_format(R.fechaevento, \"%d-%m-%y\") as 'Fecha de la reservacion', " +
+                "CONCAT(c.nombre,' ', c.apaterno,' ', IFNULL(CONCAT(c.amaterno,' '),' ')) as cliente, " +
+                "s.nombreSalon AS Nombre_Salon, " +
+                "sv.descripcion AS Descripcion_Servicio, " +
+                "ts.descripcion AS Tipo_Servicio, " +
+                "sv.Precio AS Costo_Servicio " +
+                "FROM servicios_cliente sc " +
+                "JOIN reservaciones r ON sc.cliente = r.cliente " +
+                "JOIN servicios sv ON sc.servicios = sv.codigo " +
+                "JOIN tipo_servicio ts ON sv.tipo_servicio = ts.codigo " +
+                "JOIN cliente c ON r.cliente = c.codigo " +
+                "JOIN salon s ON r.salon = s.codigo " +
+                "WHERE ts.codigo = " + tipoServicioCodigo;
+        
+        
+        try {
+            ejecutarConsulta(query);
+        } catch (Exception e) {
+            System.out.println("Se produjo un error inesperado: " + e.getMessage());
+        }
+    }
+
+    public static void consulta4E() {
+        Scanner read = new Scanner(System.in);
+        int salonCodigo = -1;
+
+        while (salonCodigo <= 0) {
+            System.out.println("Ingrese el código del salón:");
+
+            try {
+                salonCodigo = read.nextInt();
+
+                
+                if (salonCodigo <= 0) {
                     System.out.println("Código inválido. Por favor, ingrese un número.");
                 }
             } catch (InputMismatchException e) {
@@ -168,17 +258,16 @@ public class ConsultasC {
 
         
         String query = "SELECT " +
+                "s.nombreSalon AS Nombre_Salon, " +
+                "Date_format(R.fechaevento, \"%d-%m-%y\") as 'Fecha de la reservacion', " +
                 "CONCAT(c.nombre,' ', c.apaterno,' ', IFNULL(CONCAT(c.amaterno,' '),' ')) as cliente, " +
-                "date_format(R.fechaevento, \"%d-%m-%y\") as Fecha, " +
-                "s.codigo as Salon, " +
-                "tp.descripcion as 'Tipo de evento', " +
-                "R.Cant_Inv as 'cantidad de invitados' " +
-                "FROM Reservaciones as R " +
-                "INNER JOIN cliente as C on R.cliente = c.codigo " +
-                "INNER JOIN salon as S on R.salon = s.codigo " +
-                "INNER JOIN evento as e on R.evento = e.numeroEvento " +
-                "INNER JOIN tipo_evento as tp on e.tipo_evento = tp.codigo " +
-                "WHERE C.codigo = " + clienteCodigo;
+                "te.descripcion AS Tipo_Evento " +
+                "FROM reservaciones r " +
+                "JOIN salon s ON r.salon = s.codigo " +
+                "JOIN cliente c ON r.cliente = c.codigo " +
+                "JOIN evento e ON r.evento = e.numeroEvento " +
+                "JOIN tipo_evento te ON e.tipo_evento = te.codigo " +
+                "WHERE s.codigo = " + salonCodigo;
         
         
         try {
@@ -188,7 +277,44 @@ public class ConsultasC {
         }
     }
 
-    public static void consulta3(){
+    public static void consulta5E() {
+        Scanner read = new Scanner(System.in);
+        int tipoServicioCodigo = -1;
+
+        while (tipoServicioCodigo <= 0) {
+            System.out.println("Ingrese el código del tipo de servicio:");
+
+            try {
+                tipoServicioCodigo = read.nextInt();
+
+                
+                if (tipoServicioCodigo <= 0) {
+                    System.out.println("Código inválido. Por favor, ingrese un número.");
+                }
+            } catch (InputMismatchException e) {
+                
+                System.out.println("Entrada inválida. Por favor, ingrese un número.");
+                read.next(); 
+            }
+        }
+
+        
+        String query = "SELECT " +
+                "ts.descripcion AS Descripcion_Tipo_Servicio, " +
+                "sv.descripcion AS Descripcion_Servicio, " +
+                "sv.Precio AS Precio " +
+                "FROM servicios sv " +
+                "JOIN tipo_servicio ts ON sv.tipo_servicio = ts.codigo " +
+                "WHERE ts.codigo = " + tipoServicioCodigo;
+        
+        
+        try {
+            ejecutarConsulta(query);
+        } catch (Exception e) {
+            System.out.println("Se produjo un error inesperado: " + e.getMessage());
+        }
+    }
+    public static void consulta11(){
         
         
         System.out.println("Cancelando.........");
@@ -199,14 +325,18 @@ public class ConsultasC {
         } catch (InterruptedException ie) {
             Thread.currentThread().interrupt();
         }
+
+
     }
-    
+
 
     public static void main(String[] args) {
         
-        consulta1();
-        consulta2();
-        consulta3();
-       
+        consulta1E();
+        consulta2E();
+        consulta3E();
+        consulta4E();
+        consulta5E();
+        consulta11();
     }
 }

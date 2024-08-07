@@ -1,6 +1,9 @@
 
 import java.sql.*;
 import java.util.Scanner;
+
+import Consultascarpeta.ConsultasE;
+
 import java.util.Locale;
 
 public class Empleado {
