@@ -88,9 +88,9 @@ public class App {
     private static void handleClientConsultation(Scanner read) {
         System.out.println("╔══════════════════════════════════════════════════════════════╗"); 
         System.out.println("║               Selecciona la consulta a realizar:             ║");
-        System.out.println("║                       1. Reservaciones                       ║");
+        System.out.println("║               1. Reservaciones                               ║");
         System.out.println("║               (tenga su codigo de reservacion en mano)       ║");
-        System.out.println("║                       2. Salir                               ║");
+        System.out.println("║               2. Salir                                       ║");
         System.out.println("╚══════════════════════════════════════════════════════════════╝"); 
 
         if (read.hasNextLine()) {
