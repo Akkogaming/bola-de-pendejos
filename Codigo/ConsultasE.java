@@ -11,30 +11,71 @@ public class ConsultasE {
         ResultSet resultSet = null;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/eventos", "root", ""); 
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/eventos", "root", "");
             statement = connection.createStatement();
             resultSet = statement.executeQuery(query);
 
             ResultSetMetaData metaData = resultSet.getMetaData();
             int columnCount = metaData.getColumnCount();
+            int columnWidth = 26;  // Ajusta el ancho de la columna aquí
 
-            
+            // Generar la fila del encabezado con caracteres de dibujo de caja
+            StringBuilder headerRowBuilder = new StringBuilder("╔");
             for (int i = 1; i <= columnCount; i++) {
-                System.out.printf("%-40s", metaData.getColumnName(i));
+                headerRowBuilder.append("═".repeat(columnWidth)).append("╦");
             }
-            System.out.println();
+            headerRowBuilder.setLength(headerRowBuilder.length() - 1); // Remover el último '╦'
+            headerRowBuilder.append("╗");
+            System.out.println(headerRowBuilder.toString());
 
-            
-            while (resultSet.next()) {
-                for (int i = 1; i <= columnCount; i++) {
-                    System.out.printf("%-40s", resultSet.getString(i));
-                }
-                System.out.println();
+            // Imprimir los nombres de las columnas
+            StringBuilder headerNamesBuilder = new StringBuilder("║");
+            for (int i = 1; i <= columnCount; i++) {
+                String columnName = metaData.getColumnLabel(i);
+                headerNamesBuilder.append(String.format("%-" + columnWidth + "s", columnName)).append("║");
             }
+            System.out.println(headerNamesBuilder.toString());
+
+            // Generar la fila separadora
+            StringBuilder separatorRowBuilder = new StringBuilder("╠");
+            for (int i = 1; i <= columnCount; i++) {
+                separatorRowBuilder.append("═".repeat(columnWidth)).append("╬");
+            }
+            separatorRowBuilder.setLength(separatorRowBuilder.length() - 1); // Remover el último '╬'
+            separatorRowBuilder.append("╣");
+            System.out.println(separatorRowBuilder.toString());
+
+            // Imprimir cada fila de datos
+            while (resultSet.next()) {
+                StringBuilder dataRowBuilder = new StringBuilder("║");
+                for (int i = 1; i <= columnCount; i++) {
+                    String cellValue = resultSet.getString(i);
+                    cellValue = truncateCellValue(cellValue, columnWidth);
+                    dataRowBuilder.append(String.format("%-" + columnWidth + "s", cellValue)).append("║");
+                }
+                System.out.println(dataRowBuilder.toString());
+
+                // Imprimir el borde inferior de la fila actual
+                StringBuilder rowBorderBuilder = new StringBuilder("╠");
+                for (int i = 1; i <= columnCount; i++) {
+                    rowBorderBuilder.append("═".repeat(columnWidth)).append("╬");
+                }
+                rowBorderBuilder.setLength(rowBorderBuilder.length() - 1); // Remover el último '╬'
+                rowBorderBuilder.append("╣");
+                System.out.println(rowBorderBuilder.toString());
+            }
+
+            // Imprimir el borde inferior final de la tabla
+            StringBuilder bottomBorderBuilder = new StringBuilder("╚");
+            for (int i = 1; i <= columnCount; i++) {
+                bottomBorderBuilder.append("═".repeat(columnWidth)).append("╝");
+            }
+            System.out.println(bottomBorderBuilder.toString());
+
         } catch (SQLException e) {
             System.out.println("Ocurrió un error al ejecutar la consulta: " + e.getMessage());
         } finally {
-            
+            // Limpiar los recursos JDBC
             try {
                 if (resultSet != null) resultSet.close();
                 if (statement != null) statement.close();
@@ -45,6 +86,18 @@ public class ConsultasE {
         }
     }
 
+    private static String truncateCellValue(String cellValue, int maxLength) {
+        if (cellValue == null) {
+            return String.format("%-" + maxLength + "s", "").replace(' ', '.');
+        } else if (cellValue.length() > maxLength) {
+            String truncatedValue = cellValue.substring(0, maxLength - 3) + "...";
+            return String.format("%-" + maxLength + "s", truncatedValue).replace(' ', '.');
+        } else {
+            return String.format("%-" + maxLength + "s", cellValue).replace(' ', '.');
+        }
+    }
+
+    
     public static void consulta1E() {
         Scanner read = new Scanner(System.in);
         int clienteCodigo = -1;
