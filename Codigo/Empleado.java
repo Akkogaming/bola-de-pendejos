@@ -2,7 +2,7 @@
 import java.sql.*;
 import java.util.Scanner;
 
-import Consultascarpeta.ConsultasE;
+import Consultascarpeta.Consultas;
 
 import java.util.Locale;
 
@@ -51,22 +51,22 @@ public class Empleado {
                           String consultaOption = leer.nextLine();
                           switch (consultaOption) {
                               case "1":
-                                  ConsultasE.consulta1E();
+                                  Consultas.consulta1();
                                   break;
                               case "2":
-                                  ConsultasE.consulta2E();
+                                  Consultas.consulta2();
                                   break;
                               case "3":
-                                  ConsultasE.consulta3E();
+                                  Consultas.consulta3();
                                   break;
                               case "4":
-                                  ConsultasE.consulta4E();
+                                  Consultas.consulta4();
                                   break;
                               case "5":
-                                  ConsultasE.consulta5E();
+                                  Consultas.consulta5();
                                   break;
                               case "6":
-                                ConsultasE.consulta11();
+                                Consultas.consulta17();
                                 break;
                                 default:
                                 System.out.println("Opción no válida.");
@@ -81,7 +81,6 @@ public class Empleado {
                 eliminarReservacion();
                   break;
               case "4":
-              ConsultasE.consulta11();
               System.out.println("Saliendo del menú de empleado.");
               isRunning2=false;
               break;

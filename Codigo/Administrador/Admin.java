@@ -6,7 +6,6 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import Consultascarpeta.Consultas;
-import Consultascarpeta.ConsultasC;
 
 public class Admin {
 
@@ -135,10 +134,10 @@ public class Admin {
         String consultaOption = leer.nextLine();
         switch (consultaOption) {
             case "1":
-                ConsultasC.consulta1();
+                Consultas.consulta1();
                 break;
             case "2":
-                ConsultasC.consulta2();
+                Consultas.consulta2();
                 break;
             case "3":
                 Consultas.consulta3();
@@ -231,66 +230,12 @@ public class Admin {
     }
 
     private static void añadirEvento() {
-        try {
-            System.out.println("Ingrese la descripción del evento:");
-            String descripcion = leer.nextLine();
-    
-    
-            System.out.println("Ingrese el código del salón:");
-            int salonCodigo = leer.nextInt();
-            leer.nextLine(); 
-    
-            System.out.println("Ingrese el código del montaje:");
-            int montajeCodigo = leer.nextInt();
-            leer.nextLine(); 
-    
-            System.out.println("Ingrese el código del tipo de evento:");
-            int tipoEventoCodigo = leer.nextInt();
-            leer.nextLine(); 
-    
-            String insertQuery = "INSERT INTO evento (descripcion, salon, montaje, tipo_evento) VALUES (?, ?, ?, ?)";
-            PreparedStatement pstmt = connect.prepareStatement(insertQuery);
-            pstmt.setString(1, descripcion);
-            pstmt.setInt(2, salonCodigo);
-            pstmt.setInt(3, montajeCodigo);
-            pstmt.setInt(4, tipoEventoCodigo);
-    
-            pstmt.executeUpdate();
-            System.out.println("Evento añadido exitosamente.");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Eventos.añadirEvento();
     }
-    
-
-    
+     
     private static void eliminarEvento() {
-        try {
-            System.out.println("Número de evento a borrar (o 'C' para cancelar):");
-            String input = leer.nextLine().toUpperCase(Locale.getDefault());
-    
-            if (input.equals("C")) {
-                System.out.println("Operación cancelada.");
-                return;
-            }
-    
-            int numero;
-            try {
-                numero = Integer.parseInt(input);
-            } catch (NumberFormatException e) {
-                System.out.println("Entrada inválida. Debe ingresar un número o 'C' para cancelar.");
-                return;
-            }
-    
-            String deleteQuery = "DELETE FROM evento WHERE numeroEvento = ?";
-            PreparedStatement pstmt = connect.prepareStatement(deleteQuery);
-            pstmt.setInt(1, numero);
-            pstmt.executeUpdate();
-    
-            System.out.println("Evento eliminado exitosamente.");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Eventos.eliminarEvento();
     }
+        
     
 }

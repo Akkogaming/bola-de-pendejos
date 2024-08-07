@@ -6,9 +6,10 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import Administrador.Admin;
-import Consultascarpeta.ConsultasC;
+import Consultascarpeta.Consultas;
 
-public class Main {
+
+public class App {
     private static Connection connect;
     static Statement statement;
 
@@ -23,8 +24,8 @@ public class Main {
             Scanner read = new Scanner(System.in); 
             while (isRunning) {
                 
-                System.out.println("⠀");
-                System.out.println("⠀");
+                System.out.println("\n");
+                System.out.println("\n");
                 System.out.println("╔══════════════════════════════════════════════════════════╗"); 
                 System.out.println("║                       BLUE PALACE                        ║");
                 System.out.println("╠══════════════════════════════════════════════════════════╣");
@@ -88,6 +89,7 @@ public class Main {
         System.out.println("╔══════════════════════════════════════════════════════════════╗"); 
         System.out.println("║               Selecciona la consulta a realizar:             ║");
         System.out.println("║                       1. Reservaciones                       ║");
+        System.out.println("║               (tenga su codigo de reservacion en mano)       ║");
         System.out.println("║                       2. Salir                               ║");
         System.out.println("╚══════════════════════════════════════════════════════════════╝"); 
 
@@ -95,14 +97,8 @@ public class Main {
             String consultaOption = read.nextLine().trim();
             switch (consultaOption) {
                 case "1":
-                    ConsultasC.consulta1();
-                    break;
-                case "2":
-                    
-                    break;
-                case "3":
-                    
-                    break;
+                    Consultas.consulta6();
+
                 default:
                     System.out.println("Opción no válida.");
                     break;

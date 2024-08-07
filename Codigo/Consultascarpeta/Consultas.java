@@ -1,11 +1,10 @@
 package Consultascarpeta;
 
-import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.*;
 
 
-
+//* la carpeta es irrelevante pero hace que el programa se vea mas complicado de lo que es xd
     
     public class Consultas {
     
@@ -105,8 +104,10 @@ import java.util.*;
     
     ///////////////////////////////////////////////////////////////////////
 
+    //! basado en consultas admin
+
     public static void consulta1() {
-        Scanner read = new Scanner(System.in);
+       /* Scanner read = new Scanner(System.in);
         int clienteCodigo = -1;
 
         while (clienteCodigo <= 0) {
@@ -125,6 +126,7 @@ import java.util.*;
                 read.next(); 
             }
         }
+        */
 
         
         String query = "SELECT " +
@@ -142,8 +144,8 @@ import java.util.*;
                 "JOIN evento e ON r.evento = e.numeroEvento " +
                 "JOIN salon s ON r.salon = s.codigo " +
                 "JOIN tipo_evento te ON e.tipo_evento = te.codigo " +
-                "JOIN montaje m ON e.montaje = m.codigo " +
-                "WHERE r.cliente = " + clienteCodigo;
+                "JOIN montaje m ON e.montaje = m.codigo ";
+         //       "WHERE r.cliente = " + clienteCodigo;
         
         
         try {
