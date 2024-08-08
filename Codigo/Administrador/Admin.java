@@ -50,53 +50,46 @@ public class Admin {
 
    
     
-        public static void eliminarEmpleado() {
-            Empleados.eliminarEmpleado();
-        }
+      public static void eliminarEmpleado() {
+          Empleados.eliminarEmpleado();
+          }
     
-        public static void eliminarSalon() {
-           Salones.eliminarSalon();
-        }
+      public static void eliminarSalon() {
+         Salones.eliminarSalon();
+          }
         
-        public static void eliminarServicio() {
-           Servicios.eliminarServicio();
-        }
-        
-        public static void eliminarMontaje() {
-                Montajes.eliminarMontaje();
-        }
+      public static void eliminarServicio() {
+         Servicios.eliminarServicio();
+          }
+       
+      public static void eliminarMontaje() {
+              Montajes.eliminarMontaje();
+            }
     
-        public static void eliminarEvento() {
-            Eventos.eliminarEvento();
+      public static void eliminarEvento() {
+          Eventos.eliminarEvento();
         } 
 
     
-    //todo: finish this
     
     
     public static void editarEmpleado() {
         Empleados.editarEmpleado();
-    }
+        }
 
     public static void editarSalon() {
-       Salones.editarSalon();
-    }
+        Salones.editarSalon();
+        }
     
     public static void editarServicio() {
-       Servicios.editarServicio();
-    }
+        Servicios.editarServicio();
+        }
     
     public static void editarMontaje() {
-            Montajes.editarMontaje();
-    }
+        Montajes.editarMontaje();
+        }
 
     public static void editarEvento() {
         Eventos.editarEvento();
-    } 
-    
-    
-     
-    
-        
-    
+        }     
 }
