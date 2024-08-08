@@ -604,14 +604,7 @@ import java.util.*;
     public static void consulta17(){
         
         
-        System.out.println("Cancelando.........");
-
-
-        try {
-            Thread.sleep(1 * 1000);
-        } catch (InterruptedException ie) {
-            Thread.currentThread().interrupt();
-        }
+        
     }
     
 
