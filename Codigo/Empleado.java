@@ -4,8 +4,6 @@ import java.util.*;
 
 import Consultascarpeta.Consultas;
 
-import java.util.Locale;
-
 public class Empleado {
 
   private static Connection connect;
@@ -100,18 +98,17 @@ public class Empleado {
       }
   }
   
-  public static void ReservarSalon(){
+   public static void ReservarSalon(){
     try{
       boolean crearReservacion;
       int codigoSalon;
       int codigocliente;
       int cant_inv;
       int evento;
-      int montaje;
       int equipamiento;
       int servicio;
-      float monto=4455;
-      float montoT=5541;
+      double monto;
+      double montoT;
       do{
         System.out.println("╔══════════════════════════════════════════════════════════════╗");
         System.out.println("║             Creando una nueva reservacion                    ║");
@@ -119,6 +116,7 @@ public class Empleado {
         System.out.println("║          Favor de ingresar el codigo del cliente             ║");
         System.out.println("╚══════════════════════════════════════════════════════════════╝");
         codigocliente=leer.nextInt();
+        leer.nextLine();
 
         System.out.println("╔══════════════════════════════════════════════════════════════╗");
         System.out.println("║                 Que salon se va a requerir?                  ║");
@@ -161,44 +159,51 @@ public class Empleado {
         System.out.println("║      Ingrese el codigo del evento que se solicitara          ║");
         System.out.println("╚══════════════════════════════════════════════════════════════╝");
         evento=leer.nextInt();
-        leer.nextLine();
-
-        System.out.println("╔══════════════════════════════════════════════════════════════╗");
-        System.out.println("║     Ingrese el codigo del montaje que se realizara           ║");
-        System.out.println("╚══════════════════════════════════════════════════════════════╝");
-        montaje=leer.nextInt();
-        leer.nextLine();
 
         System.out.println("╔════════════════════════════════════════════════════════════════╗");
         System.out.println("║Por ultimo, ingrese el codigo del equipamiento que se requerira ║");
         System.out.println("╚════════════════════════════════════════════════════════════════╝");
         equipamiento=leer.nextInt();
-        leer.nextLine();
         
-        String comando = "INSERT INTO reservaciones(fechaevento, Cant_Inv, HoraI, HoraF, monto, montoT, cliente, salon, evento) VALUES(?,?,?,?,?,?,?,?,?)";
-        PreparedStatement pstmt = connect.prepareStatement(comando);
-        pstmt.setString(1, Fecha);
-        pstmt.setInt(2, cant_inv);
-        pstmt.setString(3, horaInicio);
-        pstmt.setString(4, horaFinal);
-        pstmt.setFloat(5, monto);
-        pstmt.setFloat(6, montoT);
-        pstmt.setInt(7, codigocliente);
-        pstmt.setInt(8, codigoSalon);
-        pstmt.setInt(9, evento); 
+        // Ejecutar consultas para obtener los precios de la base de datos
+        String consultaServicio = "SELECT Precio FROM servicios WHERE codigo = ?";
+        PreparedStatement psServicio = connect.prepareStatement(consultaServicio);
+        psServicio.setInt(1, servicio);
+        ResultSet rsServicio = psServicio.executeQuery();
+        rsServicio.next();
+        double precioServicio = rsServicio.getFloat("Precio");
 
-        
-        pstmt.executeUpdate();
-        System.out.println("╔══════════════════════════════════════════════════════════════╗");
-        System.out.println("║              Reservacion creada con exito                    ║");
-        System.out.println("╚══════════════════════════════════════════════════════════════╝");
-        crearReservacion=false;
+        String consultaTipoEvento = "SELECT precio FROM tipo_evento WHERE codigo = ?";
+        PreparedStatement psTipoEvento = connect.prepareStatement(consultaTipoEvento);
+        psTipoEvento.setInt(1, evento);
+        ResultSet rsEvento = psTipoEvento.executeQuery();
+        rsEvento.next();
+        double precioMontaje = rsEvento.getFloat("precio");
+
+        String consultarEquipamiento = "SELECT precio FROM equipamiento WHERE codigo = ?";
+        PreparedStatement psEquipamiento = connect.prepareStatement(consultarEquipamiento);
+        psEquipamiento.setInt(1, equipamiento);
+        ResultSet rsEquipamiento = psEquipamiento.executeQuery();
+        rsEquipamiento.next();
+        double precioEquipamiento = rsEquipamiento.getFloat("precio");
+
+          // Calcular monto y montoT
+          monto = precioServicio + precioMontaje + precioEquipamiento;
+          montoT = monto * (1.16); // Asumiendo 16% del impuesto
+
+          String comando = "INSERT INTO reservaciones(fechaevento, Cant_Inv, HoraI, HoraF, monto, montoT, cliente, salon, evento) VALUES('"+
+          Fecha+"','"+cant_inv+"','"+horaInicio+"','"+horaFinal+"','"+monto+"','"+montoT+"','"+codigocliente+"','"+codigoSalon+"','"+evento+"')";
+          statement.executeUpdate(comando);
+          System.out.println("╔══════════════════════════════════════════════════════════════╗");
+          System.out.println("║              Reservacion creada con exito                    ║");
+          System.out.println("╚══════════════════════════════════════════════════════════════╝");
+          crearReservacion=false;
       }while(crearReservacion);
     }catch(Exception e){
-      System.out.println("Still working on it, sorry");
       e.printStackTrace();
     }
   }
+  
   public static void eliminarReservacion(){
     try{
         System.out.println("Número de código a borrar:");
