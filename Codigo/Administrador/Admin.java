@@ -74,8 +74,8 @@ public class Admin {
     //todo: finish this
     
     
-    public static void modificarEmpleado() {
-        Empleados.modificarEmpleado();
+    public static void editarEmpleado() {
+        Empleados.editarEmpleado();
     }
 
     public static void modificarSalon() {

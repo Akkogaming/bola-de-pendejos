@@ -49,7 +49,7 @@ public class MA {
                         E();
                         break;
                     case "5":
-                        
+                    isRunning = false;
                         break;
                     default:
                         System.out.println("Opción no válida.");
@@ -123,7 +123,7 @@ public class MA {
                     
                     break;
                 case "3":
-                    
+                    //!xd
                     break;
                 case "4":
                     
