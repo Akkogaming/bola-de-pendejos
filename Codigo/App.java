@@ -30,7 +30,7 @@ public class App {
                 System.out.println("║                       BLUE PALACE                        ║");
                 System.out.println("╠══════════════════════════════════════════════════════════╣");
                 System.out.println("║                                                          ║");
-                System.out.println("║           ELIGA UNA OPCION DE LAS SIGUENTES              ║");
+                System.out.println("║           ELIGE UNA OPCION DE LAS SIGUIENTES             ║");
                 System.out.println("║                                                          ║");
                 System.out.println("║        1. iniciar sesion como administrador              ║");
                 System.out.println("║        2. iniciar sesion como empleado regular           ║");

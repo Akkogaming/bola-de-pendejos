@@ -421,9 +421,17 @@ where codigo = 1
 
 
 -- Consulta para obtener todos los servicios
-SELECT codigo AS ServicioNumero, nombre AS ServicioNombre, Precio AS ServicioCosto
-FROM servicios
-where codigo = 1;
+SELECT 
+    s.codigo AS ServicioNumero,
+    s.nombre AS ServicioNombre,
+    s.Precio AS ServicioCosto,
+    ts.descripcion AS TipoServicioDescripcion
+FROM 
+    servicios s
+    JOIN tipo_servicio ts ON s.tipo_servicio = ts.codigo
+WHERE 
+    s.codigo = 1;
+
 
 /*
 4. Consulta para Montajes
@@ -439,9 +447,16 @@ where codigo = 1;
 5. Consulta para Eventos
 */
 
-SELECT numeroevento AS EventoNumero,
-salon AS "numero de salon",
-montaje AS montaje,
-tipo_evento as "tipo de evento"
-FROM evento
-where numeroevento = 1;
+
+SELECT 
+    e.numeroEvento AS EventoNumero,
+    s.nombreSalon AS "numero de salon",
+    m.descripcion AS montaje,
+    te.descripcion AS "tipo de evento"
+FROM 
+    evento e
+    JOIN salon s ON e.salon = s.codigo
+    JOIN montaje m ON e.montaje = m.codigo
+    JOIN tipo_evento te ON e.tipo_evento = te.codigo
+WHERE 
+    e.numeroEvento = 8;

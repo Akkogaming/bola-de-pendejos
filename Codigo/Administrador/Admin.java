@@ -31,55 +31,72 @@ public class Admin {
 
     public static void insertarEmpleado() {
         Empleados.insertarEmpleado();
-    }
+        }
     public static void añadirSalon() {
         Salones.añadirSalon();
         }
+
     public static void añadirServicio() {
-            Servicios.añadirServicio();
+        Servicios.añadirServicio();
         }
 
-
-
-
-
-
-
-    public static void eliminarEmpleado() {
-        Empleados.eliminarEmpleado();
-    }
-    
-    
-
-    public static void eliminarSalon() {
-       Salones.eliminarSalon();
-    }
-    
-     
-    
-    
-    public static void eliminarServicio() {
-       Servicios.eliminarServicio();
-    }
-    
-
-    
     public static void añadirMontaje() {
-       Montajes.añadirMontaje();
-    }
-
-    
-    public static void eliminarMontaje() {
-        Montajes.eliminarMontaje();
-    }
+        Montajes.añadirMontaje();
+        }
 
     public static void añadirEvento() {
         Eventos.añadirEvento();
+        }
+
+   
+    
+        public static void eliminarEmpleado() {
+            Empleados.eliminarEmpleado();
+        }
+    
+        public static void eliminarSalon() {
+           Salones.eliminarSalon();
+        }
+        
+        public static void eliminarServicio() {
+           Servicios.eliminarServicio();
+        }
+        
+        public static void eliminarMontaje() {
+                Montajes.eliminarMontaje();
+        }
+    
+        public static void eliminarEvento() {
+            Eventos.eliminarEvento();
+        } 
+
+    
+    //todo: finish this
+    
+    
+    public static void modificarEmpleado() {
+        Empleados.modificarEmpleado();
     }
+
+    public static void modificarSalon() {
+       Salones.modificarSalon();
+    }
+    
+    public static void modificarServicio() {
+       Servicios.modificarServicio();
+    }
+    
+    public static void modificarMontaje() {
+            Montajes.modificarMontaje();
+    }
+
+    public static void modificarEvento() {
+        Eventos.modificarEvento();
+    } 
+    
+    
      
-    public static void eliminarEvento() {
-        Eventos.eliminarEvento();
-    }
+    
         
     
 }

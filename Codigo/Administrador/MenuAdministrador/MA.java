@@ -43,8 +43,7 @@ public class MA {
                         R();
                         break;
                     case "3":
-                    System.out.println("perate we");    
-                    //M();
+                        M();
                         break;
                     case "4":
                         E();
@@ -105,20 +104,20 @@ public class MA {
         public static void M() {
             leer = new Scanner(System.in);
             System.out.println("╔══════════════════════════════════════════════════════════════╗");
-            System.out.println("║                       REGISTRAR DATOS                        ║");
+            System.out.println("║                      MODIFICAR DATOS                         ║");
             System.out.println("╠══════════════════════════════════════════════════════════════╣");
-            System.out.println("║                      1. Registrar Empleados                  ║");
-            System.out.println("║                      2. Registrar Salones                    ║");
-            System.out.println("║                      3. Registrar Servicios                  ║");
-            System.out.println("║                      4. Registrar Montajes                   ║");
-            System.out.println("║                      5. Registrar Eventos                    ║");
+            System.out.println("║                      1. Modificar Empleados                  ║");
+            System.out.println("║                      2. Modificar Salones                    ║");
+            System.out.println("║                      3. Modificar Servicios                  ║");
+            System.out.println("║                      4. Modificar Montajes                   ║");
+            System.out.println("║                      5. Modificar Eventos                    ║");
             System.out.println("╠══════════════════════════════════════════════════════════════╣");
             System.out.println("║                      6. Cancelar                             ║");
             System.out.println("╚══════════════════════════════════════════════════════════════╝");
             String answer = leer.nextLine();
             switch (answer) {
                 case "1":
-                    
+                    Admin.editarEmpleado();
                     break;
                 case "2":
                     

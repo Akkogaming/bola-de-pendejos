@@ -172,5 +172,69 @@ public class Empleados {
             e.printStackTrace();
         }
     }
+    
+public static void editarEmpleado() {
+        conectar();
+        Scanner leer = new Scanner(System.in);
+        try {
+            System.out.println("Número de código del empleado a editar:");
+            int numero = leer.nextInt();
+            leer.nextLine(); // Consume el salto de línea
 
+            // Verifica si el empleado existe
+            String checkEmpleadoQuery = "SELECT * FROM empleados WHERE numero = ?";
+            PreparedStatement checkStmt = connect.prepareStatement(checkEmpleadoQuery);
+            checkStmt.setInt(1, numero);
+            ResultSet resultSet = checkStmt.executeQuery();
+
+            if (!resultSet.next()) {
+                System.out.println("Empleado no encontrado.");
+                return;
+            }
+
+            // Muestra los datos actuales del empleado
+            System.out.println("Datos actuales del empleado:");
+            System.out.println("Nombre: " + resultSet.getString("nombre"));
+            System.out.println("Primer Apellido: " + resultSet.getString("a_paterno"));
+            System.out.println("Segundo Apellido: " + resultSet.getString("a_materno"));
+            System.out.println("Teléfono: " + resultSet.getString("telefono"));
+            System.out.println("Correo: " + resultSet.getString("correo_e"));
+
+            // Solicita los nuevos datos
+            System.out.println("Ingrese el nuevo nombre del empleado (o presione Enter para mantener el actual):");
+            String nombre = leer.nextLine();
+            if (nombre.isEmpty()) nombre = resultSet.getString("nombre");
+
+            System.out.println("Ingrese el nuevo primer apellido del empleado (o presione Enter para mantener el actual):");
+            String a_paterno = leer.nextLine();
+            if (a_paterno.isEmpty()) a_paterno = resultSet.getString("a_paterno");
+
+            System.out.println("Ingrese el nuevo segundo apellido del empleado (o presione Enter para mantener el actual):");
+            String a_materno = leer.nextLine();
+            if (a_materno.isEmpty()) a_materno = resultSet.getString("a_materno");
+
+            System.out.println("Ingrese el nuevo teléfono del empleado (o presione Enter para mantener el actual):");
+            String telefono = leer.nextLine();
+            if (telefono.isEmpty()) telefono = resultSet.getString("telefono");
+
+            System.out.println("Ingrese el nuevo correo del empleado (o presione Enter para mantener el actual):");
+            String correo_e = leer.nextLine();
+            if (correo_e.isEmpty()) correo_e = resultSet.getString("correo_e");
+
+            // Actualiza los datos del empleado en la base de datos
+            String updateQuery = "UPDATE empleados SET nombre = ?, a_paterno = ?, a_materno = ?, telefono = ?, correo_e = ? WHERE numero = ?";
+            PreparedStatement updateStmt = connect.prepareStatement(updateQuery);
+            updateStmt.setString(1, nombre);
+            updateStmt.setString(2, a_paterno);
+            updateStmt.setString(3, a_materno);
+            updateStmt.setString(4, telefono);
+            updateStmt.setString(5, correo_e);
+            updateStmt.setInt(6, numero);
+            updateStmt.executeUpdate();
+
+            System.out.println("Datos del empleado actualizados exitosamente.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
