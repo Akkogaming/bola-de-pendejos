@@ -189,4 +189,80 @@ public class Servicios {
             e.printStackTrace();
         }
     }
+
+    public static void editarServicio() {
+        conectar();
+        Scanner leer = new Scanner(System.in);
+    
+        try {
+            // Solicitar el código del servicio a editar
+            System.out.println("Ingrese el código del servicio que desea editar:");
+            int codigoServicio = leer.nextInt();
+            leer.nextLine();  // Limpiar el buffer del scanner
+    
+            // Consultar los datos actuales del servicio
+            String selectQuery = "SELECT * FROM servicios WHERE codigo = ?";
+            PreparedStatement selectStmt = connect.prepareStatement(selectQuery);
+            selectStmt.setInt(1, codigoServicio);
+            ResultSet resultSet = selectStmt.executeQuery();
+    
+            if (resultSet.next()) {
+                // Mostrar los datos actuales
+                System.out.println("Datos actuales del servicio:");
+                System.out.println("Nombre: " + resultSet.getString("nombre"));
+                System.out.println("Descripción: " + resultSet.getString("descripcion"));
+                System.out.println("Precio: " + resultSet.getFloat("precio"));
+                System.out.println("Tipo de servicio: " + resultSet.getInt("tipo_servicio"));
+    
+                // Solicitar los nuevos datos
+                System.out.println("Ingrese el nuevo nombre del servicio (o presione Enter para mantener el valor actual):");
+                String nombre = leer.nextLine();
+                if (nombre.isEmpty()) nombre = resultSet.getString("nombre");
+    
+                System.out.println("Ingrese la nueva descripción del servicio (o presione Enter para mantener el valor actual):");
+                String descripcion = leer.nextLine();
+                if (descripcion.isEmpty()) descripcion = resultSet.getString("descripcion");
+    
+                System.out.println("Ingrese el nuevo costo del servicio (o presione Enter para mantener el valor actual):");
+                String input = leer.nextLine();
+                float precio = input.isEmpty() ? resultSet.getFloat("precio") : Float.parseFloat(input);
+    
+                System.out.println("Ingrese el nuevo código del tipo de servicio (1 al 50) (o presione Enter para mantener el valor actual):");
+                input = leer.nextLine();
+                int tipoServicio = input.isEmpty() ? resultSet.getInt("tipo_servicio") : Integer.parseInt(input);
+    
+                // Verificar si el tipo de servicio es válido
+                String checkTypeServiceQuery = "SELECT codigo FROM tipo_servicio WHERE codigo = ?";
+                PreparedStatement checkStmt = connect.prepareStatement(checkTypeServiceQuery);
+                checkStmt.setInt(1, tipoServicio);
+                ResultSet checkRs = checkStmt.executeQuery();
+                if (!checkRs.next()) {
+                    throw new SQLException("El tipo de servicio especificado no existe en la base de datos.");
+                }
+    
+                // Actualizar los datos del servicio
+                String updateQuery = "UPDATE servicios SET nombre = ?, descripcion = ?, Precio = ?, tipo_servicio = ? WHERE codigo = ?";
+                PreparedStatement updateStmt = connect.prepareStatement(updateQuery);
+                updateStmt.setString(1, nombre);
+                updateStmt.setString(2, descripcion);
+                updateStmt.setFloat(3, precio);
+                updateStmt.setInt(4, tipoServicio);
+                updateStmt.setInt(5, codigoServicio);
+    
+                int rowsUpdated = updateStmt.executeUpdate();
+                if (rowsUpdated > 0) {
+                    System.out.println("Datos del servicio actualizados exitosamente.");
+                } else {
+                    System.out.println("No se encontró el servicio con el código proporcionado.");
+                }
+            } else {
+                System.out.println("No se encontró el servicio con el código especificado.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            cerrarConexion();
+        }
+    }
+    
 }

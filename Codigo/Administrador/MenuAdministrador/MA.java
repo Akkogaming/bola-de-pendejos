@@ -120,10 +120,10 @@ public class MA {
                     Admin.editarEmpleado();
                     break;
                 case "2":
-                    
+                    Admin.editarSalon();
                     break;
                 case "3":
-                    //!xd
+                    Admin.editarServicio();
                     break;
                 case "4":
                     

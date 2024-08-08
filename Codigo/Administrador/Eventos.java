@@ -99,6 +99,10 @@ public class Eventos {
             e.printStackTrace();
         }
     }
+
+    public static void editarEvento(){
+        
+    }
     
 }
     

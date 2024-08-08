@@ -181,8 +181,89 @@ public class Salones {
         }
     }
 
-    public static void editarSalones() {
-        
+    public static void editarSalon() {
+        conectar();
+        Scanner leer = new Scanner(System.in);
+    
+        try {
+            // Solicitar el código del salón a editar
+            System.out.println("Ingrese el código del salón que desea editar:");
+            int codigoSalon = leer.nextInt();
+            leer.nextLine();  // Limpiar el buffer del scanner
+    
+            // Consultar los datos actuales del salón
+            String selectQuery = "SELECT * FROM salon WHERE codigo = ?";
+            PreparedStatement selectStmt = connect.prepareStatement(selectQuery);
+            selectStmt.setInt(1, codigoSalon);
+            ResultSet resultSet = selectStmt.executeQuery();
+    
+            if (resultSet.next()) {
+                // Mostrar los datos actuales
+                System.out.println("Datos actuales del salón:");
+                System.out.println("Capacidad: " + resultSet.getInt("capacidad"));
+                System.out.println("Nombre: " + resultSet.getString("nombresalon"));
+                System.out.println("Código Postal: " + resultSet.getInt("codigopostal"));
+                System.out.println("Calle: " + resultSet.getString("calle"));
+                System.out.println("Ciudad: " + resultSet.getString("ciudad"));
+                System.out.println("Estado: " + resultSet.getString("estado"));
+                System.out.println("Empleado asociado: " + resultSet.getInt("empleado"));
+    
+                // Solicitar los nuevos datos
+                System.out.println("Ingrese la nueva capacidad (o presione Enter para mantener el valor actual):");
+                String input = leer.nextLine();
+                int capacidad = input.isEmpty() ? resultSet.getInt("capacidad") : Integer.parseInt(input);
+    
+                System.out.println("Ingrese el nuevo nombre del salón (o presione Enter para mantener el valor actual):");
+                String nombreSalon = leer.nextLine();
+                if (nombreSalon.isEmpty()) nombreSalon = resultSet.getString("nombresalon");
+    
+                System.out.println("Ingrese el nuevo código postal (o presione Enter para mantener el valor actual):");
+                input = leer.nextLine();
+                int codigoPostal = input.isEmpty() ? resultSet.getInt("codigopostal") : Integer.parseInt(input);
+    
+                System.out.println("Ingrese la nueva calle (o presione Enter para mantener el valor actual):");
+                String calle = leer.nextLine();
+                if (calle.isEmpty()) calle = resultSet.getString("calle");
+    
+                System.out.println("Ingrese la nueva ciudad (o presione Enter para mantener el valor actual):");
+                String ciudad = leer.nextLine();
+                if (ciudad.isEmpty()) ciudad = resultSet.getString("ciudad");
+    
+                System.out.println("Ingrese el nuevo estado (o presione Enter para mantener el valor actual):");
+                String estado = leer.nextLine();
+                if (estado.isEmpty()) estado = resultSet.getString("estado");
+    
+                System.out.println("Ingrese el nuevo número de empleado asociado (o presione Enter para mantener el valor actual):");
+                input = leer.nextLine();
+                int empleado = input.isEmpty() ? resultSet.getInt("empleado") : Integer.parseInt(input);
+    
+                // Actualizar los datos del salón
+                String updateQuery = "UPDATE salon SET capacidad = ?, nombresalon = ?, codigopostal = ?, calle = ?, ciudad = ?, estado = ?, empleado = ? WHERE codigo = ?";
+                PreparedStatement updateStmt = connect.prepareStatement(updateQuery);
+                updateStmt.setInt(1, capacidad);
+                updateStmt.setString(2, nombreSalon);
+                updateStmt.setInt(3, codigoPostal);
+                updateStmt.setString(4, calle);
+                updateStmt.setString(5, ciudad);
+                updateStmt.setString(6, estado);
+                updateStmt.setInt(7, empleado);
+                updateStmt.setInt(8, codigoSalon);
+    
+                int rowsUpdated = updateStmt.executeUpdate();
+                if (rowsUpdated > 0) {
+                    System.out.println("Datos del salón actualizados exitosamente.");
+                } else {
+                    System.out.println("No se encontraron salones con el código proporcionado.");
+                }
+            } else {
+                System.out.println("No se encontró el salón con el código especificado.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            cerrarConexion();
+        }
     }
+    
     
 }
