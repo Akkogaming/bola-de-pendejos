@@ -126,10 +126,10 @@ public class MA {
                     Admin.editarServicio();
                     break;
                 case "4":
-                    
+                    Admin.editarMontaje();
                     break;
                 case "5":
-                    
+                    Admin.editarEvento();
                     break;
                 case "6":
                     MA();

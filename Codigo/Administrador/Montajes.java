@@ -109,6 +109,52 @@ public class Montajes {
     }
 
     public static void editarMontaje() {
-        
+        conectar();
+        Scanner leer = new Scanner(System.in);
+    
+        try {
+            // Solicitar el código del montaje a editar
+            System.out.println("Ingrese el código del montaje que desea editar:");
+            int codigoMontaje = leer.nextInt();
+            leer.nextLine();  // Limpiar el buffer del scanner
+    
+            // Consultar los datos actuales del montaje
+            String selectQuery = "SELECT * FROM montaje WHERE codigo = ?";
+            PreparedStatement selectStmt = connect.prepareStatement(selectQuery);
+            selectStmt.setInt(1, codigoMontaje);
+            ResultSet resultSet = selectStmt.executeQuery();
+    
+            if (resultSet.next()) {
+                // Mostrar los datos actuales
+                System.out.println("Datos actuales del montaje:");
+                System.out.println("Descripción: " + resultSet.getString("descripcion"));
+    
+                // Solicitar la nueva descripción
+                System.out.println("Ingrese la nueva descripción del montaje (o presione Enter para mantener el valor actual):");
+                String descripcion = leer.nextLine();
+                if (descripcion.isEmpty()) {
+                    descripcion = resultSet.getString("descripcion");
+                }
+    
+                // Actualizar los datos del montaje
+                String updateQuery = "UPDATE montaje SET descripcion = ? WHERE codigo = ?";
+                PreparedStatement updateStmt = connect.prepareStatement(updateQuery);
+                updateStmt.setString(1, descripcion);
+                updateStmt.setInt(2, codigoMontaje);
+    
+                int rowsUpdated = updateStmt.executeUpdate();
+                if (rowsUpdated > 0) {
+                    System.out.println("Datos del montaje actualizados exitosamente.");
+                } else {
+                    System.out.println("No se encontró el montaje con el código proporcionado.");
+                }
+            } else {
+                System.out.println("No se encontró el montaje con el código especificado.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            cerrarConexion();
+        }
     }
-}
+}    
