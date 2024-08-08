@@ -10,7 +10,8 @@ public class Paginas {
     public static void P1() {
 
         leer = new Scanner(System.in);
-     
+        System.out.print("\033\143");
+        System.out.flush();
         System.out.println("╔══════════════════════════════════════════════════════════════╗"); 
         System.out.println("║               Selecciona la consulta a realizar:             ║"); 
         System.out.println("║             1. Reservaciones                                 ║");
@@ -51,7 +52,8 @@ public class Paginas {
     public static void P2() {
 
         leer = new Scanner(System.in);
-
+        System.out.print("\033\143");
+        System.out.flush();
         System.out.println("╔══════════════════════════════════════════════════════════════╗"); 
         System.out.println("║             1. Servicios del mismo tipo                      ║");
         System.out.println("║             2. Reservaciones del cliente                     ║");
@@ -93,7 +95,8 @@ public class Paginas {
     public static void P3() {
 
         leer = new Scanner(System.in);
-
+        System.out.print("\033\143");
+        System.out.flush();
         System.out.println("╔══════════════════════════════════════════════════════════════╗"); 
         System.out.println("║             1. Reservaciones con un montaje específico       ║");
         System.out.println("║             2. Reservaciones en el mismo mes                 ║");
@@ -137,7 +140,8 @@ public class Paginas {
     public static void P4() {
 
         leer = new Scanner(System.in);
-		
+		System.out.print("\033\143");
+        System.out.flush();
 		System.out.println("╔══════════════════════════════════════════════════════════════╗"); 
         System.out.println("║             1. consultar salones                             ║");
         System.out.println("║             2. consultar servicios                           ║");

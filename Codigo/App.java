@@ -26,8 +26,6 @@ public class App {
                 
                 System.out.print("\033\143");
                 System.out.flush();
-                System.out.println("\n");
-                System.out.println("\n");
                 System.out.println("╔══════════════════════════════════════════════════════════╗"); 
                 System.out.println("║                       BLUE PALACE                        ║");
                 System.out.println("╠══════════════════════════════════════════════════════════╣");
@@ -88,6 +86,8 @@ public class App {
     }
 
     private static void handleClientConsultation(Scanner read) {
+        System.out.print("\033\143");
+                System.out.flush();
         System.out.println("╔══════════════════════════════════════════════════════════════╗"); 
         System.out.println("║               Selecciona la consulta a realizar:             ║");
         System.out.println("║               1. Reservaciones                               ║");

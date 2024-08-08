@@ -24,6 +24,7 @@ public class Admin {
 
     
    public static void handleConsultas(){
+    
         MCA.handleConsultas();
    }
 

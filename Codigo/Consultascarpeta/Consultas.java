@@ -679,6 +679,8 @@ Scanner keyboard=new Scanner(System.in);
     }
     
 
+    //!para probar las consultas seguidas manualmente
+    //!remover si es necesario
     public static void main(String[] args) {
         
         consulta1();

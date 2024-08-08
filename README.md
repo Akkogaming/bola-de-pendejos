@@ -22,5 +22,6 @@
 /si no se elimina la columna tipo_servicio:
 en la tabla servicio en vez de tomar el codgio tomar la descripcion del servicio
 
+-si el texto es mas largo de lo maximo el programa truena
 
-
+-en modificar empleado dar una opcion al final donde imprime los nuevos datos y pregunta si desea hacer los cambios o no
