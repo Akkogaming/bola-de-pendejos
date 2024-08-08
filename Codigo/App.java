@@ -24,6 +24,8 @@ public class App {
             Scanner read = new Scanner(System.in); 
             while (isRunning) {
                 
+                System.out.print("\033\143");
+                System.out.flush();
                 System.out.println("\n");
                 System.out.println("\n");
                 System.out.println("╔══════════════════════════════════════════════════════════╗"); 

@@ -16,12 +16,18 @@ public class MA {
     public static boolean MA() {
             
 
+  
+
             leer = new Scanner(System.in);
             boolean isRunning = true;
 
                 
 
             while (isRunning) {
+
+                System.out.print("\033\143");
+                System.out.flush();
+
                 System.out.println("╔══════════════════════════════════════════════════════════════╗");
                 System.out.println("║                       MENU ADMINISTRADOR                     ║");
                 System.out.println("╠══════════════════════════════════════════════════════════════╣");
@@ -62,6 +68,8 @@ public class MA {
         }
 
         public static void R() {
+            System.out.print("\033\143");
+            System.out.flush();
             leer = new Scanner(System.in);
             System.out.println("╔══════════════════════════════════════════════════════════════╗");
             System.out.println("║                       REGISTRAR DATOS                        ║");
@@ -103,6 +111,8 @@ public class MA {
 
         public static void M() {
             leer = new Scanner(System.in);
+            System.out.print("\033\143");
+            System.out.flush();
             System.out.println("╔══════════════════════════════════════════════════════════════╗");
             System.out.println("║                      MODIFICAR DATOS                         ║");
             System.out.println("╠══════════════════════════════════════════════════════════════╣");
@@ -143,6 +153,11 @@ public class MA {
 
         public static void E() {
             leer = new Scanner(System.in);
+            
+            System.out.print("\033\143");
+            System.out.flush();
+
+
 			System.out.println("╔══════════════════════════════════════════════════════════════╗");
             System.out.println("║                       ELIMINAR DATOS                         ║");
             System.out.println("╠══════════════════════════════════════════════════════════════╣");
@@ -154,7 +169,7 @@ public class MA {
             System.out.println("╠══════════════════════════════════════════════════════════════╣");
             System.out.println("║                      6. Cancelar                             ║");
             System.out.println("╚══════════════════════════════════════════════════════════════╝");
-            String answer = leer.nextLine();
+            String answer = leer.nextLine();                
             switch (answer) {
                 case "1":
                     Admin.eliminarEmpleado();

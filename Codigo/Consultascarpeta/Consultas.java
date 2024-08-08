@@ -8,6 +8,9 @@ import java.util.*;
     
     public class Consultas {
     
+Scanner keyboard=new Scanner(System.in);
+            String enter;
+
         public static void ejecutarConsulta(String query) {
             Connection connection = null;
             Statement statement = null;
@@ -126,9 +129,16 @@ import java.util.*;
                 "JOIN montaje m ON e.montaje = m.codigo ";
          //       "WHERE r.cliente = " + clienteCodigo;
         
+
+        
         
         try {
             ejecutarConsulta(query);
+            Scanner keyboard=new Scanner(System.in);
+        String enter;
+        System.out.println("Press Enter to continue");
+        enter=keyboard.nextLine();
+
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
@@ -173,6 +183,11 @@ import java.util.*;
         
         try {
             ejecutarConsulta(query);
+            Scanner keyboard=new Scanner(System.in);
+        String enter;
+        System.out.println("Press Enter to continue");
+        enter=keyboard.nextLine();
+
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
@@ -219,6 +234,11 @@ import java.util.*;
         
         try {
             ejecutarConsulta(query);
+            Scanner keyboard=new Scanner(System.in);
+        String enter;
+        System.out.println("Press Enter to continue");
+        enter=keyboard.nextLine();
+
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
@@ -262,6 +282,11 @@ import java.util.*;
         
         try {
             ejecutarConsulta(query);
+            Scanner keyboard=new Scanner(System.in);
+        String enter;
+        System.out.println("Press Enter to continue");
+        enter=keyboard.nextLine();
+
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
@@ -302,6 +327,11 @@ import java.util.*;
         
         try {
             ejecutarConsulta(query);
+            Scanner keyboard=new Scanner(System.in);
+        String enter;
+        System.out.println("Press Enter to continue");
+        enter=keyboard.nextLine();
+
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
@@ -346,6 +376,11 @@ import java.util.*;
         
         try {
             ejecutarConsulta(query);
+            Scanner keyboard=new Scanner(System.in);
+        String enter;
+        System.out.println("Press Enter to continue");
+        enter=keyboard.nextLine();
+
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
@@ -399,6 +434,11 @@ import java.util.*;
         
         try {
             ejecutarConsulta(query);
+            Scanner keyboard=new Scanner(System.in);
+        String enter;
+        System.out.println("Press Enter to continue");
+        enter=keyboard.nextLine();
+
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
@@ -448,6 +488,11 @@ import java.util.*;
         
         try {
             ejecutarConsulta(query);
+            Scanner keyboard=new Scanner(System.in);
+        String enter;
+        System.out.println("Press Enter to continue");
+        enter=keyboard.nextLine();
+
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
@@ -493,6 +538,11 @@ import java.util.*;
         
         try {
             ejecutarConsulta(query);
+            Scanner keyboard=new Scanner(System.in);
+        String enter;
+        System.out.println("Press Enter to continue");
+        enter=keyboard.nextLine();
+
         } catch (Exception e) {
             System.out.println("ay wey, se produjo un error inesperado: " + e.getMessage());
         }
@@ -535,6 +585,11 @@ import java.util.*;
         
         try {
             ejecutarConsulta(query);
+            Scanner keyboard=new Scanner(System.in);
+        String enter;
+        System.out.println("Press Enter to continue");
+        enter=keyboard.nextLine();
+
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
@@ -558,17 +613,13 @@ import java.util.*;
                         "WHERE e.numero = " + num;
         
         
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/eventos", "root", ""); 
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
-            
-            
-            while (rs.next()) {
-                int empleadoNumero = rs.getInt("numero_empleado");
-                int reservaNumero = rs.getInt("numero_reserva");
-                System.out.println("Número de empleado: " + empleadoNumero + ", Número de reserva: " + reservaNumero);
-            }
-            
+        try {
+            ejecutarConsulta(query);
+            Scanner keyboard=new Scanner(System.in);
+        String enter;
+        System.out.println("Press Enter to continue");
+        enter=keyboard.nextLine();
+
         } catch (Exception e) {
             System.out.println("Se produjo un error inesperado: " + e.getMessage());
         }
@@ -578,27 +629,47 @@ import java.util.*;
         //!consultar empleados
         String query = "SELECT * FROM empleados";
         ejecutarConsulta(query);
+        Scanner keyboard=new Scanner(System.in);
+        String enter;
+        System.out.println("Press Enter to continue");
+        enter=keyboard.nextLine();
     }
 
     public static void consulta13() {
         String query = "SELECT * FROM salon";
         ejecutarConsulta(query);
+        Scanner keyboard=new Scanner(System.in);
+        String enter;
+        System.out.println("Press Enter to continue");
+        enter=keyboard.nextLine();
     }
 
     public static void consulta14() {
         String query = "SELECT * FROM servicios";         
-        ejecutarConsulta(query);       
+        ejecutarConsulta(query);      
+        Scanner keyboard=new Scanner(System.in);
+        String enter;
+        System.out.println("Press Enter to continue");
+        enter=keyboard.nextLine(); 
     }
     
     public static void consulta15() {
        
         String query = "SELECT * FROM montaje ";
         ejecutarConsulta(query);
+        Scanner keyboard=new Scanner(System.in);
+        String enter;
+        System.out.println("Press Enter to continue");
+        enter=keyboard.nextLine();
     }
     
     public static void consulta16() {
         String query = "SELECT * FROM evento ";
         ejecutarConsulta(query);
+        Scanner keyboard=new Scanner(System.in);
+        String enter;
+        System.out.println("Press Enter to continue");
+        enter=keyboard.nextLine();
     }
 
     public static void consulta17(){
