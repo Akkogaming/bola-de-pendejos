@@ -180,5 +180,9 @@ public class Salones {
             e.printStackTrace();
         }
     }
+
+    public static void editarSalones() {
+        
+    }
     
 }

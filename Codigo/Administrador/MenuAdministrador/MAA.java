@@ -4,9 +4,6 @@ package Administrador.MenuAdministrador;
 import java.sql.*;
 import java.util.Scanner;
 
-import Administrador.Admin;
-
-
 public class MAA {
 public static Connection connect;
     public static Statement statement;

@@ -78,20 +78,20 @@ public class Admin {
         Empleados.editarEmpleado();
     }
 
-    public static void modificarSalon() {
-       Salones.modificarSalon();
+    public static void editarSalon() {
+       Salones.editarSalon();
     }
     
-    public static void modificarServicio() {
-       Servicios.modificarServicio();
+    public static void editarServicio() {
+       Servicios.editarServicio();
     }
     
-    public static void modificarMontaje() {
-            Montajes.modificarMontaje();
+    public static void editarMontaje() {
+            Montajes.editarMontaje();
     }
 
-    public static void modificarEvento() {
-        Eventos.modificarEvento();
+    public static void editarEvento() {
+        Eventos.editarEvento();
     } 
     
     
