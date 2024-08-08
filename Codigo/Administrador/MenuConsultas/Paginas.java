@@ -12,7 +12,7 @@ public class Paginas {
         leer = new Scanner(System.in);
      
         System.out.println("╔══════════════════════════════════════════════════════════════╗"); 
-        System.out.println("║  1             Selecciona la consulta a realizar:             ║"); 
+        System.out.println("║               Selecciona la consulta a realizar:             ║"); 
         System.out.println("║             1. Reservaciones                                 ║");
         System.out.println("║             2. Equipamiento requerido                        ║");
         System.out.println("║             3. Servicios requeridos                          ║");
@@ -53,7 +53,7 @@ public class Paginas {
         leer = new Scanner(System.in);
 
         System.out.println("╔══════════════════════════════════════════════════════════════╗"); 
-        System.out.println("║   2          1. Servicios del mismo tipo                      ║");
+        System.out.println("║             1. Servicios del mismo tipo                      ║");
         System.out.println("║             2. Reservaciones del cliente                     ║");
         System.out.println("║             3. Reservaciones con un servicio específico      ║");
         System.out.println("║             4. Reservaciones con un equipo específico        ║");
@@ -95,7 +95,7 @@ public class Paginas {
         leer = new Scanner(System.in);
 
         System.out.println("╔══════════════════════════════════════════════════════════════╗"); 
-        System.out.println("║   3          1. Reservaciones con un montaje específico       ║");
+        System.out.println("║             1. Reservaciones con un montaje específico       ║");
         System.out.println("║             2. Reservaciones en el mismo mes                 ║");
         System.out.println("║             3. Reservaciones asignados a un empleado         ║");
         System.out.println("║             4. consultar empleados                           ║");
@@ -139,7 +139,7 @@ public class Paginas {
         leer = new Scanner(System.in);
 		
 		System.out.println("╔══════════════════════════════════════════════════════════════╗"); 
-        System.out.println("║    4        1. consultar salones                             ║");
+        System.out.println("║             1. consultar salones                             ║");
         System.out.println("║             2. consultar servicios                           ║");
         System.out.println("║             3. consultar montajes                            ║");
         System.out.println("║             4. consultar eventos                             ║");
