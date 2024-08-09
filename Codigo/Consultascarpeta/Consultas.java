@@ -11,97 +11,79 @@ import java.util.*;
 Scanner keyboard=new Scanner(System.in);
             String enter;
 
-        public static void ejecutarConsulta(String query) {
-            Connection connection = null;
-            Statement statement = null;
-            ResultSet resultSet = null;
-    
-            try {
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/eventos", "root", "");
-                statement = connection.createStatement();
-                resultSet = statement.executeQuery(query);
-    
-                ResultSetMetaData metaData = resultSet.getMetaData();
-                int columnCount = metaData.getColumnCount();
-                int columnWidth = 25;  // Ajusta el ancho de la columna aquí
-    
-                // Generar la fila del encabezado con caracteres de dibujo de caja
-                StringBuilder headerRowBuilder = new StringBuilder("╔");
-                for (int i = 1; i <= columnCount; i++) {
-                    headerRowBuilder.append("═".repeat(columnWidth)).append("╦");
-                }
-                headerRowBuilder.setLength(headerRowBuilder.length() - 1); // Remover el último '╦'
-                headerRowBuilder.append("╗");
-                System.out.println(headerRowBuilder.toString());
-    
-                // Imprimir los nombres de las columnas
-                StringBuilder headerNamesBuilder = new StringBuilder("║");
-                for (int i = 1; i <= columnCount; i++) {
-                    String columnName = metaData.getColumnLabel(i);
-                    headerNamesBuilder.append(String.format("%-" + columnWidth + "s", columnName)).append("║");
-                }
-                System.out.println(headerNamesBuilder.toString());
-    
-                // Generar la fila separadora
-                StringBuilder separatorRowBuilder = new StringBuilder("╠");
-                for (int i = 1; i <= columnCount; i++) {
-                    separatorRowBuilder.append("═".repeat(columnWidth)).append("╬");
-                }
-                separatorRowBuilder.setLength(separatorRowBuilder.length() - 1); // Remover el último '╬'
-                separatorRowBuilder.append("╣");
-                System.out.println(separatorRowBuilder.toString());
-    
-                // Imprimir cada fila de datos
-                while (resultSet.next()) {
-                    StringBuilder dataRowBuilder = new StringBuilder("║");
-                    for (int i = 1; i <= columnCount; i++) {
-                        String cellValue = resultSet.getString(i);
-                        cellValue = truncateCellValue(cellValue, columnWidth);
-                        dataRowBuilder.append(String.format("%-" + columnWidth + "s", cellValue)).append("║");
-                    }
-                    System.out.println(dataRowBuilder.toString());
-    
-                    // Imprimir el borde inferior de la fila actual
-                    StringBuilder rowBorderBuilder = new StringBuilder("╠");
-                    for (int i = 1; i <= columnCount; i++) {
-                        rowBorderBuilder.append("═".repeat(columnWidth)).append("╬");
-                    }
-                    rowBorderBuilder.setLength(rowBorderBuilder.length() - 1); // Remover el último '╬'
-                    rowBorderBuilder.append("╣");
-                    System.out.println(rowBorderBuilder.toString());
-                }
-    
-                // Imprimir el borde inferior final de la tabla
-                StringBuilder bottomBorderBuilder = new StringBuilder("╚");
-                for (int i = 1; i <= columnCount; i++) {
-                    bottomBorderBuilder.append("═".repeat(columnWidth)).append("╝");
-                }
-                System.out.println(bottomBorderBuilder.toString());
-    
-            } catch (SQLException e) {
-                System.out.println("Ocurrió un error al ejecutar la consulta: " + e.getMessage());
-            } finally {
-                // Limpiar los recursos JDBC
+           
+            public static void ejecutarConsulta(String query) {
+                Connection connection = null;
+                Statement statement = null;
+                ResultSet resultSet = null;
+        
                 try {
-                    if (resultSet != null) resultSet.close();
-                    if (statement != null) statement.close();
-                    if (connection != null) connection.close();
+                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/eventos", "root", "");
+                    statement = connection.createStatement();
+                    resultSet = statement.executeQuery(query);
+        
+                    ResultSetMetaData metaData = resultSet.getMetaData();
+                    int columnCount = metaData.getColumnCount();
+                    int columnWidth = 65; // Ajusta el ancho según lo necesites
+        
+                    while (resultSet.next()) {
+                        printDataInBlocks(resultSet, metaData, columnCount, columnWidth);
+                    }
+        
                 } catch (SQLException e) {
-                    System.out.println("Error al cerrar recursos: " + e.getMessage());
+                    System.out.println("An error occurred while executing the query: " + e.getMessage());
+                } finally {
+                    // Close JDBC resources
+                    try {
+                        if (resultSet != null) resultSet.close();
+                        if (statement != null) statement.close();
+                        if (connection != null) connection.close();
+                    } catch (SQLException e) {
+                        System.out.println("Error closing resources: " + e.getMessage());
+                    }
                 }
             }
-        }
-    
-        private static String truncateCellValue(String cellValue, int maxLength) {
-            if (cellValue == null) {
-                return String.format("%-" + maxLength + "s", "").replace(' ', ' ');
-            } else if (cellValue.length() > maxLength) {
-                String truncatedValue = cellValue.substring(0, maxLength - 3) + "...";
-                return String.format("%-" + maxLength + "s", truncatedValue).replace(' ', ' ');
-            } else {
-                return String.format("%-" + maxLength + "s", cellValue).replace(' ', ' ');
+        
+            private static void printDataInBlocks(ResultSet resultSet, ResultSetMetaData metaData, int columnCount, int columnWidth) throws SQLException {
+                // Print the top border
+                printBorder(columnWidth, "═", "╔", "╗");
+        
+                // Print each column's data
+                for (int i = 1; i <= columnCount; i++) {
+                    String header = metaData.getColumnLabel(i);
+                    String cellValue = resultSet.getString(i);
+        
+                    // Print header and value
+                    printRow(header, cellValue, columnWidth);
+        
+                    // Print a blank line after each pair
+                    printBlankLine(columnWidth);
+                }
+        
+                // Print the bottom border
+                printBorder(columnWidth, "═", "╚", "╝");
+        
+                System.out.println();  // Space between blocks (optional)
             }
-        }
+        
+            private static void printBorder(int columnWidth, String borderChar, String startChar, String endChar) {
+                String border = startChar + borderChar.repeat(columnWidth - 0) + endChar;
+                System.out.println(border);
+            }
+        
+            private static void printRow(String header, String cellValue, int columnWidth) {
+                String headerLine = String.format("%-" + (columnWidth - 2) + "s", header + ":");
+                String valueLine = String.format("%-" + (columnWidth - 2) + "s", cellValue);
+        
+                System.out.println("║ " + headerLine + " ║");
+                System.out.println("║ " + valueLine + " ║");
+            }
+        
+            private static void printBlankLine(int columnWidth) {
+                System.out.println("║ " + " ".repeat(columnWidth - 2) + " ║");
+            }
+        
+        
         
         
     
