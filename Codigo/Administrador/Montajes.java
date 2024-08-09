@@ -34,9 +34,9 @@ public class Montajes {
     public static void añadirMontaje() {
         conectar();
         try {
-            
+
             Scanner leer = new Scanner(System.in);
-            Integer codigo=null;
+            Integer codigo = null;
 
             System.out.println("Ingrese la descripción del montaje:");
             String descripcion = leer.nextLine();
@@ -53,20 +53,19 @@ public class Montajes {
         }
     }
 
-    
     public static void eliminarMontaje() {
         conectar();
         try {
-            
+
             Scanner leer = new Scanner(System.in);
             System.out.println("Número de montaje a borrar (o 'C' para cancelar):");
             String input = leer.nextLine().toUpperCase(Locale.getDefault());
-    
+
             if (input.equals("C")) {
                 System.out.println("Operación cancelada.");
                 return;
             }
-    
+
             int codigo;
             try {
                 codigo = Integer.parseInt(input);
@@ -74,34 +73,34 @@ public class Montajes {
                 System.out.println("Entrada inválida. Debe ingresar un número o 'C' para cancelar.");
                 return;
             }
-    
+
             String checkEventoQuery = "SELECT COUNT(*) FROM evento WHERE montaje = ?";
             PreparedStatement checkStmt = connect.prepareStatement(checkEventoQuery);
             checkStmt.setInt(1, codigo);
             ResultSet resultSet = checkStmt.executeQuery();
             resultSet.next();
             int count = resultSet.getInt(1);
-    
+
             if (count > 0) {
                 System.out.println("El montaje está asociado con uno o más eventos.");
                 System.out.println("Ingrese el número del nuevo montaje:");
                 int nuevoMontaje = leer.nextInt();
-                leer.nextLine(); 
-    
+                leer.nextLine();
+
                 String updateEventoQuery = "UPDATE evento SET montaje = ? WHERE montaje = ?";
                 PreparedStatement updateEventoStmt = connect.prepareStatement(updateEventoQuery);
                 updateEventoStmt.setInt(1, nuevoMontaje);
                 updateEventoStmt.setInt(2, codigo);
                 updateEventoStmt.executeUpdate();
-    
+
                 System.out.println("Eventos reasignados al nuevo montaje.");
             }
-    
+
             String deleteMontajeQuery = "DELETE FROM montaje WHERE codigo = ?";
             PreparedStatement pstmt = connect.prepareStatement(deleteMontajeQuery);
             pstmt.setInt(1, codigo);
             pstmt.executeUpdate();
-    
+
             System.out.println("Montaje eliminado exitosamente.");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -111,37 +110,38 @@ public class Montajes {
     public static void editarMontaje() {
         conectar();
         Scanner leer = new Scanner(System.in);
-    
+
         try {
             // Solicitar el código del montaje a editar
             System.out.println("Ingrese el código del montaje que desea editar:");
             int codigoMontaje = leer.nextInt();
-            leer.nextLine();  // Limpiar el buffer del scanner
-    
+            leer.nextLine(); // Limpiar el buffer del scanner
+
             // Consultar los datos actuales del montaje
             String selectQuery = "SELECT * FROM montaje WHERE codigo = ?";
             PreparedStatement selectStmt = connect.prepareStatement(selectQuery);
             selectStmt.setInt(1, codigoMontaje);
             ResultSet resultSet = selectStmt.executeQuery();
-    
+
             if (resultSet.next()) {
                 // Mostrar los datos actuales
                 System.out.println("Datos actuales del montaje:");
                 System.out.println("Descripción: " + resultSet.getString("descripcion"));
-    
+
                 // Solicitar la nueva descripción
-                System.out.println("Ingrese la nueva descripción del montaje (o presione Enter para mantener el valor actual):");
+                System.out.println(
+                        "Ingrese la nueva descripción del montaje (o presione Enter para mantener el valor actual):");
                 String descripcion = leer.nextLine();
                 if (descripcion.isEmpty()) {
                     descripcion = resultSet.getString("descripcion");
                 }
-    
+
                 // Actualizar los datos del montaje
                 String updateQuery = "UPDATE montaje SET descripcion = ? WHERE codigo = ?";
                 PreparedStatement updateStmt = connect.prepareStatement(updateQuery);
                 updateStmt.setString(1, descripcion);
                 updateStmt.setInt(2, codigoMontaje);
-    
+
                 int rowsUpdated = updateStmt.executeUpdate();
                 if (rowsUpdated > 0) {
                     System.out.println("Datos del montaje actualizados exitosamente.");
@@ -157,4 +157,4 @@ public class Montajes {
             cerrarConexion();
         }
     }
-}    
+}

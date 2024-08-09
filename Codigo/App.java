@@ -8,25 +8,24 @@ import java.util.Scanner;
 import Administrador.Admin;
 import Consultascarpeta.Consultas;
 
-
 public class App {
     private static Connection connect;
     static Statement statement;
 
     public static void main(String[] args) {
-        String direction = "jdbc:mysql://localhost:3306/eventos"; 
-        
+        String direction = "jdbc:mysql://localhost:3306/eventos";
+
         try {
             connect = DriverManager.getConnection(direction, "root", "");
-            statement = connect.createStatement(); 
+            statement = connect.createStatement();
 
             boolean isRunning = true;
-            Scanner read = new Scanner(System.in); 
+            Scanner read = new Scanner(System.in);
             while (isRunning) {
-                
+
                 System.out.print("\033\143");
                 System.out.flush();
-                System.out.println("╔══════════════════════════════════════════════════════════╗"); 
+                System.out.println("╔══════════════════════════════════════════════════════════╗");
                 System.out.println("║                       BLUE PALACE                        ║");
                 System.out.println("╠══════════════════════════════════════════════════════════╣");
                 System.out.println("║                                                          ║");
@@ -36,18 +35,16 @@ public class App {
                 System.out.println("║        2. iniciar sesion como empleado regular           ║");
                 System.out.println("║        3. consultar una reservacion como cliente         ║");
                 System.out.println("║        4. otros                                          ║");
-                System.out.println("║        5. salir                                          ║"); 
+                System.out.println("║        5. salir                                          ║");
                 System.out.println("║                                                          ║");
-                System.out.println("╚══════════════════════════════════════════════════════════╝");   
+                System.out.println("╚══════════════════════════════════════════════════════════╝");
 
-                
                 if (read.hasNextLine()) {
                     String answer = read.nextLine().trim().toUpperCase(Locale.getDefault());
 
-                    
                     switch (answer) {
                         case "1":
-                            Admin.admin(connect); 
+                            Admin.admin(connect);
                             break;
                         case "2":
                             Empleado.empleado(connect);
@@ -57,11 +54,11 @@ public class App {
                             break;
                         case "4":
                             Otros.otros();
-                            break;  
+                            break;
                         case "5":
                             System.out.println("Saliendo del programa...");
-                            isRunning = false; 
-                            break;        
+                            isRunning = false;
+                            break;
                         default:
                             System.out.println("Elija una de las opciones correctas por favor");
                             break;
@@ -71,13 +68,13 @@ public class App {
                     isRunning = false;
                 }
             }
-            
+
         } catch (Exception e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
         } finally {
             if (connect != null) {
                 try {
-                    connect.close(); 
+                    connect.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -87,13 +84,13 @@ public class App {
 
     private static void handleClientConsultation(Scanner read) {
         System.out.print("\033\143");
-                System.out.flush();
-        System.out.println("╔══════════════════════════════════════════════════════════════╗"); 
+        System.out.flush();
+        System.out.println("╔══════════════════════════════════════════════════════════════╗");
         System.out.println("║               Selecciona la consulta a realizar:             ║");
         System.out.println("║               1. Reservaciones                               ║");
         System.out.println("║               (tenga su codigo de reservacion en mano)       ║");
         System.out.println("║               2. Salir                                       ║");
-        System.out.println("╚══════════════════════════════════════════════════════════════╝"); 
+        System.out.println("╚══════════════════════════════════════════════════════════════╝");
 
         if (read.hasNextLine()) {
             String consultaOption = read.nextLine().trim();

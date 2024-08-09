@@ -38,13 +38,12 @@ public class Empleados {
             Scanner leer = new Scanner(System.in);
             Integer numero = null;
 
-
             System.out.println("Ingrese el nombre del empleado:");
             String nombre = leer.nextLine();
-            
+
             System.out.println("Ingrese el primer apellido del empleado:");
             String a_paterno = leer.nextLine();
-            
+
             System.out.println("Ingrese el segundo apellido del empleado:");
             String a_materno = leer.nextLine();
 
@@ -69,8 +68,6 @@ public class Empleados {
             e.printStackTrace();
         }
     }
-
-
 
     public static void eliminarEmpleado() {
         conectar();
@@ -124,7 +121,7 @@ public class Empleados {
 
                     System.out.println("Ingrese el número del nuevo empleado:");
                     int nuevoEmpleado = leer.nextInt();
-                    leer.nextLine(); 
+                    leer.nextLine();
 
                     String updateClienteQuery = "UPDATE cliente SET empleado = ? WHERE empleado = ?";
                     PreparedStatement updateClienteStmt = connect.prepareStatement(updateClienteQuery);
@@ -172,8 +169,8 @@ public class Empleados {
             e.printStackTrace();
         }
     }
-    
-public static void editarEmpleado() {
+
+    public static void editarEmpleado() {
         conectar();
         Scanner leer = new Scanner(System.in);
         try {
@@ -203,23 +200,30 @@ public static void editarEmpleado() {
             // Solicita los nuevos datos
             System.out.println("Ingrese el nuevo nombre del empleado (o presione Enter para mantener el actual):");
             String nombre = leer.nextLine();
-            if (nombre.isEmpty()) nombre = resultSet.getString("nombre");
+            if (nombre.isEmpty())
+                nombre = resultSet.getString("nombre");
 
-            System.out.println("Ingrese el nuevo primer apellido del empleado (o presione Enter para mantener el actual):");
+            System.out.println(
+                    "Ingrese el nuevo primer apellido del empleado (o presione Enter para mantener el actual):");
             String a_paterno = leer.nextLine();
-            if (a_paterno.isEmpty()) a_paterno = resultSet.getString("a_paterno");
+            if (a_paterno.isEmpty())
+                a_paterno = resultSet.getString("a_paterno");
 
-            System.out.println("Ingrese el nuevo segundo apellido del empleado (o presione Enter para mantener el actual):");
+            System.out.println(
+                    "Ingrese el nuevo segundo apellido del empleado (o presione Enter para mantener el actual):");
             String a_materno = leer.nextLine();
-            if (a_materno.isEmpty()) a_materno = resultSet.getString("a_materno");
+            if (a_materno.isEmpty())
+                a_materno = resultSet.getString("a_materno");
 
             System.out.println("Ingrese el nuevo teléfono del empleado (o presione Enter para mantener el actual):");
             String telefono = leer.nextLine();
-            if (telefono.isEmpty()) telefono = resultSet.getString("telefono");
+            if (telefono.isEmpty())
+                telefono = resultSet.getString("telefono");
 
             System.out.println("Ingrese el nuevo correo del empleado (o presione Enter para mantener el actual):");
             String correo_e = leer.nextLine();
-            if (correo_e.isEmpty()) correo_e = resultSet.getString("correo_e");
+            if (correo_e.isEmpty())
+                correo_e = resultSet.getString("correo_e");
 
             // Actualiza los datos del empleado en la base de datos
             String updateQuery = "UPDATE empleados SET nombre = ?, a_paterno = ?, a_materno = ?, telefono = ?, correo_e = ? WHERE numero = ?";
