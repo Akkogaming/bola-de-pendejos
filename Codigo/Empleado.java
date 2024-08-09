@@ -10,7 +10,7 @@ public class Empleado {
   private static Statement statement;
   private static Scanner leer;
 
-  public static void empleado(Connection conn) {
+  public static void empleado(Connection conn) throws InterruptedException {
     connect = conn;
     try {
       statement = connect.createStatement();
@@ -237,9 +237,14 @@ public class Empleado {
 
       String confirmDecision = leer.nextLine().toUpperCase(Locale.getDefault());
       if (confirmDecision.equals("Y")) {
-        String comando = "DELETE FROM reservacion WHERE codigo = " + numero;
+        String comando = "DELETE FROM reservaciones WHERE codigo = " + numero;
         statement.executeUpdate(comando);
         System.out.println("Salon eliminado exitosamente.");
+        
+            // Retraso de 5 segundos
+            System.out.println("Esperando 5 segundos...");
+            Thread.sleep(5000);  // Pausa el hilo actual durante 5000 milisegundos (5 segundos)
+            System.out.println("¡Tiempo transcurrido!");
       } else if (confirmDecision.equals("N")) {
         System.out.println("Operación cancelada.");
       } else {
@@ -249,7 +254,7 @@ public class Empleado {
     }
   }
 
-  public static void AñadirCliente() {
+  public static void AñadirCliente() throws InterruptedException {
     try {
       int empleado;
       System.out.println("Ingrese el nombre del cliente:");
@@ -278,6 +283,11 @@ public class Empleado {
       pstmt.executeUpdate();
 
       System.out.println("Empleado añadido exitosamente.");
+      
+            // Retraso de 5 segundos
+            System.out.println("Esperando 5 segundos...");
+            Thread.sleep(5000);  // Pausa el hilo actual durante 5000 milisegundos (5 segundos)
+            System.out.println("¡Tiempo transcurrido!");
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -302,8 +312,18 @@ public class Empleado {
         String comando = "DELETE FROM cliente WHERE codigo = " + numero;
         statement.executeUpdate(comando);
         System.out.println("Cliente eliminado exitosamente.");
+        
+            // Retraso de 5 segundos
+            System.out.println("Esperando 5 segundos...");
+            Thread.sleep(5000);  // Pausa el hilo actual durante 5000 milisegundos (5 segundos)
+            System.out.println("¡Tiempo transcurrido!");
       } else if (confirmDecision.equals("N")) {
         System.out.println("Operación cancelada.");
+        
+            // Retraso de 5 segundos
+            System.out.println("Esperando 5 segundos...");
+            Thread.sleep(5000);  // Pausa el hilo actual durante 5000 milisegundos (5 segundos)
+            System.out.println("¡Tiempo transcurrido!");
       } else {
         System.out.println("Selección no válida. Debe ingresar Y o N.");
       }
