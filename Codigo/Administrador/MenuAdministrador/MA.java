@@ -73,8 +73,9 @@ public class MA {
         System.out.println("║                      3. Registrar Servicios                  ║");
         System.out.println("║                      4. Registrar Montajes                   ║");
         System.out.println("║                      5. Registrar Eventos                    ║");
+        System.out.println("║                      6. Registrar Cliente                    ║");
         System.out.println("╠══════════════════════════════════════════════════════════════╣");
-        System.out.println("║                      6. Cancelar                             ║");
+        System.out.println("║                      7. Cancelar                             ║");
         System.out.println("╚══════════════════════════════════════════════════════════════╝");
         String answer = leer.nextLine();
         switch (answer) {
@@ -94,6 +95,9 @@ public class MA {
                 Admin.añadirEvento();
                 break;
             case "6":
+                Admin.añadirCliente();
+                break;
+            case "7":
                 MA();
                 break;
             default:
@@ -115,8 +119,9 @@ public class MA {
         System.out.println("║                      3. Modificar Servicios                  ║");
         System.out.println("║                      4. Modificar Montajes                   ║");
         System.out.println("║                      5. Modificar Eventos                    ║");
+        System.out.println("║                      6. Modificar Cliente                    ║");
         System.out.println("╠══════════════════════════════════════════════════════════════╣");
-        System.out.println("║                      6. Cancelar                             ║");
+        System.out.println("║                      7. Cancelar                             ║");
         System.out.println("╚══════════════════════════════════════════════════════════════╝");
         String answer = leer.nextLine();
         switch (answer) {
@@ -136,6 +141,9 @@ public class MA {
                 Admin.editarEvento();
                 break;
             case "6":
+                Admin.editarCliente();
+                break;
+            case "7":
                 MA();
                 break;
             default:
@@ -159,8 +167,9 @@ public class MA {
         System.out.println("║                      3. Eliminar Servicios                   ║");
         System.out.println("║                      4. Eliminar Montajes                    ║");
         System.out.println("║                      5. Eliminar Eventos                     ║");
+        System.out.println("║                      6. Eliminar Clientes                    ║");
         System.out.println("╠══════════════════════════════════════════════════════════════╣");
-        System.out.println("║                      6. Cancelar                             ║");
+        System.out.println("║                      7. Cancelar                             ║");
         System.out.println("╚══════════════════════════════════════════════════════════════╝");
         String answer = leer.nextLine();
         switch (answer) {
@@ -180,6 +189,9 @@ public class MA {
                 Admin.eliminarEvento();
                 break;
             case "6":
+                Admin.eliminarCliente();
+                break;
+            case "7":
                 MA();
                 break;
             default:

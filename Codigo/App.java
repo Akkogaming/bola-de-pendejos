@@ -50,7 +50,8 @@ public class App {
                             Empleado.empleado(connect);
                             break;
                         case "3":
-                            handleClientConsultation(read);
+                            Consultas.consulta6();
+                           // handleClientConsultation(read);
                             break;
                         case "4":
                             Otros.otros();

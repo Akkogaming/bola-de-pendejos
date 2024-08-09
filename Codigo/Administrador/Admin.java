@@ -45,6 +45,10 @@ public class Admin {
         Eventos.añadirEvento();
     }
 
+    public static void añadirCliente() {
+        clientes.insertarCliente();
+    }
+
     public static void eliminarEmpleado() {
         Empleados.eliminarEmpleado();
     }
@@ -63,6 +67,10 @@ public class Admin {
 
     public static void eliminarEvento() {
         Eventos.eliminarEvento();
+    }
+
+    public static void eliminarCliente() {
+        clientes.eliminarCliente();
     }
 
     public static void editarEmpleado() {
@@ -84,4 +92,9 @@ public class Admin {
     public static void editarEvento() {
         Eventos.editarEvento();
     }
+
+    public static void editarCliente() {
+        clientes.editarCliente();
+    }
+
 }

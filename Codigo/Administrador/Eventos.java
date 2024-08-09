@@ -31,25 +31,49 @@ public class Eventos {
         }
     }
 
+    // Método para validar la longitud de la cadena
+    private static boolean validarLongitud(String valor, int maxLongitud) {
+        if (valor.length() > maxLongitud) {
+            System.out.println("El valor ingresado excede la longitud máxima permitida de " + maxLongitud + " caracteres.");
+            return false;
+        }
+        return true;
+    }
+
+    // Método para validar que el valor es un número
+    private static boolean esNumero(String valor) {
+        try {
+            Integer.parseInt(valor);
+            return true;
+        } catch (NumberFormatException e) {
+            System.out.println("El valor ingresado debe ser un número.");
+            return false;
+        }
+    }
+
     public static void añadirEvento() {
         conectar();
         try {
-
             Scanner leer = new Scanner(System.in);
-            System.out.println("Ingrese la descripción del evento:");
+
+            System.out.println("Ingrese la descripción del evento (máx. 255 caracteres):");
             String descripcion = leer.nextLine();
+            if (!validarLongitud(descripcion, 255)) return;
 
             System.out.println("Ingrese el código del salón:");
-            int salonCodigo = leer.nextInt();
-            leer.nextLine();
+            String salonCodigoStr = leer.nextLine();
+            if (!esNumero(salonCodigoStr)) return;
+            int salonCodigo = Integer.parseInt(salonCodigoStr);
 
             System.out.println("Ingrese el código del montaje:");
-            int montajeCodigo = leer.nextInt();
-            leer.nextLine();
+            String montajeCodigoStr = leer.nextLine();
+            if (!esNumero(montajeCodigoStr)) return;
+            int montajeCodigo = Integer.parseInt(montajeCodigoStr);
 
             System.out.println("Ingrese el código del tipo de evento:");
-            int tipoEventoCodigo = leer.nextInt();
-            leer.nextLine();
+            String tipoEventoCodigoStr = leer.nextLine();
+            if (!esNumero(tipoEventoCodigoStr)) return;
+            int tipoEventoCodigo = Integer.parseInt(tipoEventoCodigoStr);
 
             String insertQuery = "INSERT INTO evento (descripcion, salon, montaje, tipo_evento) VALUES (?, ?, ?, ?)";
             PreparedStatement pstmt = connect.prepareStatement(insertQuery);
@@ -62,13 +86,14 @@ public class Eventos {
             System.out.println("Evento añadido exitosamente.");
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            cerrarConexion();
         }
     }
 
     public static void eliminarEvento() {
         conectar();
         try {
-
             Scanner leer = new Scanner(System.in);
             System.out.println("Número de evento a borrar (o 'C' para cancelar):");
             String input = leer.nextLine().toUpperCase(Locale.getDefault());
@@ -78,13 +103,8 @@ public class Eventos {
                 return;
             }
 
-            int numero;
-            try {
-                numero = Integer.parseInt(input);
-            } catch (NumberFormatException e) {
-                System.out.println("Entrada inválida. Debe ingresar un número o 'C' para cancelar.");
-                return;
-            }
+            if (!esNumero(input)) return;
+            int numero = Integer.parseInt(input);
 
             String deleteQuery = "DELETE FROM evento WHERE numeroEvento = ?";
             PreparedStatement pstmt = connect.prepareStatement(deleteQuery);
@@ -94,25 +114,27 @@ public class Eventos {
             System.out.println("Evento eliminado exitosamente.");
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            cerrarConexion();
         }
     }
 
     public static void editarEvento() {
         conectar();
         Scanner leer = new Scanner(System.in);
-
+    
         try {
-            // Solicitar el código del evento a editar
             System.out.println("Ingrese el número del evento que desea editar:");
-            int numeroEvento = leer.nextInt();
-            leer.nextLine(); // Limpiar el buffer del scanner
-
+            String numeroEventoStr = leer.nextLine();
+            if (!esNumero(numeroEventoStr)) return;
+            int numeroEvento = Integer.parseInt(numeroEventoStr);
+    
             // Consultar los datos actuales del evento
             String selectQuery = "SELECT * FROM evento WHERE numeroEvento = ?";
             PreparedStatement selectStmt = connect.prepareStatement(selectQuery);
             selectStmt.setInt(1, numeroEvento);
             ResultSet resultSet = selectStmt.executeQuery();
-
+    
             if (resultSet.next()) {
                 // Mostrar los datos actuales
                 System.out.println("Datos actuales del evento:");
@@ -120,43 +142,54 @@ public class Eventos {
                 System.out.println("Código del salón: " + resultSet.getInt("salon"));
                 System.out.println("Código del montaje: " + resultSet.getInt("montaje"));
                 System.out.println("Código del tipo de evento: " + resultSet.getInt("tipo_evento"));
-
+    
                 // Solicitar los nuevos datos
-                System.out.println(
-                        "Ingrese la nueva descripción del evento (o presione Enter para mantener el valor actual):");
+                System.out.println("Ingrese la nueva descripción del evento (máx. 255 caracteres, o presione Enter para mantener el valor actual):");
                 String descripcion = leer.nextLine();
-                if (descripcion.isEmpty())
-                    descripcion = resultSet.getString("descripcion");
-
-                System.out
-                        .println("Ingrese el nuevo código del salón (o presione Enter para mantener el valor actual):");
-                String input = leer.nextLine();
-                int salonCodigo = input.isEmpty() ? resultSet.getInt("salon") : Integer.parseInt(input);
-
-                System.out.println(
-                        "Ingrese el nuevo código del montaje (o presione Enter para mantener el valor actual):");
-                input = leer.nextLine();
-                int montajeCodigo = input.isEmpty() ? resultSet.getInt("montaje") : Integer.parseInt(input);
-
-                System.out.println(
-                        "Ingrese el nuevo código del tipo de evento (o presione Enter para mantener el valor actual):");
-                input = leer.nextLine();
-                int tipoEventoCodigo = input.isEmpty() ? resultSet.getInt("tipo_evento") : Integer.parseInt(input);
-
-                // Actualizar los datos del evento
-                String updateQuery = "UPDATE evento SET descripcion = ?, salon = ?, montaje = ?, tipo_evento = ? WHERE numeroEvento = ?";
-                PreparedStatement updateStmt = connect.prepareStatement(updateQuery);
-                updateStmt.setString(1, descripcion);
-                updateStmt.setInt(2, salonCodigo);
-                updateStmt.setInt(3, montajeCodigo);
-                updateStmt.setInt(4, tipoEventoCodigo);
-                updateStmt.setInt(5, numeroEvento);
-
-                int rowsUpdated = updateStmt.executeUpdate();
-                if (rowsUpdated > 0) {
-                    System.out.println("Datos del evento actualizados exitosamente.");
+                if (!descripcion.isEmpty() && !validarLongitud(descripcion, 255)) return;
+                descripcion = descripcion.isEmpty() ? resultSet.getString("descripcion") : descripcion;
+    
+                System.out.println("Ingrese el nuevo código del salón (o presione Enter para mantener el valor actual):");
+                String salonCodigoStr = leer.nextLine();
+                int salonCodigo = salonCodigoStr.isEmpty() ? resultSet.getInt("salon") : Integer.parseInt(salonCodigoStr);
+    
+                System.out.println("Ingrese el nuevo código del montaje (o presione Enter para mantener el valor actual):");
+                String montajeCodigoStr = leer.nextLine();
+                int montajeCodigo = montajeCodigoStr.isEmpty() ? resultSet.getInt("montaje") : Integer.parseInt(montajeCodigoStr);
+    
+                System.out.println("Ingrese el nuevo código del tipo de evento (o presione Enter para mantener el valor actual):");
+                String tipoEventoCodigoStr = leer.nextLine();
+                int tipoEventoCodigo = tipoEventoCodigoStr.isEmpty() ? resultSet.getInt("tipo_evento") : Integer.parseInt(tipoEventoCodigoStr);
+    
+                // Muestra los nuevos datos ingresados
+                System.out.println("Nuevos datos del evento:");
+                System.out.println("Descripción: " + descripcion);
+                System.out.println("Código del salón: " + salonCodigo);
+                System.out.println("Código del montaje: " + montajeCodigo);
+                System.out.println("Código del tipo de evento: " + tipoEventoCodigo);
+    
+                // Pregunta al usuario si desea aceptar los cambios
+                System.out.println("¿Desea aceptar los cambios? (s/n):");
+                String respuesta = leer.nextLine().trim().toLowerCase();
+    
+                if (respuesta.equals("s")) {
+                    // Actualizar los datos del evento
+                    String updateQuery = "UPDATE evento SET descripcion = ?, salon = ?, montaje = ?, tipo_evento = ? WHERE numeroEvento = ?";
+                    PreparedStatement updateStmt = connect.prepareStatement(updateQuery);
+                    updateStmt.setString(1, descripcion);
+                    updateStmt.setInt(2, salonCodigo);
+                    updateStmt.setInt(3, montajeCodigo);
+                    updateStmt.setInt(4, tipoEventoCodigo);
+                    updateStmt.setInt(5, numeroEvento);
+    
+                    int rowsUpdated = updateStmt.executeUpdate();
+                    if (rowsUpdated > 0) {
+                        System.out.println("Datos del evento actualizados exitosamente.");
+                    } else {
+                        System.out.println("No se encontró el evento con el número proporcionado.");
+                    }
                 } else {
-                    System.out.println("No se encontró el evento con el número proporcionado.");
+                    System.out.println("Cambios cancelados. Los datos del evento no han sido modificados.");
                 }
             } else {
                 System.out.println("No se encontró el evento con el número especificado.");
@@ -166,6 +199,15 @@ public class Eventos {
         } finally {
             cerrarConexion();
         }
+    
+        // Retraso de 5 segundos
+        System.out.println("Esperando 5 segundos...");
+        try {
+            Thread.sleep(5000);  // Pausa el hilo actual durante 5000 milisegundos (5 segundos)
+        } catch (InterruptedException e) {
+            System.err.println("El retraso fue interrumpido.");
+            e.printStackTrace();
+        }
+        System.out.println("¡Tiempo transcurrido!");
     }
-
 }
