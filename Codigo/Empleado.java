@@ -282,7 +282,7 @@ public class Empleado {
       pstmt.setInt(5, empleado);
       pstmt.executeUpdate();
 
-      System.out.println("Empleado añadido exitosamente.");
+      System.out.println("Cliente añadido exitosamente.");
       
             // Retraso de 5 segundos
             System.out.println("Esperando 5 segundos...");
